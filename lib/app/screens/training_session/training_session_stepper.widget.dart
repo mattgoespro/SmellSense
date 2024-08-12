@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:smellsense/app/screens/training_session/training_session_entry/training_session_entry.dart';
-import 'package:smellsense/app/shared/modules/training_session/training_scent.module.dart';
+import 'package:smellsense/app/shared/modules/training_scent/training_scent.module.dart';
 
-class TrainingSessionEntryFormStepper extends StatefulWidget {
+class TrainingSessionStepperWidget extends StatefulWidget {
   final List<TrainingScent> scents;
 
-  const TrainingSessionEntryFormStepper({super.key, required this.scents});
+  const TrainingSessionStepperWidget({super.key, required this.scents});
 
   @override
-  State<TrainingSessionEntryFormStepper> createState() =>
-      _TrainingSessionEntryFormStepperState();
+  State<TrainingSessionStepperWidget> createState() =>
+      _TrainingSessionStepperWidgetState();
 }
 
-class _TrainingSessionEntryFormStepperState
-    extends State<TrainingSessionEntryFormStepper> {
+class _TrainingSessionStepperWidgetState
+    extends State<TrainingSessionStepperWidget> {
   int _index = 0;
 
   @override
@@ -44,7 +44,7 @@ class _TrainingSessionEntryFormStepperState
         (scent) {
           return Step(
             title: Text(scent.name.toString()),
-            content: TrainingSessionEntryRatingFormWidget(
+            content: TrainingSessionEntryWidget(
               scent: scent,
             ),
           );

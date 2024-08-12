@@ -4,13 +4,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:smellsense/app/theme.dart';
 
 @staticIconProvider
 class AssetProvider {
-  static final checkboxIcon =
-      Icon(Icons.check_box, color: AppTheme.colors().blue);
-
   Future<ByteData> load(String assetName) async {
     return rootBundle.load("lib/assets/svg/reactions/$assetName.svg");
   }

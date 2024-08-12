@@ -25,6 +25,7 @@
     "dart-code.dart-code",
     "vscjava.vscode-gradle",
     "github.copilot",
-    "github.copilot-chat"
+    "github.copilot-chat",
+    "circlecodesolution.ccs-flutter-color"
   ]
 }

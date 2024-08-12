@@ -8,7 +8,7 @@ import 'package:smellsense/app/screens/scent_selection/scent_selection.screen.da
 import 'package:smellsense/app/screens/splash/splash.screen.dart';
 import 'package:smellsense/app/screens/training_session/training_session.screen.dart';
 import 'package:smellsense/app/screens/training_session_history/training_session_history.screen.dart';
-import 'package:smellsense/app/shared/modules/training_session/training_scent.module.dart';
+import 'package:smellsense/app/shared/modules/training_scent/training_scent.module.dart';
 import 'package:smellsense/app/shared/widgets/fade.animated_widget.dart';
 
 final router = MaterialApp.router(

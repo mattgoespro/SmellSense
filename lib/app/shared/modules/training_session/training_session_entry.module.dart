@@ -1,4 +1,4 @@
-import 'package:smellsense/app/shared/modules/training_session/training_scent.module.dart';
+import 'package:smellsense/app/shared/modules/training_scent/training_scent.module.dart';
 import 'package:smellsense/app/shared/modules/training_session/training_session_entry_parosmia_reaction.module.dart';
 import 'package:smellsense/app/shared/modules/training_session/training_session_entry_rating.module.dart';
 

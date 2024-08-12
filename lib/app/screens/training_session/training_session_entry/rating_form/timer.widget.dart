@@ -1,28 +1,55 @@
 import 'package:flutter/material.dart';
 
-class TrainingSessionEntryRatingFormTimerWidget extends StatefulWidget {
-  final int time;
+class TimerWidget extends StatefulWidget {
+  final Duration timerDuration;
   final void Function() onStart;
-  final void Function() onComplete;
   final Widget replaceDoneTimerWidget;
 
-  const TrainingSessionEntryRatingFormTimerWidget({
+  const TimerWidget({
     super.key,
-    required this.time,
+    required this.timerDuration,
     required this.onStart,
-    required this.onComplete,
     required this.replaceDoneTimerWidget,
   });
 
   @override
-  State<TrainingSessionEntryRatingFormTimerWidget> createState() =>
-      TrainingSessionEntryRatingFormTimerWidgetState();
+  State<TimerWidget> createState() => TimerWidgetState();
 }
 
-class TrainingSessionEntryRatingFormTimerWidgetState
-    extends State<TrainingSessionEntryRatingFormTimerWidget>
+class TimerWidgetState extends State<TimerWidget>
     with TickerProviderStateMixin {
   late AnimationController controller;
+
+  @override
+  void initState() {
+    super.initState();
+
+    controller = AnimationController(
+      vsync: this,
+      duration: widget.timerDuration,
+      lowerBound: 0,
+      upperBound: widget.timerDuration.inSeconds.toDouble(),
+    )..addStatusListener((status) {
+        switch (status) {
+          case AnimationStatus.completed:
+            break;
+          case AnimationStatus.forward:
+            widget.onStart();
+            break;
+          case AnimationStatus.dismissed:
+            widget.onStart();
+            break;
+          default:
+            break;
+        }
+      });
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,39 +84,5 @@ class TrainingSessionEntryRatingFormTimerWidgetState
         ],
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-
-    controller = AnimationController(
-      vsync: this,
-      duration: Duration(
-        seconds: widget.time,
-      ),
-      lowerBound: 0,
-      upperBound: widget.time.toDouble(),
-    )..addStatusListener((status) {
-        switch (status) {
-          case AnimationStatus.completed:
-            widget.onComplete();
-            break;
-          case AnimationStatus.forward:
-            widget.onStart();
-            break;
-          case AnimationStatus.dismissed:
-            widget.onStart();
-            break;
-          default:
-            break;
-        }
-      });
   }
 }

@@ -1,30 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smellsense/app/application/providers/infrastructure.provider.dart';
-import 'package:smellsense/app/screens/training_session/training_session_entry/rating_form/form_rating.widget.dart';
-import 'package:smellsense/app/screens/training_session/training_session_entry/rating_form/form_timer.widget.dart';
-import 'package:smellsense/app/shared/modules/training_session/training_scent.module.dart';
-import 'package:smellsense/app/shared/modules/training_session/training_scent_display.module.dart';
-import 'package:smellsense/app/shared/modules/training_session/training_session.module.dart';
+import 'package:smellsense/app/screens/training_session/training_session_entry/rating_form/rating_form.widget.dart';
+import 'package:smellsense/app/shared/modules/training_scent/training_scent.module.dart';
+import 'package:smellsense/app/shared/modules/training_scent/training_scent_display.module.dart';
 import 'package:smellsense/app/shared/modules/training_session/training_session_entry.module.dart';
 
-class TrainingSessionEntryRatingFormWidget extends StatefulWidget {
-  static const timerDuration = 15;
+class TrainingSessionEntryWidget extends StatefulWidget {
+  static const Duration timerDuration = Duration(seconds: 15);
+
   final TrainingScent scent;
 
-  const TrainingSessionEntryRatingFormWidget({super.key, required this.scent});
+  const TrainingSessionEntryWidget({super.key, required this.scent});
 
   @override
-  TrainingSessionEntryRatingFormWidgetState createState() =>
-      TrainingSessionEntryRatingFormWidgetState();
+  TrainingSessionEntryWidgetState createState() =>
+      TrainingSessionEntryWidgetState();
 
-  static TrainingSessionEntryRatingFormWidgetState of(BuildContext context) =>
-      context.findAncestorStateOfType<
-          TrainingSessionEntryRatingFormWidgetState>()!;
+  static TrainingSessionEntryWidgetState of(BuildContext context) =>
+      context.findAncestorStateOfType<TrainingSessionEntryWidgetState>()!;
 }
 
-class TrainingSessionEntryRatingFormWidgetState
-    extends State<TrainingSessionEntryRatingFormWidget>
+class TrainingSessionEntryWidgetState extends State<TrainingSessionEntryWidget>
     with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   final Map<TrainingScentName, TrainingSessionEntry> _entries = {};
 
@@ -41,6 +38,7 @@ class TrainingSessionEntryRatingFormWidgetState
   @override
   Widget build(BuildContext context) {
     super.build(context);
+
     var infrastructure = context.read<Infrastructure>();
 
     return SizedBox(
@@ -55,25 +53,8 @@ class TrainingSessionEntryRatingFormWidgetState
                     ).displayImage,
                   ),
             ),
-            TrainingSessionEntryRatingFormTimerWidget(
-              time: TrainingSessionEntryRatingFormWidget.timerDuration,
-              onStart: () {
-                setState(() {
-                  busy = true;
-                  currentEncouragement =
-                      TrainingSessionEncouragements.getNextEncouragement();
-                });
-              },
-              onComplete: () {
-                setState(() {
-                  busy = false;
-                  currentEncouragement = null;
-                });
-              },
-              replaceDoneTimerWidget:
-                  TrainingSessionEntryRatingFormRatingWidget(
-                scent: widget.scent,
-              ),
+            RatingFormWidget(
+              scent: widget.scent,
             ),
           ],
         ),

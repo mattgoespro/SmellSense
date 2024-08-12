@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smellsense/app/screens/training_session/training_session_stepper.widget.dart';
-import 'package:smellsense/app/shared/modules/training_session/training_scent.module.dart';
+import 'package:smellsense/app/shared/modules/training_scent/training_scent.module.dart';
 
 class TrainingSessionScreenWidget extends StatefulWidget {
   final List<TrainingScent> scents;
@@ -25,7 +25,7 @@ class TrainingSessionScreenWidgetState
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(8),
-        child: TrainingSessionEntryFormStepper(
+        child: TrainingSessionStepperWidget(
           scents: widget.scents,
         ),
       ),

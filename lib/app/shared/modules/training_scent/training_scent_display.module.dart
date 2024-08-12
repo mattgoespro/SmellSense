@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smellsense/app/shared/modules/training_session/training_scent.module.dart';
+import 'package:smellsense/app/shared/modules/training_scent/training_scent.module.dart';
 
 class TrainingScentDisplay {
   final TrainingScentName name;
@@ -20,6 +20,12 @@ class TrainingScentDisplay {
   static List<TrainingScentDisplay> getScents() => _scents.values.toList();
 
   static const Map<TrainingScentName, TrainingScentDisplay> _scents = {
+    TrainingScentName.chamomile: TrainingScentDisplay(
+      name: TrainingScentName.chamomile,
+      displayName: "Chamomile",
+      displayColor: Color(0xFFFFCB2E),
+      displayImage: 'assets/scent_png/chamomile.png',
+    ),
     TrainingScentName.cinnamon: TrainingScentDisplay(
       name: TrainingScentName.cinnamon,
       displayName: "Cinnamon",
@@ -31,12 +37,6 @@ class TrainingScentDisplay {
       displayName: "Citronella",
       displayColor: Color(0xFFC0CA33),
       displayImage: 'assets/scent_png/citronella.png',
-    ),
-    TrainingScentName.chamomile: TrainingScentDisplay(
-      name: TrainingScentName.chamomile,
-      displayName: "Chamomile",
-      displayColor: Color(0xFFFFE082),
-      displayImage: 'assets/scent_png/chamomile.png',
     ),
     TrainingScentName.clove: TrainingScentDisplay(
       name: TrainingScentName.clove,
@@ -71,7 +71,7 @@ class TrainingScentDisplay {
     TrainingScentName.lemon: TrainingScentDisplay(
       name: TrainingScentName.lemon,
       displayName: 'Lemon',
-      displayColor: Color(0xFFD4E157),
+      displayColor: Color.fromARGB(255, 199, 216, 44),
       displayImage: 'assets/scent_png/lemon.png',
     ),
     TrainingScentName.rose: TrainingScentDisplay(

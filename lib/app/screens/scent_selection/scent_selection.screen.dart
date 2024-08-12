@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:smellsense/app/screens/scent_selection/scent_selection_checkbox_group.widget.dart';
-import 'package:smellsense/app/shared/modules/training_session/training_scent.module.dart';
+import 'package:smellsense/app/shared/modules/training_scent/training_scent.module.dart';
+import 'package:smellsense/app/shared/theme/theme.dart';
 
 class ScentSelectionScreenWidget extends StatefulWidget {
   static int maxSelectionCount = 4;
@@ -27,7 +28,8 @@ class ScentSelectionScreenWidgetState
 
   @override
   Widget build(BuildContext context) {
-    var theme = Theme.of(context);
+    var theme = MaterialTheme.of(context);
+    var textTheme = theme.textTheme;
 
     return Scaffold(
       body: Center(
@@ -43,8 +45,8 @@ class ScentSelectionScreenWidgetState
               Flexible(
                 flex: 1,
                 child: Text(
-                  'Select ${ScentSelectionCheckboxGroupWidget.maxSelectionCount} of your desired training scents',
-                  style: theme.textTheme.titleMedium,
+                  'Select four of your desired training scents',
+                  style: textTheme.headlineSmall,
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -62,16 +64,49 @@ class ScentSelectionScreenWidgetState
               ),
               Align(
                 alignment: Alignment.bottomRight,
-                child: OutlinedButton(
+                child: TextButton(
                   onPressed: isSelectionComplete()
                       ? () {
                           storeScentSelections();
                           return context.goNamed("home");
                         }
                       : null,
+                  style: ButtonStyle(
+                    textStyle: WidgetStateProperty.resolveWith<TextStyle>(
+                      (Set<WidgetState> states) {
+                        if (states.contains(WidgetState.disabled)) {
+                          return textTheme.labelMedium!.copyWith(
+                            color: theme.colorScheme.surfaceDim,
+                          );
+                        }
+
+                        return textTheme.labelMedium!.copyWith(
+                          color: theme.colorScheme.primary,
+                        );
+                      },
+                    ),
+                    backgroundColor: WidgetStateProperty.resolveWith<Color>(
+                      (Set<WidgetState> states) {
+                        if (states.contains(WidgetState.disabled)) {
+                          return theme.colorScheme.surfaceDim;
+                        }
+
+                        return theme.colorScheme.primaryContainer;
+                      },
+                    ),
+                    shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        side: BorderSide(
+                          color: theme.colorScheme.primary,
+                          width: 1,
+                        ),
+                      ),
+                    ),
+                  ),
                   child: Text(
                     'DONE',
-                    style: Theme.of(context).textTheme.labelMedium,
+                    style: textTheme.labelMedium,
                   ),
                 ),
               )

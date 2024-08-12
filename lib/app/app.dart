@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:smellsense/app/application/providers/asset.provider.dart';
-import 'package:smellsense/app/application/providers/database_service.provider.dart';
 import 'package:smellsense/app/application/providers/infrastructure.provider.dart';
 import 'package:smellsense/app/router.dart';
 import 'package:smellsense/app/shared/theme/theme.dart';
@@ -19,19 +17,12 @@ class App extends StatelessWidget {
           routerConfig: routerConfig,
           routerDelegate: router.routerDelegate,
           routeInformationParser: router.routeInformationParser,
-          theme: theme.getTheme(),
+          theme: theme.theme,
         );
       },
       providers: [
         FutureProvider<Infrastructure?>(
-          create: (context) async {
-            var dbService =
-                await DatabaseServiceProvider.createDatabaseService();
-            return Infrastructure(
-              databaseService: dbService,
-              assetProvider: AssetProvider(),
-            );
-          },
+          create: (context) => Infrastructure.getInfrastructure(),
           initialData: null,
         ),
       ],

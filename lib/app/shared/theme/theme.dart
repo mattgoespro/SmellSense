@@ -5,15 +5,19 @@
 library;
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:smellsense/app/shared/theme/text_theme.dart';
 import 'package:smellsense/app/shared/theme/widget_theme_data.dart';
 
 class MaterialTheme {
+  late ThemeData theme;
   late TextTheme textTheme;
-  final String displayFont = "Ubuntu";
+  late ColorScheme colorScheme;
+  final String displayFont = "Roboto";
   final String bodyFont = "Open Sans";
 
   MaterialTheme.of(BuildContext context) {
+    colorScheme = createColorScheme();
+    theme = createTheme(colorScheme);
     textTheme = createTextTheme(
       context,
       bodyFont,
@@ -21,44 +25,7 @@ class MaterialTheme {
     );
   }
 
-  TextTheme createTextTheme(
-    BuildContext context,
-    String bodyFontString,
-    String displayFontString,
-  ) {
-    TextTheme baseTextTheme = Theme.of(context).textTheme;
-
-    TextTheme bodyTextTheme = GoogleFonts.getTextTheme(
-      bodyFontString,
-      baseTextTheme,
-    );
-    TextTheme displayTextTheme = GoogleFonts.getTextTheme(
-      displayFontString,
-      baseTextTheme,
-    );
-
-    return displayTextTheme.copyWith(
-      bodyLarge: bodyTextTheme.bodyLarge,
-      bodyMedium: bodyTextTheme.bodyMedium,
-      bodySmall: bodyTextTheme.bodySmall,
-      labelLarge: bodyTextTheme.labelLarge,
-      labelMedium: bodyTextTheme.labelMedium,
-      labelSmall: bodyTextTheme.labelSmall,
-      displaySmall: displayTextTheme.displaySmall,
-      displayMedium: displayTextTheme.displayMedium,
-      displayLarge: displayTextTheme.displayLarge,
-      titleSmall: displayTextTheme.titleSmall,
-      titleMedium: displayTextTheme.titleMedium!.copyWith(
-        fontWeight: FontWeight.w100,
-      ),
-      titleLarge: displayTextTheme.titleLarge,
-      headlineSmall: displayTextTheme.headlineSmall,
-      headlineMedium: displayTextTheme.headlineMedium,
-      headlineLarge: displayTextTheme.headlineLarge,
-    );
-  }
-
-  static ColorScheme colorScheme() {
+  ColorScheme createColorScheme() {
     return const ColorScheme(
       brightness: Brightness.light,
       error: Color(0xffba1a1a),
@@ -87,7 +54,7 @@ class MaterialTheme {
       secondaryFixed: Color(0xffffd9e2),
       secondaryFixedDim: Color(0xfff9b3c7),
       shadow: Color(0xff000000),
-      surface: Color(0xfff7fafd),
+      surface: Color(0xFFF0F0F0),
       surfaceBright: Color(0xfff7fafd),
       surfaceContainerLowest: Color(0xffffffff),
       surfaceContainerLow: Color(0xfff1f4f7),
@@ -107,11 +74,7 @@ class MaterialTheme {
     );
   }
 
-  ThemeData getTheme() {
-    return theme(colorScheme());
-  }
-
-  ThemeData theme(ColorScheme colorScheme) {
+  ThemeData createTheme(ColorScheme colorScheme) {
     return ThemeData(
       brightness: colorScheme.brightness,
       buttonTheme: WidgetThemeData.getButtonThemeData(colorScheme),

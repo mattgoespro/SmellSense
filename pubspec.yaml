@@ -45,6 +45,7 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   json_annotation: ^4.9.0
   sqflite: any
+  logger: ^2.4.0
 dev_dependencies:
   build_runner: ^2.1.11
   floor_generator: ^1.5.0
@@ -62,30 +63,33 @@ flutter:
 
   # Resolution-aware assets: https://flutter.dev/assets-and-#resolution-aware.s
   assets:
-    # SVGs
-    - assets/svg/smellsense_logo.svg
-    - assets/svg/checkmark.svg
+    # Icons
 
-    # Scent training images
-    - assets/scent_png/chamomile.png
-    - assets/scent_png/cinnamon.png
-    - assets/scent_png/citronella.png
-    - assets/scent_png/clove.png
-    - assets/scent_png/eucalyptus.png
-    - assets/scent_png/garlic.png
-    - assets/scent_png/grapefruit.png
-    - assets/scent_png/lavender.png
-    - assets/scent_png/lemon.png
-    - assets/scent_png/mint.png
-    - assets/scent_png/orange.png
-    - assets/scent_png/rose.png
-    - assets/scent_png/rosemary.png
-    - assets/scent_png/teatree.png
+    ## App icons
+    - assets/icons/smellsense_logo.svg
+
+    # Images
+
+    ## Supported scents
+    - assets/images/chamomile.png
+    - assets/images/cinnamon.png
+    - assets/images/citronella.png
+    - assets/images/clove.png
+    - assets/images/eucalyptus.png
+    - assets/images/garlic.png
+    - assets/images/grapefruit.png
+    - assets/images/lavender.png
+    - assets/images/lemon.png
+    - assets/images/mint.png
+    - assets/images/orange.png
+    - assets/images/rose.png
+    - assets/images/rosemary.png
+    - assets/images/teatree.png
 
     # Parosmia smell reaction emojis
-    - assets/svg/reactions/angry.svg
-    - assets/svg/reactions/disgusted.svg
-    - assets/svg/reactions/unhappy.svg
-    - assets/svg/reactions/neutral.svg
-    - assets/svg/reactions/pleased.svg
-    - assets/svg/reactions/happy.svg
+    - assets/icons/reactions/angry.svg
+    - assets/icons/reactions/disgusted.svg
+    - assets/icons/reactions/unhappy.svg
+    - assets/icons/reactions/neutral.svg
+    - assets/icons/reactions/pleased.svg
+    - assets/icons/reactions/happy.svg

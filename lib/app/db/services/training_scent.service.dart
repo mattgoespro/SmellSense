@@ -1,22 +1,22 @@
+import 'package:smellsense/app/application/providers/supported_training_scent.provider.dart';
 import 'package:smellsense/app/db/daos/training_scent.dao.dart';
 import 'package:smellsense/app/db/entities/training_period.entity.dart';
 import 'package:smellsense/app/db/entities/training_scent.entity.dart'
     show TrainingScentEntity;
-import 'package:smellsense/app/db/services/supported_training_scent.service.dart';
 import 'package:smellsense/app/db/smellsense.db.dart';
 import 'package:smellsense/app/shared/modules/training_period.module.dart';
-import 'package:smellsense/app/shared/modules/training_session/training_scent.module.dart'
+import 'package:smellsense/app/shared/modules/training_scent/training_scent.module.dart'
     show TrainingScent, TrainingScentName;
 
 class TrainingScentService {
   final SmellSenseDatabase db;
 
   late TrainingScentDao _trainingScentDao;
-  late SupportedTrainingScentService _supportedTrainingScentService;
+  late SupportedTrainingScentProvider _supportedTrainingScentService;
 
   TrainingScentService({required this.db}) {
     _trainingScentDao = db.trainingScentDao;
-    _supportedTrainingScentService = SupportedTrainingScentService();
+    _supportedTrainingScentService = SupportedTrainingScentProvider();
   }
 
   Future<TrainingScent> findTrainingScentById(String id) async {

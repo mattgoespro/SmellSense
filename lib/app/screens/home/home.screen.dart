@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:smellsense/app/application/providers/asset.provider.dart';
 import 'package:smellsense/app/application/providers/infrastructure.provider.dart';
 import 'package:smellsense/app/shared/modules/training_period.module.dart';
-import 'package:smellsense/app/shared/modules/training_session/training_scent.module.dart'
+import 'package:smellsense/app/shared/modules/training_scent/training_scent.module.dart'
     show TrainingScent;
 
 class HomeScreenWidget extends StatefulWidget {

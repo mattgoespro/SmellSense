@@ -1,6 +1,5 @@
 import 'package:flutter/gestures.dart' show TapGestureRecognizer;
 import 'package:flutter/material.dart';
-import 'package:smellsense/app/theme.dart';
 import 'package:url_launcher/url_launcher.dart' show launchUrl;
 
 class AboutScreenWidget extends StatefulWidget {
@@ -11,55 +10,6 @@ class AboutScreenWidget extends StatefulWidget {
 }
 
 class AboutScreenWidgetState extends State<AboutScreenWidget> {
-  Widget createTextInput(
-    String text,
-    bool required,
-    Function onChanged,
-    int maxLines,
-  ) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(
-            top: 8,
-            bottom: 3,
-            left: 15,
-            right: 15,
-          ),
-          child: RichText(
-            text: TextSpan(
-              text: text,
-              style: const TextStyle(color: Colors.black),
-              children: [
-                if (required)
-                  TextSpan(
-                    text: ' *',
-                    style: TextStyle(color: AppTheme.colors().error),
-                  ),
-              ],
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 15, right: 15),
-          child: TextField(
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(5),
-                ),
-              ),
-            ),
-            keyboardType: TextInputType.multiline,
-            maxLines: maxLines,
-            onChanged: onChanged as void Function(String)?,
-          ),
-        ),
-      ],
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,37 +26,20 @@ class AboutScreenWidgetState extends State<AboutScreenWidget> {
                       padding: const EdgeInsets.all(20),
                       child: Text(
                         'About Us',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w100,
-                          fontSize: Theme.of(context)
-                              .textTheme
-                              .headlineSmall!
-                              .fontSize,
-                        ),
+                        style: Theme.of(context).textTheme.titleMedium,
                       ),
                     ),
-                    const Text(
-                      'SmellSense is a private initiative\nstarted by E.N.T specialist\nDr. Martin Young.',
+                    Text(
+                      'SmellSense is a private initiative started by ENT surgeon and specialist, Dr. Martin Young.',
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w300,
-                        fontSize: 14,
-                      ),
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 20.0, bottom: 10),
                       child: Text(
                         'Contacts',
                         textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w100,
-                          fontSize: Theme.of(context)
-                              .textTheme
-                              .headlineSmall!
-                              .fontSize,
-                        ),
+                        style: Theme.of(context).textTheme.titleMedium,
                       ),
                     ),
                     Padding(
@@ -136,26 +69,20 @@ class AboutScreenWidgetState extends State<AboutScreenWidget> {
                         ),
                       ),
                     ),
-                    const Padding(
-                      padding: EdgeInsets.only(bottom: 5),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 5),
                       child: Text(
                         'Email: knysnaent@gmail.com',
                         textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontWeight: FontWeight.w300,
-                          fontSize: 14,
-                        ),
+                        style: Theme.of(context).textTheme.bodyMedium,
                       ),
                     ),
-                    const Padding(
-                      padding: EdgeInsets.only(bottom: 5),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 5),
                       child: Text(
-                        'App and development enquiries: smellsenseza@gmail.com',
+                        'Support and development enquiries: smellsenseza@gmail.com',
                         textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontWeight: FontWeight.w300,
-                          fontSize: 14,
-                        ),
+                        style: Theme.of(context).textTheme.bodyMedium,
                       ),
                     ),
                     Padding(
@@ -163,14 +90,7 @@ class AboutScreenWidgetState extends State<AboutScreenWidget> {
                       child: Text(
                         'Resources',
                         textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w100,
-                          fontSize: Theme.of(context)
-                              .textTheme
-                              .headlineSmall!
-                              .fontSize,
-                        ),
+                        style: Theme.of(context).textTheme.titleMedium,
                       ),
                     ),
                     Padding(

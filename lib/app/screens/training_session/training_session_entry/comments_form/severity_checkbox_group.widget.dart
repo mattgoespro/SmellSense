@@ -2,19 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:smellsense/app/shared/modules/training_session/training_session_entry.module.dart';
 import 'package:smellsense/app/shared/modules/training_session/training_session_entry_parosmia_reaction.module.dart';
 
-class TrainingSessionSeverityCheckboxGroupWidget extends StatefulWidget {
+class SeverityCheckboxGroupWidget extends StatefulWidget {
   final TrainingSessionEntry entry;
 
-  const TrainingSessionSeverityCheckboxGroupWidget(
-      {super.key, required this.entry});
+  const SeverityCheckboxGroupWidget({super.key, required this.entry});
 
   @override
-  TrainingSessionSeverityCheckboxGroupWidgetState createState() =>
-      TrainingSessionSeverityCheckboxGroupWidgetState();
+  SeverityCheckboxGroupWidgetState createState() =>
+      SeverityCheckboxGroupWidgetState();
 }
 
-class TrainingSessionSeverityCheckboxGroupWidgetState
-    extends State<TrainingSessionSeverityCheckboxGroupWidget> {
+class SeverityCheckboxGroupWidgetState
+    extends State<SeverityCheckboxGroupWidget> {
   TrainingSessionEntryParosmiaReactionSeverity _selectedSeverity =
       TrainingSessionEntryParosmiaReactionSeverity.none;
 

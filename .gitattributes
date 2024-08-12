@@ -1,0 +1,5 @@
+# test is kept with lf line endings
+* text eol=lf
+
+# images are kept as binary
+*.png -text

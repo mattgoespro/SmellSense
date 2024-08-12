@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:smellsense/app/screens/training_session_comments/comment_form.widget.dart';
+import 'package:smellsense/app/screens/training_session/training_session_entry/comments_form/comment_form.widget.dart';
 import 'package:smellsense/app/shared/modules/training_session/training_session_entry.module.dart';
 import 'package:smellsense/app/shared/utils.dart';
 
-class TrainingSessionRatingCommentsWidget extends StatefulWidget {
+class SessionEntriesCommentsFormWidget extends StatefulWidget {
   final FormMode mode;
   final List<TrainingSessionEntry> entries;
 
-  const TrainingSessionRatingCommentsWidget(
+  const SessionEntriesCommentsFormWidget(
       {super.key, required this.mode, required this.entries});
 
   @override
-  TrainingSessionRatingCommentsWidgetState createState() =>
-      TrainingSessionRatingCommentsWidgetState();
+  SessionEntriesCommentsFormWidgetState createState() =>
+      SessionEntriesCommentsFormWidgetState();
 }
 
-class TrainingSessionRatingCommentsWidgetState
-    extends State<TrainingSessionRatingCommentsWidget> {
+class SessionEntriesCommentsFormWidgetState
+    extends State<SessionEntriesCommentsFormWidget> {
   @override
   Widget build(BuildContext context) => Scaffold(
         resizeToAvoidBottomInset: false,

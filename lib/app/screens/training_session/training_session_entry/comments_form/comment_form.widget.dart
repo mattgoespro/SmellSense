@@ -15,7 +15,7 @@ class CommentForm extends StatefulWidget {
 }
 
 class _CommentFormState extends State<CommentForm> {
-  Widget get reactionFormField => FormField(
+  Widget get parosmiaReactionFormField => FormField(
         builder: (FormFieldState<dynamic> field) => DropdownButtonFormField(
           items: [
             for (var reaction
@@ -28,7 +28,7 @@ class _CommentFormState extends State<CommentForm> {
           ],
           decoration: const InputDecoration(
             labelText: 'How did you react after smelling this scent?',
-            hintText: 'Enter your comment here',
+            hintText: 'I reacted...',
           ),
           onChanged: (String? value) {
             field.didChange(value);
@@ -36,7 +36,7 @@ class _CommentFormState extends State<CommentForm> {
         ),
       );
 
-  Widget get reactionSeverityFormField => FormField(
+  Widget get parosmiaReactionSeverityFormField => FormField(
         builder: (FormFieldState<dynamic> field) => DropdownButtonFormField(
           items: [
             for (var severity
@@ -52,8 +52,8 @@ class _CommentFormState extends State<CommentForm> {
           ],
           decoration: const InputDecoration(
             labelText:
-                'What was the severity of your reaction to the smell of this scent?',
-            hintText: 'Enter your comment here',
+                'How severe was your reaction to the smell of this scent?',
+            hintText: 'The severity...',
           ),
           onChanged: (String? value) {
             field.didChange(value);
@@ -65,7 +65,7 @@ class _CommentFormState extends State<CommentForm> {
         builder: (FormFieldState<dynamic> field) => TextFormField(
           decoration: const InputDecoration(
             labelText: 'Any additional comments?',
-            hintText: 'Enter your comment here',
+            hintText: 'Additionally...',
           ),
           maxLines: 3,
           onChanged: (String value) {
@@ -79,8 +79,8 @@ class _CommentFormState extends State<CommentForm> {
     return Form(
       child: Column(
         children: [
-          reactionFormField,
-          reactionSeverityFormField,
+          parosmiaReactionFormField,
+          parosmiaReactionSeverityFormField,
           additionalCommentsFormField
         ],
       ),

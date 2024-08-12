@@ -2,7 +2,7 @@ import 'package:smellsense/app/db/daos/training_session_entry.dao.dart';
 import 'package:smellsense/app/db/entities/training_session_entry.entity.dart';
 import 'package:smellsense/app/db/services/training_scent.service.dart';
 import 'package:smellsense/app/db/smellsense.db.dart';
-import 'package:smellsense/app/shared/modules/training_session/training_scent.module.dart';
+import 'package:smellsense/app/shared/modules/training_scent/training_scent.module.dart';
 import 'package:smellsense/app/shared/modules/training_session/training_session_entry.module.dart';
 import 'package:smellsense/app/shared/modules/training_session/training_session_entry_parosmia_reaction.module.dart';
 import 'package:smellsense/app/shared/modules/training_session/training_session_entry_rating.module.dart';

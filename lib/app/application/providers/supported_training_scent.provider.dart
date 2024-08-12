@@ -1,10 +1,8 @@
-import 'package:smellsense/app/db/data/supported_training_scent_data.dart';
+import 'package:smellsense/app/static/supported_training_scent_data.dart';
 
-class SupportedTrainingScentService {
-  late SupportedTrainingScentData _supportedTrainingScentLoader;
-  SupportedTrainingScentService() {
-    _supportedTrainingScentLoader = SupportedTrainingScentData();
-  }
+class SupportedTrainingScentProvider {
+  final SupportedTrainingScentData _supportedTrainingScentLoader =
+      SupportedTrainingScentData();
 
   SupportedTrainingScent findSupportedTrainingScent(String id) {
     if (_supportedTrainingScentLoader.scents == null) {
