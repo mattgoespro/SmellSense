@@ -1,5 +1,15 @@
-# test is kept with lf line endings
-* text eol=lf
+# Set default behavior to automatically normalize line endings
+* text=auto
 
-# images are kept as binary
-*.png -text
+*.dart text eol=lf
+*.json text eol=lf
+*.sh text eol=lf
+*.yaml text eol=lf
+*.svg text eol=lf
+
+# Declare binary files to be excluded from text normalization
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.pdf binary
+assets/** binary
