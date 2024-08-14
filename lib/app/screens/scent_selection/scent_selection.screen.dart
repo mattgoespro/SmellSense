@@ -41,19 +41,25 @@ class ScentSelectionScreenWidgetState
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                'Select four of your desired training scents',
-                style: textTheme.headlineSmall,
-                textAlign: TextAlign.center,
+              Flexible(
+                flex: 1,
+                child: Text(
+                  'Select four of your desired training scents',
+                  style: textTheme.headlineSmall,
+                  textAlign: TextAlign.center,
+                ),
               ),
-              ScentSelectionCheckboxGroupWidget(
-                onSelectionChange: (List<TrainingScentName> scents) {
-                  setState(
-                    () {
-                      selectedScents = scents;
-                    },
-                  );
-                },
+              Flexible(
+                flex: 3,
+                child: ScentSelectionCheckboxGroupWidget(
+                  onSelectionChange: (List<TrainingScentName> scents) {
+                    setState(
+                      () {
+                        selectedScents = scents;
+                      },
+                    );
+                  },
+                ),
               ),
               Align(
                 alignment: Alignment.bottomRight,
