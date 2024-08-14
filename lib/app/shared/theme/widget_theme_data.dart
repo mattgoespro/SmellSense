@@ -1,59 +1,86 @@
 import 'package:flutter/material.dart';
 
 class WidgetThemeData {
-  static ButtonThemeData getButtonThemeData(ColorScheme colorScheme) =>
-      ButtonThemeData(
-        buttonColor: colorScheme.primary,
-        textTheme: ButtonTextTheme.primary,
+  static TextButtonThemeData getTextButtonTheme(
+      ColorScheme colorScheme, TextTheme textTheme) {
+    return TextButtonThemeData(
+      style: TextButton.styleFrom(
+        backgroundColor: colorScheme.primary,
+        foregroundColor: colorScheme.onPrimary,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-          side: BorderSide(
+          borderRadius: BorderRadius.circular(4),
+        ),
+        textStyle: textTheme.displaySmall,
+      ),
+    );
+  }
+
+  static OutlinedButtonThemeData getOutlinedButtonTheme(
+    ColorScheme colorScheme,
+    TextTheme textTheme,
+  ) {
+    return OutlinedButtonThemeData(
+      style: ButtonStyle(
+        side: WidgetStateProperty.resolveWith<BorderSide>(
+            (Set<MaterialState> states) {
+          if (states.contains(MaterialState.disabled)) {
+            return BorderSide(
+              color: colorScheme.onSurface
+                  .withOpacity(0.4), // Grey color when disabled
+              width: 1,
+            );
+          }
+          return BorderSide(
             color: colorScheme.primary,
             width: 1,
-          ),
+          );
+        }),
+        shape: WidgetStateProperty.resolveWith<OutlinedBorder>(
+          (Set<WidgetState> states) {
+            var borderWidth = 1.0;
+            var borderRadius = BorderRadius.circular(4);
+
+            if (states.contains(WidgetState.disabled)) {
+              return RoundedRectangleBorder(
+                borderRadius: borderRadius,
+                side: BorderSide(
+                  color: colorScheme.outlineVariant,
+                  width: borderWidth,
+                ),
+              );
+            }
+
+            return RoundedRectangleBorder(
+              borderRadius: borderRadius,
+              side: BorderSide(
+                color: colorScheme.outlineVariant,
+                width: borderWidth,
+              ),
+            );
+          },
         ),
-        colorScheme: colorScheme,
-        height: 48,
-        hoverColor: colorScheme.primaryContainer,
-        disabledColor: colorScheme.surfaceDim,
-        focusColor: colorScheme.primaryContainer,
-        highlightColor: colorScheme.primaryContainer,
-        layoutBehavior: ButtonBarLayoutBehavior.padded,
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        splashColor: colorScheme.primaryContainer,
-      );
+      ),
+    );
+  }
 
   static CheckboxThemeData getCheckboxThemeData(ColorScheme colorScheme) =>
       CheckboxThemeData(
-        fillColor:
-            WidgetStateProperty.resolveWith<Color>((Set<WidgetState> states) {
-          if (states.contains(WidgetState.disabled)) {
-            if (states.contains(WidgetState.selected)) {
-              return colorScheme.onSurface
-                  .withOpacity(0.38); // Checked and disabled
-            }
-            return colorScheme.onSurface
-                .withOpacity(0.12); // Unchecked and disabled
-          }
-
-          if (states.contains(WidgetState.selected)) {
-            return colorScheme.primary; // Checked
-          }
-
-          return Colors.transparent; // Default unchecked state
-        }),
         checkColor: WidgetStateProperty.resolveWith<Color>(
           (Set<WidgetState> states) {
-            if (states.contains(WidgetState.disabled) &&
-                states.contains(WidgetState.selected)) {
-              return colorScheme.onSurface
-                  .withOpacity(0.54); // Checked and disabled
+            var isDisabled = states.contains(WidgetState.disabled);
+            var isChecked = states.contains(WidgetState.selected);
+
+            if (isDisabled) {
+              return isChecked
+                  ? colorScheme.primaryContainer.withOpacity(0.8)
+                  : colorScheme.surfaceContainer;
             }
 
-            if (states.contains(WidgetState.selected)) {
-              return colorScheme.onPrimary; // Checked
+            if (isChecked) {
+              return colorScheme.primaryContainer;
             }
-            return Colors.transparent; // Default unchecked state
+
+            return colorScheme.surfaceContainer;
           },
         ),
         overlayColor: WidgetStateProperty.resolveWith<Color>(
@@ -69,16 +96,35 @@ class WidgetThemeData {
       );
 
   static SnackBarThemeData getSnackBarThemeData(
-          ColorScheme colorScheme, TextTheme textTheme) =>
+    ColorScheme colorScheme,
+    TextTheme textTheme,
+  ) =>
       SnackBarThemeData(
-        backgroundColor: Colors.grey.shade900,
+        backgroundColor: colorScheme.secondaryContainer,
         contentTextStyle: textTheme.displaySmall,
         elevation: 4,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(5),
         ),
         behavior: SnackBarBehavior.floating,
-        actionTextColor: colorScheme.onTertiaryContainer,
+        actionTextColor: colorScheme.onSecondaryContainer,
         dismissDirection: DismissDirection.none,
       );
+
+  static ListTileThemeData getListTileThemeData(
+    ColorScheme colorScheme,
+    TextTheme textTheme,
+  ) {
+    return ListTileThemeData(
+      tileColor: colorScheme.surfaceContainer,
+      iconColor: colorScheme.onSurface,
+      textColor: colorScheme.onSurface,
+      selectedColor: colorScheme.onPrimary,
+      horizontalTitleGap: 16,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(4),
+      ),
+      style: ListTileStyle.list,
+    );
+  }
 }

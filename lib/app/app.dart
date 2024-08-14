@@ -17,7 +17,7 @@ class App extends StatelessWidget {
           routerConfig: routerConfig,
           routerDelegate: router.routerDelegate,
           routeInformationParser: router.routeInformationParser,
-          theme: theme.theme,
+          theme: theme.themeData,
         );
       },
       providers: [

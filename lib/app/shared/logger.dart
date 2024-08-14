@@ -37,13 +37,14 @@ class Log {
     logger.t(message);
   }
 
-  static debug(dynamic message) {
-    logger.d("DEBUG");
-    logger.e("ERROR");
-    logger.i("INFO");
-    logger.w("WARNING");
-    logger.t("TRACE");
-    logger.d(message);
+  static debug(List<dynamic> message) {
+    logger.d(message.map((msg) {
+      if (msg is List) {
+        return msg.join(",");
+      }
+
+      return msg;
+    }).join('\n'));
   }
 
   static info(dynamic message) {

@@ -1,55 +1,56 @@
 #!/bin/bash
 
+##
+# Connects an Android device to the host machine over Wi-Fi.
+# The script should be executed from an external script or terminal.
+##
+
 function usage() {
     echo "Usage: connect_device.sh [-d <wifi|vm>]"
 }
 
 function connect_wireless_device() {
-    # Ensure adb server is running
-    adb start-server
-
     # Get the device ID of the single connected device
-    DEVICE_ID="$(adb devices | grep -w "device" | cut -f1)"
+    mapfile -t devices < <(adb devices | grep -w "device" | awk '{print $1}')
+    DEVICE_ID="${devices[0]}"
+    DEVICE_IP="$(adb shell ip route | awk '{print $9}' | tail -n 1)"
 
-    if [ -z "$DEVICE_ID" ]; then
-        echo "No devices connected."
-        return 0
-    fi
+    echo "device id: $DEVICE_ID"
+    echo "device ip: $DEVICE_IP"
 
-    echo "Connecting to device over Wi-Fi..."
-
-    ADB_PORT=5555
-
-    # Retrieve the IP address of the connected device
-    DEVICE_IP="$(adb -s "$DEVICE_ID" shell ip route | awk '{print $9}' | tail -n 1)"
-
-    echo -e "Identified device:"
-    echo "  ID: $DEVICE_ID"
-    echo "  IP Address: $DEVICE_IP"
-
-    echo "Enabling ADB over Wi-Fi on the device..."
-
-    if ! adb -s "$DEVICE_ID" tcpip $ADB_PORT >>/dev/null; then
-        echo "Failed to enable ADB over Wi-Fi on the device."
+    if [ -z "$DEVICE_ID" ] || [ -z "$DEVICE_IP" ]; then
+        echo "error: no devices connected."
         return 1
     fi
 
-    # Connect to the device over Wi-Fi
-    echo "Connecting on address: $DEVICE_IP:$ADB_PORT"
+    ADB_PORT="${DEVICE_IP##*:}"
 
-    if ! adb connect "$DEVICE_IP:$ADB_PORT" >>/dev/null; then
-        echo "Failed to connect to device. Ensure that:"
+    echo -e "identified device '${DEVICE_ID}'"
+
+    echo "connecting to device over wi-fi."
+
+    # ADB_PORT=5555
+
+    # if ! adb -s "$DEVICE_ID" tcpip "$ADB_PORT" >>/dev/null; then
+    #     echo "error: adb failed to bridge connection to device '$DEVICE_ID' over wi-fi."
+    #     return 1
+    # fi
+
+    echo "enabled adb over wi-fi for the connected device..."
+
+    # Connect to the device over Wi-Fi
+
+    if ! adb connect "$ADB_PORT" >>/dev/null; then
+        echo "error: failed to connect to device."
+        echo "Ensure that:"
         echo "  - The device is connected to this machine via USB and has USB debugging enabled."
         echo "  - Wi-Fi on the device in turned on and connected to the same network."
         return 1
     fi
 
-    # Verify the connection
-    if adb devices | grep -q "$DEVICE_IP:$ADB_PORT"; then
-        return 0
-    fi
+    echo "connection complete"
 
-    return 1
+    return 0
 }
 
 while getopts "d:" opt; do
@@ -62,18 +63,24 @@ while getopts "d:" opt; do
 
         case "$OPTARG" in
         "wifi")
+            if adb forward --list | grep -q "tcp:"; then
+                echo "device already connected."
+                exit 0
+            fi
+
             if ! connect_wireless_device; then
-                echo "Failed to connect to device."
                 exit 1
             fi
+
+            echo -e "\nsuccess: device connected."
             ;;
         "vm")
-            echo "Connecting to VM device..."
+            echo "connecting to VM device..."
             exit 0
             ;;
 
         *)
-            echo "Invalid option: $OPTARG"
+            echo "invalid option: $OPTARG"
             usage
             exit 1
             ;;

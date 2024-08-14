@@ -26,16 +26,23 @@
       },
       "problemMatcher": [
         {
-          "pattern": {
-            "regexp": "^Successfully connected on",
-            "file": 1,
-            "location": 2,
-            "message": 3
-          },
+          "owner": "adb",
+          "fileLocation": [
+            "relative",
+            "${workspaceFolder}/scripts/connect_device.sh"
+          ],
+          "pattern": [
+            {
+              "regexp": "^(error: no devices connected\\.|error: failed to connect to device\\.|error: adb failed to bridge connection to device '\\w+' over wi-fi\\.)$",
+              "file": 1,
+              "line": 1,
+              "message": 1
+            }
+          ],
           "background": {
             "activeOnStart": true,
-            "beginsPattern": "^Successfully connected on",
-            "endsPattern": "^$"
+            "beginsPattern": "^Connecting to device over Wi-Fi\\.\\.\\.$",
+            "endsPattern": "^(error: failed to connect to device\\.|error: adb failed to bridge connection to device '\\w+' over wi-fi\\.)$"
           }
         }
       ]

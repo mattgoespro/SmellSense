@@ -9,20 +9,21 @@ import 'package:smellsense/app/shared/theme/text_theme.dart';
 import 'package:smellsense/app/shared/theme/widget_theme_data.dart';
 
 class MaterialTheme {
-  late ThemeData theme;
-  late TextTheme textTheme;
-  late ColorScheme colorScheme;
+  late final ThemeData themeData;
+  late final TextTheme textTheme;
+  late final ColorScheme colorScheme;
+
   final String displayFont = "Roboto";
   final String bodyFont = "Open Sans";
 
   MaterialTheme.of(BuildContext context) {
     colorScheme = createColorScheme();
-    theme = createTheme(colorScheme);
     textTheme = createTextTheme(
       context,
       bodyFont,
       displayFont,
     );
+    themeData = createTheme(colorScheme, textTheme);
   }
 
   ColorScheme createColorScheme() {
@@ -74,21 +75,34 @@ class MaterialTheme {
     );
   }
 
-  ThemeData createTheme(ColorScheme colorScheme) {
+  ThemeData createTheme(ColorScheme colorScheme, TextTheme textTheme) {
     return ThemeData(
       brightness: colorScheme.brightness,
-      buttonTheme: WidgetThemeData.getButtonThemeData(colorScheme),
       canvasColor: colorScheme.surface,
       cardColor: colorScheme.surfaceContainer,
       checkboxTheme: WidgetThemeData.getCheckboxThemeData(colorScheme),
       colorScheme: colorScheme,
       scaffoldBackgroundColor: colorScheme.surface,
-      snackBarTheme:
-          WidgetThemeData.getSnackBarThemeData(colorScheme, textTheme),
+      snackBarTheme: WidgetThemeData.getSnackBarThemeData(
+        colorScheme,
+        textTheme,
+      ),
+      listTileTheme: WidgetThemeData.getListTileThemeData(
+        colorScheme,
+        textTheme,
+      ),
       splashColor: colorScheme.primary,
       textTheme: textTheme.apply(
         bodyColor: colorScheme.onSurface,
         displayColor: colorScheme.onSurface,
+      ),
+      textButtonTheme: WidgetThemeData.getTextButtonTheme(
+        colorScheme,
+        textTheme,
+      ),
+      outlinedButtonTheme: WidgetThemeData.getOutlinedButtonTheme(
+        colorScheme,
+        textTheme,
       ),
       useMaterial3: true,
     );

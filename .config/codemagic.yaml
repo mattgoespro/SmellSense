@@ -1,10 +1,10 @@
-#    _____    ______   ______   _____   _   _   _____   _______   _____    ____    _   _    _____ 
+#    _____    ______   ______   _____   _   _   _____   _______   _____    ____    _   _    _____
 #   |  __ \  |  ____| |  ____| |_   _| | \ | | |_   _| |__   __| |_   _|  / __ \  | \ | |  / ____|
-#   | |  | | | |__    | |__      | |   |  \| |   | |      | |      | |   | |  | | |  \| | | (___  
-#   | |  | | |  __|   |  __|     | |   | . ` |   | |      | |      | |   | |  | | | . ` |  \___ \ 
+#   | |  | | | |__    | |__      | |   |  \| |   | |      | |      | |   | |  | | |  \| | | (___
+#   | |  | | |  __|   |  __|     | |   | . ` |   | |      | |      | |   | |  | | | . ` |  \___ \
 #   | |__| | | |____  | |       _| |_  | |\  |  _| |_     | |     _| |_  | |__| | | |\  |  ____) |
-#   |_____/  |______| |_|      |_____| |_| \_| |_____|    |_|    |_____|  \____/  |_| \_| |_____/ 
-#                                                                                                 
+#   |_____/  |______| |_|      |_____| |_| \_| |_____|    |_|    |_____|  \____/  |_| \_| |_____/
+#
 
 definitions:
   - &flutter-pub-get
@@ -15,8 +15,8 @@ definitions:
     script: flutter analyze
   - &cache
     cache_paths:
-      - $FLUTTER_ROOT/.pub-cache       # Dart cache
-      - $HOME/.gradle/caches           # Gradle cache
+      - $FLUTTER_ROOT/.pub-cache # Dart cache
+      - $HOME/.gradle/caches # Gradle cache
       - $HOME/Library/Caches/CocoaPods # CocoaPods cache
   - &env-builders
     flutter: stable
@@ -42,36 +42,33 @@ definitions:
     flutter: stable
     xcode: latest
     cocoapods: default
-  - &env-max-build-duration
-    60
+  - &env-max-build-duration 60
   - &artifacts-all
     - build/**/outputs/bundle/**/*.aab
     - build/ios/ipa/*.ipa
   - &publishing
     email:
-        recipients:
-          - mattyoung305@gmail.com
+      recipients:
+        - mattyoung305@gmail.com
 
-#   __          __   ____    _____    _  __  ______   _         ____   __          __   _____ 
+#   __          __   ____    _____    _  __  ______   _         ____   __          __   _____
 #   \ \        / /  / __ \  |  __ \  | |/ / |  ____| | |       / __ \  \ \        / /  / ____|
-#    \ \  /\  / /  | |  | | | |__) | | ' /  | |__    | |      | |  | |  \ \  /\  / /  | (___  
-#     \ \/  \/ /   | |  | | |  _  /  |  <   |  __|   | |      | |  | |   \ \/  \/ /    \___ \ 
+#    \ \  /\  / /  | |  | | | |__) | | ' /  | |__    | |      | |  | |  \ \  /\  / /  | (___
+#     \ \/  \/ /   | |  | | |  _  /  |  <   |  __|   | |      | |  | |   \ \/  \/ /    \___ \
 #      \  /\  /    | |__| | | | \ \  | . \  | |      | |____  | |__| |    \  /\  /     ____) |
-#       \/  \/      \____/  |_|  \_\ |_|\_\ |_|      |______|  \____/      \/  \/     |_____/ 
+#       \/  \/      \____/  |_|  \_\ |_|\_\ |_|      |______|  \____/      \/  \/     |_____/
 
 workflows:
-
   #     _     _  _   ___    ___    ___    ___   ___              ___    ___  __   __
   #    /_\   | \| | |   \  | _ \  / _ \  |_ _| |   \     ___    |   \  | __| \ \ / /
-  #   / _ \  | .` | | |) | |   / | (_) |  | |  | |) |   |___|   | |) | | _|   \ V / 
-  #  /_/ \_\ |_|\_| |___/  |_|_\  \___/  |___| |___/            |___/  |___|   \_/  
+  #   / _ \  | .` | | |) | |   / | (_) |  | |  | |) |   |___|   | |) | | _|   \ V /
+  #  /_/ \_\ |_|\_| |___/  |_|_\  \___/  |___| |___/            |___/  |___|   \_/
 
   android-dev:
-    name: '[Dev] Build for Android'
+    name: "[Dev] Build for Android"
     instance_type: mac_pro
     max_build_duration: *env-max-build-duration
-    environment:
-      *env-android
+    environment: *env-android
     cache: *cache
     scripts:
       - *flutter-pub-get
@@ -92,21 +89,20 @@ workflows:
     artifacts:
       - build/**/outputs/bundle/**/*.aab
     publishing:
-      email: 
+      email:
         recipients:
           - "mattyoung305@gmail.com"
 
-  #     _     _  _   ___    ___    ___    ___   ___              ___   ___    ___    ___  
-  #    /_\   | \| | |   \  | _ \  / _ \  |_ _| |   \     ___    | _ \ | _ \  / _ \  |   \ 
+  #     _     _  _   ___    ___    ___    ___   ___              ___   ___    ___    ___
+  #    /_\   | \| | |   \  | _ \  / _ \  |_ _| |   \     ___    | _ \ | _ \  / _ \  |   \
   #   / _ \  | .` | | |) | |   / | (_) |  | |  | |) |   |___|   |  _/ |   / | (_) | | |) |
-  #  /_/ \_\ |_|\_| |___/  |_|_\  \___/  |___| |___/            |_|   |_|_\  \___/  |___/ 
-                                                                                      
+  #  /_/ \_\ |_|\_| |___/  |_|_\  \___/  |___| |___/            |_|   |_|_\  \___/  |___/
+
   android-prod:
-    name: '[Prod] Build for Android'
+    name: "[Prod] Build for Android"
     instance_type: mac_pro
     max_build_duration: *env-max-build-duration
-    environment:
-      *env-android
+    environment: *env-android
     cache: *cache
     scripts:
       - *flutter-pub-get
@@ -121,7 +117,7 @@ workflows:
           storeFile=/tmp/keystore.keystore
           EOF
       - name: "[Flutter] Setting up SDK paths"
-        script: | 
+        script: |
           echo "flutter.sdk=$HOME/programs/flutter" > "$FCI_BUILD_DIR/android/local.properties"
           echo "ndk.dir=/usr/local/share/android-sdk/ndk/23.1.7779620" > "$FCI_BUILD_DIR/android/local.properties"
           echo "Local Android properties..."
@@ -131,21 +127,20 @@ workflows:
     artifacts:
       - build/**/outputs/bundle/**/*.aab
     publishing:
-      email: 
+      email:
         recipients:
           - "mattyoung305@gmail.com"
 
   #    _    ___    ___             ___    ___  __   __
   #   (_)  / _ \  / __|    ___    |   \  | __| \ \ / /
-  #   | | | (_) | \__ \   |___|   | |) | | _|   \ V / 
-  #   |_|  \___/  |___/           |___/  |___|   \_/  
+  #   | | | (_) | \__ \   |___|   | |) | | _|   \ V /
+  #   |_|  \___/  |___/           |___/  |___|   \_/
 
   ios-dev:
-    name: '[Dev] Build for iOS'
+    name: "[Dev] Build for iOS"
     instance_type: mac_pro
     max_build_duration: *env-max-build-duration
-    environment:
-      *env-ios
+    environment: *env-ios
     cache: *cache
     scripts:
       - *flutter-pub-get
@@ -164,21 +159,20 @@ workflows:
     artifacts:
       - build/ios/ipa/*.ipa
     publishing:
-      email: 
+      email:
         recipients:
           - "mattyoung305@gmail.com"
 
-  #    _    ___    ___             ___   ___    ___    ___  
-  #   (_)  / _ \  / __|    ___    | _ \ | _ \  / _ \  |   \ 
+  #    _    ___    ___             ___   ___    ___    ___
+  #   (_)  / _ \  / __|    ___    | _ \ | _ \  / _ \  |   \
   #   | | | (_) | \__ \   |___|   |  _/ |   / | (_) | | |) |
-  #   |_|  \___/  |___/           |_|   |_|_\  \___/  |___/ 
+  #   |_|  \___/  |___/           |_|   |_|_\  \___/  |___/
 
   ios-prod:
-    name: '[Prod] Build for iOS'
+    name: "[Prod] Build for iOS"
     instance_type: mac_pro
     max_build_duration: *env-max-build-duration
-    environment:
-      *env-ios
+    environment: *env-ios
     cache: *cache
     scripts:
       - *flutter-pub-get
@@ -197,7 +191,7 @@ workflows:
     artifacts:
       - build/ios/ipa/*.ipa
     publishing:
-      email: 
+      email:
         recipients:
           - "mattyoung305@gmail.com"
       app_store_connect:
@@ -209,11 +203,11 @@ workflows:
 
   #      _     _      _                ___    ___  __   __
   #     /_\   | |    | |       ___    |   \  | __| \ \ / /
-  #    / _ \  | |__  | |__    |___|   | |) | | _|   \ V / 
-  #   /_/ \_\ |____| |____|           |___/  |___|   \_/  
+  #    / _ \  | |__  | |__    |___|   | |) | | _|   \ V /
+  #   /_/ \_\ |____| |____|           |___/  |___|   \_/
 
   build-all-dev:
-    name: '[Dev] Build for Android & iOS'
+    name: "[Dev] Build for Android & iOS"
     instance_type: mac_pro
     max_build_duration: *env-max-build-duration
     environment:
@@ -264,6 +258,6 @@ workflows:
       - build/**/outputs/bundle/**/*.aab
       - build/ios/ipa/*.ipa
     publishing:
-      email: 
+      email:
         recipients:
           - "mattyoung305@gmail.com"

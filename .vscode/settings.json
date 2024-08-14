@@ -7,25 +7,13 @@
     "editor.formatOnPaste": true,
     "editor.formatOnSave": true
   },
-  "[gradle-build]": {
-    "editor.defaultFormatter": "vscjava.vscode-gradle",
-    "editor.formatOnPaste": true,
-    "editor.formatOnSave": true,
-    "files.eol": "\n"
-  },
-  "[gradle]": {
-    "editor.defaultFormatter": "vscjava.vscode-gradle",
-    "editor.formatOnPaste": true,
-    "editor.formatOnSave": true,
-    "files.eol": "\n"
-  },
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true,
-    "editor.formatOnPaste": true
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true
   },
   "[properties]": {
     "files.eol": "\n"
@@ -35,25 +23,22 @@
     "editor.formatOnPaste": true,
     "editor.formatOnSave": true
   },
-  // "[xml]": {
-  //   "editor.defaultFormatter": "redhat.vscode-xml"
-  // },
-  // "terminal.integrated.shellIntegration.enabled": false,
-  "dart.debugExternalPackageLibraries": true,
-  "dart.debugSdkLibraries": true,
-  "dart.flutterHotReloadOnSave": "manual",
-  "dart.renameFilesWithClasses": "prompt",
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml",
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true
+  },
   "dart.flutterCustomEmulators": [
     {
-      "name": "Pixel 6 API 34",
-      "id": "Pixel_6_API_34",
+      "args": ["-avd", "Pixel_6_API_34", "-gpu", "host", "-grpc-use-jwt"],
       "emulatorPath": "emulator",
-      "args": ["-avd", "Pixel_6_API_34", "-gpu", "host", "-grpc-use-jwt"]
+      "id": "Pixel_6_API_34",
+      "name": "Pixel 6 API 34"
     }
   ],
   "editor.codeActionsOnSave": {
-    "source.organizeImports": "always",
-    "source.fixAll.dart": "always"
+    "source.fixAll.dart": "always",
+    "source.organizeImports": "always"
   },
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
@@ -69,9 +54,6 @@
     ".packages": true,
     "pubspec.lock": true
   },
-  "debug.console.fontSize": 13,
-  "debug.console.fontFamily": "Roboto, sans-serif",
-  "debug.console.lineHeight": 18,
   "json.schemas": [
     {
       "description": "Codemagic CI/CD file configuration",
@@ -79,11 +61,5 @@
       "url": "https://codemagic.io/codemagic-schema.json"
     }
   ],
-  "terminal.integrated.defaultProfile.windows": "Git Bash",
-  "dart.hotReloadPatterns": ["lib/**"],
-  "dart.hotReloadOnSave": "manual",
-  "dart.previewHotReloadOnSaveWatcher": true
-  // "yaml.schemas": {
-  //   "https://static.codemagic.io/codemagic-schema.json": "https://codemagic.io/codemagic-schema.json"
-  // },
+  "terminal.integrated.defaultProfile.windows": "Git Bash"
 }
