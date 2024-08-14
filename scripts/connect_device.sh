@@ -15,9 +15,6 @@ function connect_wireless_device() {
     DEVICE_ID="${devices[0]}"
     DEVICE_IP="$(adb shell ip route | awk '{print $9}' | tail -n 1)"
 
-    echo "device id: $DEVICE_ID"
-    echo "device ip: $DEVICE_IP"
-
     if [ -z "$DEVICE_ID" ] || [ -z "$DEVICE_IP" ]; then
         echo "error: no devices connected."
         return 1
