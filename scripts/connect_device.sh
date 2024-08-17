@@ -62,7 +62,7 @@ while getopts "d:" opt; do
         "wifi")
             if adb forward --list | grep -q "tcp:"; then
                 echo "device already connected."
-                exit 0
+                return
             fi
 
             if ! connect_wireless_device; then
@@ -92,4 +92,5 @@ while getopts "d:" opt; do
     esac
 done
 
-exit 0
+read -r -p "Press any key to exit..."
+

@@ -22,8 +22,8 @@ class WidgetThemeData {
     return OutlinedButtonThemeData(
       style: ButtonStyle(
         side: WidgetStateProperty.resolveWith<BorderSide>(
-            (Set<MaterialState> states) {
-          if (states.contains(MaterialState.disabled)) {
+            (Set<WidgetState> states) {
+          if (states.contains(WidgetState.disabled)) {
             return BorderSide(
               color: colorScheme.onSurface
                   .withOpacity(0.4), // Grey color when disabled

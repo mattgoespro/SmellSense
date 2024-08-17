@@ -1,20 +1,16 @@
 import 'package:floor/floor.dart'
-    show ColumnInfo, ForeignKey, entity, primaryKey;
-import 'package:smellsense/app/db/entities/supported_training_scent.entity.dart';
+    show ColumnInfo, Entity, ForeignKey, primaryKey;
 import 'package:smellsense/app/db/entities/training_period.entity.dart';
 
-@entity
+@Entity(
+  tableName: 'training_scent',
+)
 class TrainingScentEntity {
   @ColumnInfo(name: 'id')
   @primaryKey
   final String id;
 
   @ColumnInfo(name: 'supported_scent_id')
-  @ForeignKey(
-    childColumns: ['supported_scent_id'],
-    parentColumns: ['id'],
-    entity: SupportedTrainingScentEntity,
-  )
   final String supportedScentId;
 
   TrainingScentEntity({
@@ -30,4 +26,22 @@ class TrainingScentEntity {
     entity: TrainingPeriodEntity,
   )
   final String periodId;
+
+  @override
+  String toString() =>
+      'TrainingScentEntity(id: $id, supportedScentId: $supportedScentId, periodId: $periodId)';
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is TrainingScentEntity &&
+        other.id == id &&
+        other.supportedScentId == supportedScentId &&
+        other.periodId == periodId;
+  }
+
+  @override
+  int get hashCode =>
+      id.hashCode ^ supportedScentId.hashCode ^ periodId.hashCode;
 }

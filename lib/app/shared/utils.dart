@@ -17,3 +17,7 @@ class AssetPathProvider {
     return _basePath + assetTypePath + assetName;
   }
 }
+
+String formatString(dynamic clazz, List<dynamic> fieldNames) {
+  return "${clazz.runtimeType.toString()}(${fieldNames.map((field) => "$field: ${clazz.field}").join(", ")})";
+}

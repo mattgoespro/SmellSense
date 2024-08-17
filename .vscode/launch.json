@@ -2,18 +2,52 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Flutter: debug",
+      "name": "Flutter: Run all Tests",
       "type": "dart",
       "request": "launch",
-      "flutterMode": "debug",
-      "internalConsoleOptions": "openOnSessionStart"
+      "program": "./test/"
     },
     {
-      "name": "Flutter: debug with wifi device",
+      "name": "flutter: launch on wi-fi device with profile mode",
       "type": "dart",
       "request": "launch",
       "program": "lib/main.dart",
+      "deviceId": "android-arm64",
+      "flutterMode": "profile",
+      "presentation": {
+        "hidden": false,
+        "group": "debug",
+        "order": 1
+      },
+      "internalConsoleOptions": "openOnSessionStart"
+    },
+    {
+      "name": "flutter: launch in virtual device with debug mode",
+      "type": "dart",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "deviceId": "Pixel_6_API_34",
       "flutterMode": "debug",
+      "showMemoryUsage": true,
+      "internalConsoleOptions": "openOnSessionStart",
+      "presentation": {
+        "hidden": false,
+        "group": "debug",
+        "order": 2
+      }
+    },
+
+    {
+      "name": "flutter: launch in release mode",
+      "type": "dart",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "deviceId": "android-arm64",
+      "presentation": {
+        "hidden": false,
+        "group": "debug",
+        "order": 3
+      },
       "internalConsoleOptions": "openOnSessionStart"
     }
   ]

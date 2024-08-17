@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smellsense/app/shared/modules/training_scent/training_scent.module.dart';
+import 'package:smellsense/app/shared/utils.dart';
 
 class TrainingScentDisplay {
   final TrainingScentName name;
@@ -104,4 +105,14 @@ class TrainingScentDisplay {
         displayColor: Color(0xFF80DEEA),
         displayImage: 'assets/scent_png/teatree.png')
   };
+
+  @override
+  String toString() {
+    return formatString(this, [
+      'name',
+      'displayName',
+      'displayColor',
+      'displayImage',
+    ]);
+  }
 }

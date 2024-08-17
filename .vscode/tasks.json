@@ -41,7 +41,7 @@
           ],
           "background": {
             "activeOnStart": true,
-            "beginsPattern": "^Connecting to device over Wi-Fi\\.\\.\\.$",
+            "beginsPattern": "^connecting to device over wi-fi\\.$",
             "endsPattern": "^(error: failed to connect to device\\.|error: adb failed to bridge connection to device '\\w+' over wi-fi\\.)$"
           }
         }
@@ -96,6 +96,13 @@
           }
         }
       ]
+    },
+    {
+      "detail": "flutter: test",
+      "type": "flutter",
+      "label": "flutter: test",
+      "command": "test",
+      "args": ["--coverage", "--no-pub"]
     }
   ],
   "inputs": [

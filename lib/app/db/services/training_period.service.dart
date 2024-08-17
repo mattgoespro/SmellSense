@@ -1,19 +1,31 @@
+import 'package:smellsense/app/application/providers/supported_training_scent.provider.dart';
 import 'package:smellsense/app/db/daos/training_period.dao.dart';
 import 'package:smellsense/app/db/entities/training_period.entity.dart';
+import 'package:smellsense/app/db/entities/training_scent.entity.dart';
+import 'package:smellsense/app/db/services/training_scent.service.dart';
 import 'package:smellsense/app/db/services/training_session.service.dart';
 import 'package:smellsense/app/db/services/util.service.dart';
 import 'package:smellsense/app/db/smellsense.db.dart';
 import 'package:smellsense/app/shared/modules/training_period.module.dart';
+import 'package:smellsense/app/shared/modules/training_scent/training_scent.module.dart';
 import 'package:smellsense/app/shared/modules/training_session/training_session.module.dart';
 
 class TrainingPeriodService {
   final SmellSenseDatabase db;
-  late TrainingPeriodDao _trainingPeriodDao;
-  late TrainingSessionService _trainingSessionService;
+  final TrainingSessionService _trainingSessionService;
+  final TrainingScentService _trainingScentService;
 
-  TrainingPeriodService({required this.db}) {
+  late TrainingPeriodDao _trainingPeriodDao;
+  late SupportedTrainingScentProvider supportedTrainingScentProvider =
+      SupportedTrainingScentProvider();
+
+  TrainingPeriodService({
+    required this.db,
+    required trainingSessionService,
+    required trainingScentService,
+  })  : _trainingSessionService = trainingSessionService,
+        _trainingScentService = trainingScentService {
     _trainingPeriodDao = db.trainingPeriodDao;
-    _trainingSessionService = TrainingSessionService(db: db);
   }
 
   Future<TrainingPeriod> findTrainingPeriodById(String id) async {
@@ -59,6 +71,7 @@ class TrainingPeriodService {
 
   Future<void> createTrainingPeriod(
     DateTime startDate,
+    List<TrainingScent> scents,
   ) async {
     try {
       String periodId = uuid();
@@ -69,6 +82,19 @@ class TrainingPeriodService {
           startDate: startDate,
         ),
       );
+
+      for (TrainingScent scent in scents) {
+        var supportedScent = supportedTrainingScentProvider
+            .findSupportedTrainingScentByName(scent.name.toString());
+
+        await _trainingScentService.addTrainingScent(
+            TrainingScentEntity(
+              id: uuid(),
+              periodId: periodId,
+              supportedScentId: supportedScent.id,
+            ),
+            periodId);
+      }
     } catch (e) {
       throw SmellSenseDatabaseException(
           "Error creating training period: ${e.toString()}");

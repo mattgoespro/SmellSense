@@ -3,6 +3,7 @@ import 'package:smellsense/app/db/daos/training_scent.dao.dart';
 import 'package:smellsense/app/db/entities/training_period.entity.dart';
 import 'package:smellsense/app/db/entities/training_scent.entity.dart'
     show TrainingScentEntity;
+import 'package:smellsense/app/db/services/util.service.dart';
 import 'package:smellsense/app/db/smellsense.db.dart';
 import 'package:smellsense/app/shared/modules/training_period.module.dart';
 import 'package:smellsense/app/shared/modules/training_scent/training_scent.module.dart'
@@ -10,13 +11,15 @@ import 'package:smellsense/app/shared/modules/training_scent/training_scent.modu
 
 class TrainingScentService {
   final SmellSenseDatabase db;
+  final SupportedTrainingScentProvider supportedTrainingScentProvider;
 
   late TrainingScentDao _trainingScentDao;
-  late SupportedTrainingScentProvider _supportedTrainingScentService;
 
-  TrainingScentService({required this.db}) {
+  TrainingScentService({
+    required this.db,
+    required this.supportedTrainingScentProvider,
+  }) {
     _trainingScentDao = db.trainingScentDao;
-    _supportedTrainingScentService = SupportedTrainingScentProvider();
   }
 
   Future<TrainingScent> findTrainingScentById(String id) async {
@@ -29,8 +32,8 @@ class TrainingScentService {
             "Error retrieving scent: No scent found with ID '$id'.");
       }
 
-      var supportedScent = _supportedTrainingScentService
-          .findSupportedTrainingScent(entity.supportedScentId);
+      var supportedScent = supportedTrainingScentProvider
+          .findSupportedTrainingScentById(entity.supportedScentId);
 
       return TrainingScent(
         name: TrainingScentName.fromString(supportedScent.name),
@@ -58,8 +61,8 @@ class TrainingScentService {
 
       var trainingScents = entities.map<Future<TrainingScent>>(
         (entity) async {
-          var supportedScent = _supportedTrainingScentService
-              .findSupportedTrainingScent(entity.supportedScentId);
+          var supportedScent = supportedTrainingScentProvider
+              .findSupportedTrainingScentById(entity.supportedScentId);
 
           return TrainingScent(
             name: TrainingScentName.fromString(supportedScent.name),
@@ -71,6 +74,24 @@ class TrainingScentService {
     } catch (e) {
       throw SmellSenseDatabaseException(
           "Error retrieving scents for period: ${e.toString()}");
+    }
+  }
+
+  Future<void> addTrainingScent(
+    TrainingScentEntity scent,
+    String periodId,
+  ) async {
+    try {
+      await _trainingScentDao.insertTrainingScent(
+        TrainingScentEntity(
+          id: uuid(),
+          supportedScentId: scent.supportedScentId,
+          periodId: periodId,
+        ),
+      );
+    } catch (e) {
+      throw SmellSenseDatabaseException(
+          "Error inserting scent: ${e.toString()}");
     }
   }
 }

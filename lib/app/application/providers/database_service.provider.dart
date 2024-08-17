@@ -9,13 +9,13 @@ class DatabaseServiceProvider {
   ///
   /// Create the database service.
   ///
-  /// This function should only be called once, and before any other database
-  /// service functions.
+  /// This function should only be called once before the application initializes.
   ///
   static Future<DatabaseService> createDatabaseService() async {
     var db = await $FloorSmellSenseDatabase
         .databaseBuilder(DatabaseServiceProvider.dbName)
         .build();
+
     return DatabaseService(db: db);
   }
 

@@ -12,25 +12,35 @@ class App extends StatelessWidget {
     MaterialTheme theme = MaterialTheme.of(context);
 
     return MultiProvider(
-      builder: (context, child) {
-        return MaterialApp.router(
-          routerConfig: routerConfig,
-          routerDelegate: router.routerDelegate,
-          routeInformationParser: router.routeInformationParser,
-          theme: theme.themeData,
-        );
-      },
       providers: [
         FutureProvider<Infrastructure?>(
           create: (context) => Infrastructure.getInfrastructure(),
           initialData: null,
-        ),
+          builder: (context, child) {
+            if (context.watch<Infrastructure?>() == null) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+
+            return MaterialApp.router(
+              scrollBehavior: const MaterialScrollBehavior(),
+              routerConfig: routerConfig,
+              theme: theme.themeData,
+              builder: (context, child) {
+                return MultiProvider(
+                  providers: [
+                    Provider<Infrastructure?>.value(
+                      value: context.watch<Infrastructure?>(),
+                    ),
+                  ],
+                  child: child,
+                );
+              },
+            );
+          },
+        )
       ],
-      child: Container(
-        margin: const EdgeInsets.all(0),
-        padding: const EdgeInsets.all(0),
-        child: router,
-      ),
     );
   }
 }

@@ -43,4 +43,9 @@ class TrainingScent {
       : name = TrainingScentName.fromString(name);
 
   getDisplay() => TrainingScentDisplay.getScent(name);
+
+  @override
+  String toString() {
+    return "TrainingScent(name: $name)";
+  }
 }

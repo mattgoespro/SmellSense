@@ -1,9 +1,11 @@
 import 'package:floor/floor.dart'
-    show ColumnInfo, ForeignKey, entity, primaryKey;
+    show ColumnInfo, ForeignKey, Entity, primaryKey;
 import 'package:smellsense/app/db/entities/training_scent.entity.dart';
 import 'package:smellsense/app/db/entities/training_session.entity.dart';
 
-@entity
+@Entity(
+  tableName: 'training_session_entry',
+)
 class TrainingSessionEntryEntity {
   @ColumnInfo(name: 'id')
   @primaryKey
@@ -46,4 +48,33 @@ class TrainingSessionEntryEntity {
     this.parosmiaReactionSeverity,
     this.parosmiaReaction,
   });
+
+  @override
+  String toString() {
+    return 'TrainingSessionEntryEntity(id: $id, sessionId: $sessionId, scentId: $scentId, rating: $rating, comment: $comment, parosmiaReaction: $parosmiaReaction, parosmiaReactionSeverity: $parosmiaReactionSeverity)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is TrainingSessionEntryEntity &&
+        other.id == id &&
+        other.sessionId == sessionId &&
+        other.scentId == scentId &&
+        other.rating == rating &&
+        other.comment == comment &&
+        other.parosmiaReaction == parosmiaReaction &&
+        other.parosmiaReactionSeverity == parosmiaReactionSeverity;
+  }
+
+  @override
+  int get hashCode =>
+      id.hashCode ^
+      sessionId.hashCode ^
+      scentId.hashCode ^
+      rating.hashCode ^
+      comment.hashCode ^
+      parosmiaReaction.hashCode ^
+      parosmiaReactionSeverity.hashCode;
 }

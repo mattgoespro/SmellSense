@@ -13,6 +13,11 @@ enum TrainingSessionEntryParosmiaReactionSeverity {
       (element) => element.index == value,
     );
   }
+
+  @override
+  String toString() {
+    return "TrainingSessionEntryParosmiaReactionSeverity(value: $severity)";
+  }
 }
 
 enum TrainingSessionEntryParosmiaReaction {

@@ -34,7 +34,7 @@ class Log {
   );
 
   static trace(dynamic message) {
-    logger.t(message);
+    logger.t(message.toString());
   }
 
   static debug(List<dynamic> message) {

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:smellsense/app/application/providers/infrastructure.provider.dart';
 import 'package:smellsense/app/screens/scent_selection/scent_selection_checkbox_group.widget.dart';
 import 'package:smellsense/app/shared/modules/training_scent/training_scent.module.dart';
 import 'package:smellsense/app/shared/theme/theme.dart';
@@ -21,8 +23,19 @@ class ScentSelectionScreenWidgetState
       selectedScents.length ==
       ScentSelectionCheckboxGroupWidget.maxSelectionCount;
 
-  void storeScentSelections() {
-    // TODO: Store selected scents in the SmellSense database
+  Future<void> storeScentSelections() async {
+    var infrastructure = Infrastructure.of(context);
+
+    await infrastructure.databaseService.trainingPeriodService
+        .createTrainingPeriod(
+            DateTime.now(),
+            selectedScents.map(
+              (scent) {
+                return TrainingScent(name: scent);
+              },
+            ).toList());
+
+    print('Training period created');
   }
 
   @override
@@ -67,6 +80,7 @@ class ScentSelectionScreenWidgetState
                   onPressed: isSelectionComplete()
                       ? () {
                           storeScentSelections();
+                          context.goNamed('home');
                         }
                       : null,
                   child: const Text('NEXT'),

@@ -9,7 +9,6 @@ import 'package:smellsense/app/db/daos/training_period.dao.dart';
 import 'package:smellsense/app/db/daos/training_scent.dao.dart';
 import 'package:smellsense/app/db/daos/training_session.dao.dart';
 import 'package:smellsense/app/db/daos/training_session_entry.dao.dart';
-import 'package:smellsense/app/db/entities/supported_training_scent.entity.dart';
 import 'package:smellsense/app/db/entities/training_period.entity.dart';
 import 'package:smellsense/app/db/entities/training_scent.entity.dart';
 import 'package:smellsense/app/db/entities/training_session.entity.dart';
@@ -23,7 +22,6 @@ import 'entities/training_session_entry.entity.dart';
 part 'smellsense.db.g.dart';
 
 @Database(version: 1, entities: [
-  SupportedTrainingScentEntity,
   TrainingScentEntity,
   TrainingPeriodEntity,
   TrainingSessionEntity,

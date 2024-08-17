@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:smellsense/app/shared/utils.dart';
 
 part 'supported_training_scent_data.g.dart';
 
@@ -69,8 +70,24 @@ class SupportedTrainingScent {
 
   factory SupportedTrainingScent.fromJson(Map<String, String> json) =>
       _$SupportedTrainingScentFromJson(json);
+
+  @override
+  String toString() {
+    // return 'SupportedTrainingScent{id: $id, name: $name, displayName: $displayName, displayColor: $displayColor, displayImage: $displayImage}';
+    return formatString(this, [
+      'id',
+      'name',
+      'displayName',
+      'displayColor',
+      'displayImage',
+    ]);
+  }
 }
 
-@JsonLiteral('../../../assets/static/supported_scents.json')
+@JsonLiteral('../../../assets/data/supported_scents.json')
 List<Map<String, String>> get supportedScentsData =>
     _$supportedScentsDataJsonLiteral;
+
+SupportedTrainingScentData loadSupportedTrainingScents() {
+  return SupportedTrainingScentData.fromJson(supportedScentsData);
+}

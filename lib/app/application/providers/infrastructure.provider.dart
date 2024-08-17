@@ -1,18 +1,31 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:smellsense/app/application/providers/asset.provider.dart';
 import 'package:smellsense/app/application/providers/database_service.provider.dart';
 import 'package:smellsense/app/application/providers/supported_training_scent.provider.dart';
 import 'package:smellsense/app/db/services/database.service.dart';
 
 class Infrastructure {
-  final DatabaseService databaseService;
-  final AssetProvider assetProvider;
-  final SupportedTrainingScentProvider supportedTrainingScentProvider;
+  late final DatabaseService databaseService;
+  late final AssetProvider assetProvider;
+  late final SupportedTrainingScentProvider supportedTrainingScentProvider;
 
   Infrastructure({
     required this.databaseService,
     required this.assetProvider,
     required this.supportedTrainingScentProvider,
   });
+
+  Infrastructure.of(BuildContext context) {
+    var infrastructure = context.read<Infrastructure?>();
+
+    if (infrastructure != null) {
+      assetProvider = infrastructure.assetProvider;
+      databaseService = infrastructure.databaseService;
+      supportedTrainingScentProvider =
+          infrastructure.supportedTrainingScentProvider;
+    }
+  }
 
   AssetProvider getAssetProvider() => assetProvider;
 

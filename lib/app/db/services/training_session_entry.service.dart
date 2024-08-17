@@ -9,13 +9,15 @@ import 'package:smellsense/app/shared/modules/training_session/training_session_
 
 class TrainingSessionEntryService {
   final SmellSenseDatabase db;
+  final TrainingScentService trainingScentService;
 
   late TrainingSessionEntryDao _trainingSessionEntryDao;
-  late TrainingScentService _trainingScentService;
 
-  TrainingSessionEntryService({required this.db}) {
+  TrainingSessionEntryService({
+    required this.db,
+    required this.trainingScentService,
+  }) {
     _trainingSessionEntryDao = db.trainingSessionEntryDao;
-    _trainingScentService = TrainingScentService(db: db);
   }
 
   Future<List<TrainingSessionEntry>> getTrainingSessionEntries(
@@ -29,7 +31,7 @@ class TrainingSessionEntryService {
 
       for (var entity in entryEntities) {
         TrainingScent scent =
-            await _trainingScentService.findTrainingScentById(entity.scentId);
+            await trainingScentService.findTrainingScentById(entity.scentId);
 
         sessionEntries.add(
           TrainingSessionEntry(
