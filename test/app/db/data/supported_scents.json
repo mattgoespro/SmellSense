@@ -1,0 +1,23 @@
+[
+  {
+    "id": "3adce9d7-4526-402d-815b-51abf8ac5afd",
+    "name": "chamomile",
+    "displayName": "Chamomile",
+    "displayColor": "0xFFFFE0B2",
+    "displayImage": "assets/scent_png/chamomile.png"
+  },
+  {
+    "id": "0f7ef8f5-7640-4c0a-b4ea-a8570f464245",
+    "name": "cinnamon",
+    "displayName": "Cinnamon",
+    "displayColor": "0xFF5D4037",
+    "displayImage": "assets/scent_png/cinnamon.png"
+  },
+  {
+    "id": "b00c66b9-1a9d-4308-8448-69054dda7a94",
+    "name": "citronella",
+    "displayName": "Citronella",
+    "displayColor": "0xFFFFCB2E",
+    "displayImage": "assets/scent_png/citronella.png"
+  }
+]

@@ -2,53 +2,53 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Flutter: Run all Tests",
+      "name": "debug: wi-fi device",
       "type": "dart",
       "request": "launch",
-      "program": "./test/"
-    },
-    {
-      "name": "flutter: launch on wi-fi device with profile mode",
-      "type": "dart",
-      "request": "launch",
-      "program": "lib/main.dart",
-      "deviceId": "android-arm64",
-      "flutterMode": "profile",
       "presentation": {
         "hidden": false,
         "group": "debug",
         "order": 1
       },
-      "internalConsoleOptions": "openOnSessionStart"
+      "program": "lib/main.dart",
+      "deviceId": "SM A245F",
+      "flutterMode": "debug",
+      "internalConsoleOptions": "openOnSessionStart",
+      "preLaunchTask": "adb: sync db from device"
     },
     {
-      "name": "flutter: launch in virtual device with debug mode",
+      "name": "debug: virtual device",
       "type": "dart",
-      "request": "launch",
-      "program": "lib/main.dart",
-      "deviceId": "Pixel_6_API_34",
-      "flutterMode": "debug",
-      "showMemoryUsage": true,
-      "internalConsoleOptions": "openOnSessionStart",
+      "request": "attach",
       "presentation": {
         "hidden": false,
         "group": "debug",
         "order": 2
-      }
+      },
+      "deviceId": "emulator-5554",
+      "preLaunchTask": "adb: launch virtual device"
     },
-
     {
-      "name": "flutter: launch in release mode",
+      "name": "debug release: wi-fi device",
       "type": "dart",
       "request": "launch",
-      "program": "lib/main.dart",
-      "deviceId": "android-arm64",
       "presentation": {
         "hidden": false,
         "group": "debug",
         "order": 3
       },
+      "program": "lib/main.dart",
+      "deviceId": "SM A245F",
+      "flutterMode": "release",
+      "showMemoryUsage": true,
       "internalConsoleOptions": "openOnSessionStart"
+    },
+    {
+      "name": "flutter: run tests",
+      "type": "dart",
+      "request": "launch",
+      "program": "${workspaceFolder}/test",
+      "args": ["--coverage", "--reporter=expanded"]
     }
   ]
 }

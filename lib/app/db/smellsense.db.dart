@@ -13,6 +13,7 @@ import 'package:smellsense/app/db/entities/training_period.entity.dart';
 import 'package:smellsense/app/db/entities/training_scent.entity.dart';
 import 'package:smellsense/app/db/entities/training_session.entity.dart';
 import 'package:smellsense/app/db/services/datetime_converter.converter.dart';
+import 'package:smellsense/app/shared/string_builder.dart';
 // ignore: depend_on_referenced_packages
 import 'package:sqflite/sqflite.dart'
     as sqflite; // generated `floor` SQLite database part uses aliased sqflite import under the hood
@@ -37,11 +38,18 @@ abstract class SmellSenseDatabase extends FloorDatabase {
 
 class SmellSenseDatabaseException implements Exception {
   final String message;
+  final StackTrace? stackTrace;
 
-  SmellSenseDatabaseException(this.message);
+  SmellSenseDatabaseException(this.message, [this.stackTrace]);
 
   @override
   String toString() {
-    return 'SmellSenseDatabaseException: $message';
+    return StringBuilder.builder()
+        .append('SmellSenseDatabaseException: $message')
+        .appendLine(
+          stackTrace,
+          indent: 1,
+        )
+        .toString();
   }
 }

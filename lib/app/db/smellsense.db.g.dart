@@ -109,7 +109,7 @@ class _$SmellSenseDatabase extends SmellSenseDatabase {
         await database.execute(
             'CREATE TABLE IF NOT EXISTS `training_session` (`id` TEXT NOT NULL, `period_id` TEXT NOT NULL, `date` INTEGER NOT NULL, PRIMARY KEY (`id`))');
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `training_session_entry` (`id` TEXT NOT NULL, `session_id` TEXT NOT NULL, `scent_id` TEXT NOT NULL, `rating` INTEGER NOT NULL, `comment` TEXT, `parosmia_reaction` INTEGER, `parosmia_reaction_severity` INTEGER, PRIMARY KEY (`id`))');
+            'CREATE TABLE IF NOT EXISTS `training_session_entry` (`id` TEXT NOT NULL, `session_id` TEXT NOT NULL, `scent_id` TEXT NOT NULL, `rating` INTEGER NOT NULL, `parosmia_reaction` INTEGER, `parosmia_reaction_severity` INTEGER, `comment` TEXT, PRIMARY KEY (`id`))');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -186,7 +186,7 @@ class _$TrainingPeriodDao extends TrainingPeriodDao {
       _trainingPeriodEntityDeletionAdapter;
 
   @override
-  Future<List<TrainingPeriodEntity>> listTrainingPeriods() async {
+  Future<List<TrainingPeriodEntity>?> listTrainingPeriods() async {
     return _queryAdapter.queryList('SELECT id, start_date FROM training_period',
         mapper: (Map<String, Object?> row) => TrainingPeriodEntity(
             id: row['id'] as String,
@@ -255,6 +255,15 @@ class _$TrainingSessionDao extends TrainingSessionDao {
                   'id': item.id,
                   'period_id': item.periodId,
                   'date': _dateTimeTypeConverter.encode(item.date)
+                }),
+        _trainingSessionEntityDeletionAdapter = DeletionAdapter(
+            database,
+            'training_session',
+            ['id'],
+            (TrainingSessionEntity item) => <String, Object?>{
+                  'id': item.id,
+                  'period_id': item.periodId,
+                  'date': _dateTimeTypeConverter.encode(item.date)
                 });
 
   final sqflite.DatabaseExecutor database;
@@ -266,11 +275,14 @@ class _$TrainingSessionDao extends TrainingSessionDao {
   final InsertionAdapter<TrainingSessionEntity>
       _trainingSessionEntityInsertionAdapter;
 
+  final DeletionAdapter<TrainingSessionEntity>
+      _trainingSessionEntityDeletionAdapter;
+
   @override
   Future<List<TrainingSessionEntity>> findTrainingSessionsByPeriodId(
       String periodId) async {
     return _queryAdapter.queryList(
-        'SELECT id, period_id FROM training_session WHERE period_id = ?1',
+        'SELECT id, period_id, date FROM training_session WHERE period_id = ?1',
         mapper: (Map<String, Object?> row) => TrainingSessionEntity(
             id: row['id'] as String,
             periodId: row['period_id'] as String,
@@ -281,7 +293,7 @@ class _$TrainingSessionDao extends TrainingSessionDao {
   @override
   Future<TrainingSessionEntity?> findTrainingSessionById(String id) async {
     return _queryAdapter.query(
-        'SELECT id, period_id FROM training_session WHERE id = ?1',
+        'SELECT id, period_id, date FROM training_session WHERE id = ?1',
         mapper: (Map<String, Object?> row) => TrainingSessionEntity(
             id: row['id'] as String,
             periodId: row['period_id'] as String,
@@ -293,6 +305,11 @@ class _$TrainingSessionDao extends TrainingSessionDao {
   Future<void> insertTrainingSession(TrainingSessionEntity session) async {
     await _trainingSessionEntityInsertionAdapter.insert(
         session, OnConflictStrategy.abort);
+  }
+
+  @override
+  Future<void> deleteTrainingSession(TrainingSessionEntity session) async {
+    await _trainingSessionEntityDeletionAdapter.delete(session);
   }
 }
 
@@ -309,9 +326,9 @@ class _$TrainingSessionEntryDao extends TrainingSessionEntryDao {
                   'session_id': item.sessionId,
                   'scent_id': item.scentId,
                   'rating': item.rating,
-                  'comment': item.comment,
                   'parosmia_reaction': item.parosmiaReaction,
-                  'parosmia_reaction_severity': item.parosmiaReactionSeverity
+                  'parosmia_reaction_severity': item.parosmiaReactionSeverity,
+                  'comment': item.comment
                 }),
         _trainingSessionEntryEntityDeletionAdapter = DeletionAdapter(
             database,
@@ -322,9 +339,9 @@ class _$TrainingSessionEntryDao extends TrainingSessionEntryDao {
                   'session_id': item.sessionId,
                   'scent_id': item.scentId,
                   'rating': item.rating,
-                  'comment': item.comment,
                   'parosmia_reaction': item.parosmiaReaction,
-                  'parosmia_reaction_severity': item.parosmiaReactionSeverity
+                  'parosmia_reaction_severity': item.parosmiaReactionSeverity,
+                  'comment': item.comment
                 });
 
   final sqflite.DatabaseExecutor database;
@@ -340,16 +357,16 @@ class _$TrainingSessionEntryDao extends TrainingSessionEntryDao {
       _trainingSessionEntryEntityDeletionAdapter;
 
   @override
-  Future<List<TrainingSessionEntryEntity>>
+  Future<List<TrainingSessionEntryEntity>?>
       findTrainingSessionEntriesBySessionId(String sessionId) async {
     return _queryAdapter.queryList(
-        'SELECT id, session_id, date, scent, rating, comment, severity, response FROM training_session_entry as tse INNER JOIN training_session as ts ON ts.id = tse.session_id WHERE ts.id = ?1',
+        'SELECT id, session_id, scent_id, rating, parosmia_reaction, parosmia_reaction_severity, comment FROM training_session_entry WHERE session_id = ?1',
         mapper: (Map<String, Object?> row) => TrainingSessionEntryEntity(id: row['id'] as String, sessionId: row['session_id'] as String, scentId: row['scent_id'] as String, rating: row['rating'] as int, comment: row['comment'] as String?, parosmiaReactionSeverity: row['parosmia_reaction_severity'] as int?, parosmiaReaction: row['parosmia_reaction'] as int?),
         arguments: [sessionId]);
   }
 
   @override
-  Future<void> insertTrainingSessionEntries(
+  Future<void> insertTrainingSessionEntry(
       TrainingSessionEntryEntity entry) async {
     await _trainingSessionEntryEntityInsertionAdapter.insert(
         entry, OnConflictStrategy.abort);

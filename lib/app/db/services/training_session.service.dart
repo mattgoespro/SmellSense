@@ -5,6 +5,7 @@ import 'package:smellsense/app/db/services/util.service.dart';
 import 'package:smellsense/app/db/smellsense.db.dart';
 import 'package:smellsense/app/shared/modules/training_session/training_session.module.dart';
 import 'package:smellsense/app/shared/modules/training_session/training_session_entry.module.dart';
+import 'package:smellsense/app/shared/string_builder.dart';
 
 class TrainingSessionService {
   final SmellSenseDatabase db;
@@ -35,9 +36,14 @@ class TrainingSessionService {
           ),
         );
       }
-    } catch (e) {
+    } catch (e, stackTrace) {
       throw SmellSenseDatabaseException(
-          "Error creating session for period '$periodId': ${e.toString()}");
+        StringBuilder.builder()
+            .append("Error adding sessions for period '$periodId'.")
+            .appendLine(e.toString())
+            .appendLine(stackTrace.toString())
+            .toString(),
+      );
     }
   }
 
@@ -66,7 +72,11 @@ class TrainingSessionService {
       return sessions;
     } catch (e) {
       throw SmellSenseDatabaseException(
-          "Error getting sessions for period '$periodId': ${e.toString()}");
+        StringBuilder.builder()
+            .append("Error getting sessions for period '$periodId'.")
+            .appendLine(e.toString())
+            .toString(),
+      );
     }
   }
 }

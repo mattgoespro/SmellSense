@@ -90,7 +90,6 @@ class ScentSelectionCheckboxGroupWidgetState
                           selectedScents[scent.name] = isChecked;
                           scentSelections.remove(scent.name);
                           widget.onSelectionChange(scentSelections);
-                          print(selectedScents);
                         });
 
                         return;

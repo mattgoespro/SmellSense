@@ -6,23 +6,23 @@ class SupportedTrainingScentProvider {
 
   SupportedTrainingScent findSupportedTrainingScentById(String id) {
     if (_supportedTrainingScentLoader.scents == null) {
-      throw Exception('Supported training scent data is not loaded');
+      throw Exception('Supported training scent data has not been loaded.');
     }
 
     return _supportedTrainingScentLoader.scents!.firstWhere(
       (scent) => scent.id == id,
-      orElse: () => throw Exception('Supported training scent not found'),
+      orElse: () => throw Exception('Supported training scent not found.'),
     );
   }
 
   SupportedTrainingScent findSupportedTrainingScentByName(String name) {
     if (_supportedTrainingScentLoader.scents == null) {
-      throw Exception('Supported training scent data is not loaded');
+      throw Exception('Supported training scent data has not been loaded.');
     }
 
     return _supportedTrainingScentLoader.scents!.firstWhere(
       (scent) => scent.name == name,
-      orElse: () => throw Exception('Supported training scent not found'),
+      orElse: () => throw Exception('Supported training scent not found.'),
     );
   }
 }

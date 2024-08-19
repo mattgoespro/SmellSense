@@ -5,7 +5,6 @@ class DateTimeTypeConverter extends TypeConverter<DateTime, int> {
   DateTime decode(int databaseValue) {
     var dateTime = DateTime.fromMillisecondsSinceEpoch(databaseValue);
     var date = stripTime(dateTime);
-    print("Decoded date: $date");
     return date;
   }
 
@@ -14,7 +13,6 @@ class DateTimeTypeConverter extends TypeConverter<DateTime, int> {
     var dateTime = value.millisecondsSinceEpoch;
     var date = DateTime.fromMillisecondsSinceEpoch(dateTime);
     var dateMillis = stripTime(date).millisecondsSinceEpoch;
-    print("Encoded date: ${DateTime.fromMillisecondsSinceEpoch(dateMillis)}");
     return dateMillis;
   }
 

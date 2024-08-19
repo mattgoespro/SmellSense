@@ -1,4 +1,5 @@
 import 'package:logger/logger.dart' as dart_logger;
+import 'package:smellsense/app/shared/string_builder.dart';
 
 class CustomPrettyPrinter extends dart_logger.PrettyPrinter {
   CustomPrettyPrinter({
@@ -34,28 +35,22 @@ class Log {
   );
 
   static trace(dynamic message) {
-    logger.t(message.toString());
+    logger.t(StringBuilder.builder().append(message).toString());
   }
 
-  static debug(List<dynamic> message) {
-    logger.d(message.map((msg) {
-      if (msg is List) {
-        return msg.join(",");
-      }
-
-      return msg;
-    }).join('\n'));
+  static debug(dynamic message) {
+    logger.d(StringBuilder.builder().append(message).toString());
   }
 
   static info(dynamic message) {
-    logger.i(message);
+    logger.i(StringBuilder.builder().append(message).toString());
   }
 
   static warning(dynamic message) {
-    logger.w(message);
+    logger.w(StringBuilder.builder().append(message).toString());
   }
 
   static error(dynamic message) {
-    logger.e(message);
+    logger.e(StringBuilder.builder().append(message).toString());
   }
 }

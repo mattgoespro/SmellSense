@@ -28,8 +28,7 @@ class TrainingScentService {
           await _trainingScentDao.findTrainingScentById(id);
 
       if (entity == null) {
-        throw SmellSenseDatabaseException(
-            "Error retrieving scent: No scent found with ID '$id'.");
+        throw SmellSenseDatabaseException("Training scent not found: $id");
       }
 
       var supportedScent = supportedTrainingScentProvider
@@ -38,9 +37,11 @@ class TrainingScentService {
       return TrainingScent(
         name: TrainingScentName.fromString(supportedScent.name),
       );
-    } catch (e) {
+    } catch (e, stackTrace) {
       throw SmellSenseDatabaseException(
-          "Error retrieving scent: ${e.toString()}");
+        "An error occurred retrieving training scent: ${e.toString()}",
+        stackTrace,
+      );
     }
   }
 
@@ -51,33 +52,38 @@ class TrainingScentService {
       TrainingPeriodEntity? periodEntity = await db.trainingPeriodDao
           .findTrainingPeriodByStartDate(period.startDate);
 
-      List<TrainingScentEntity>? entities = await _trainingScentDao
-          .findTrainingScentsByPeriodId(periodEntity!.id);
+      if (periodEntity == null) {
+        throw SmellSenseDatabaseException(
+            "Error retrieving scents for period: No period found with start date '${period.startDate}'.");
+      }
+
+      List<TrainingScentEntity>? entities =
+          await _trainingScentDao.findTrainingScentsByPeriodId(periodEntity.id);
 
       if (entities == null || entities.isEmpty) {
         throw SmellSenseDatabaseException(
             "Error retrieving scents for period: No scents found for period with ID '$period'.");
       }
 
-      var trainingScents = entities.map<Future<TrainingScent>>(
-        (entity) async {
-          var supportedScent = supportedTrainingScentProvider
-              .findSupportedTrainingScentById(entity.supportedScentId);
+      return Future.wait(
+        entities.map<Future<TrainingScent>>(
+          (entity) async {
+            var supportedScent = supportedTrainingScentProvider
+                .findSupportedTrainingScentById(entity.supportedScentId);
 
-          return TrainingScent(
-            name: TrainingScentName.fromString(supportedScent.name),
-          );
-        },
-      ).toList();
-
-      return Future.wait(trainingScents);
+            return TrainingScent(
+              name: TrainingScentName.fromString(supportedScent.name),
+            );
+          },
+        ).toList(),
+      );
     } catch (e) {
       throw SmellSenseDatabaseException(
           "Error retrieving scents for period: ${e.toString()}");
     }
   }
 
-  Future<void> addTrainingScent(
+  Future<void> createTrainingScent(
     TrainingScentEntity scent,
     String periodId,
   ) async {

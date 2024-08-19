@@ -42,6 +42,4 @@ app.*.map.json
 
 # Project
 TODO.md
-external/dev
 temp
-docs/node_modules

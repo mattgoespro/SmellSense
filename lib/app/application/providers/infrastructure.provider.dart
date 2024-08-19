@@ -46,7 +46,7 @@ class Infrastructure {
       );
     } catch (exception) {
       throw Exception(
-          "Fatal: failed to create infrastructure: ${exception.toString()}");
+          "Fatal: Failed to create infrastructure: ${exception.toString()}.");
     }
   }
 }

@@ -4,7 +4,7 @@ import 'package:smellsense/app/db/entities/training_period.entity.dart';
 @dao
 abstract class TrainingPeriodDao {
   @Query('SELECT id, start_date FROM training_period')
-  Future<List<TrainingPeriodEntity>> listTrainingPeriods();
+  Future<List<TrainingPeriodEntity>?> listTrainingPeriods();
 
   @Query(
       'SELECT id, start_date FROM training_period ORDER BY start_date DESC LIMIT 1')

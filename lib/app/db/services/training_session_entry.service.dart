@@ -6,6 +6,7 @@ import 'package:smellsense/app/shared/modules/training_scent/training_scent.modu
 import 'package:smellsense/app/shared/modules/training_session/training_session_entry.module.dart';
 import 'package:smellsense/app/shared/modules/training_session/training_session_entry_parosmia_reaction.module.dart';
 import 'package:smellsense/app/shared/modules/training_session/training_session_entry_rating.module.dart';
+import 'package:smellsense/app/shared/string_builder.dart';
 
 class TrainingSessionEntryService {
   final SmellSenseDatabase db;
@@ -24,12 +25,13 @@ class TrainingSessionEntryService {
     String sessionId,
   ) async {
     List<TrainingSessionEntry> sessionEntries = [];
+
     try {
-      List<TrainingSessionEntryEntity> entryEntities =
+      List<TrainingSessionEntryEntity>? entryEntities =
           await _trainingSessionEntryDao
               .findTrainingSessionEntriesBySessionId(sessionId);
 
-      for (var entity in entryEntities) {
+      for (TrainingSessionEntryEntity entity in entryEntities!) {
         TrainingScent scent =
             await trainingScentService.findTrainingScentById(entity.scentId);
 
@@ -46,9 +48,14 @@ class TrainingSessionEntryService {
           ),
         );
       }
-    } catch (e) {
+    } catch (e, stackTrace) {
       throw SmellSenseDatabaseException(
-          "Error getting session entries for session '$sessionId': ${e.toString()}");
+        StringBuilder.builder()
+            .append("Error getting session entries for session '$sessionId'.")
+            .appendLine(e.toString())
+            .appendLine(stackTrace.toString())
+            .toString(),
+      );
     }
 
     return sessionEntries;

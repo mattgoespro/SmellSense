@@ -8,7 +8,7 @@ class LocalizationProvider extends ChangeNotifier {
 
   void setLocale(Locale locale) {
     if (!supportedLocales.contains(locale)) {
-      throw Exception('Locale not supported');
+      throw Exception('Locale not supported.');
     }
 
     _locale = locale;

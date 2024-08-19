@@ -9,6 +9,7 @@ import 'package:smellsense/app/db/smellsense.db.dart';
 import 'package:smellsense/app/shared/modules/training_period.module.dart';
 import 'package:smellsense/app/shared/modules/training_scent/training_scent.module.dart';
 import 'package:smellsense/app/shared/modules/training_session/training_session.module.dart';
+import 'package:smellsense/app/shared/string_builder.dart';
 
 class TrainingPeriodService {
   final SmellSenseDatabase db;
@@ -33,8 +34,7 @@ class TrainingPeriodService {
         await db.trainingPeriodDao.findTrainingPeriodById(id);
 
     if (trainingPeriodEntity == null) {
-      throw SmellSenseDatabaseException(
-          "Training period with id $id not found.");
+      throw SmellSenseDatabaseException("Training period not found: $id");
     }
 
     List<TrainingSession> sessions = await _trainingSessionService
@@ -53,7 +53,7 @@ class TrainingPeriodService {
 
       if (period == null) {
         throw SmellSenseDatabaseException(
-            "There are no active training period.");
+            "Cannot get active training period: No training periods exist.");
       }
 
       List<TrainingSession> sessions = await _trainingSessionService
@@ -65,7 +65,7 @@ class TrainingPeriodService {
       );
     } catch (e) {
       throw SmellSenseDatabaseException(
-          "Error getting current training period: ${e.toString()}");
+          "Error retrieving active training period: ${e.toString()}");
     }
   }
 
@@ -87,7 +87,7 @@ class TrainingPeriodService {
         var supportedScent = supportedTrainingScentProvider
             .findSupportedTrainingScentByName(scent.name.toString());
 
-        await _trainingScentService.addTrainingScent(
+        await _trainingScentService.createTrainingScent(
             TrainingScentEntity(
               id: uuid(),
               periodId: periodId,
@@ -95,9 +95,14 @@ class TrainingPeriodService {
             ),
             periodId);
       }
-    } catch (e) {
+    } catch (e, stackTrace) {
       throw SmellSenseDatabaseException(
-          "Error creating training period: ${e.toString()}");
+        StringBuilder.builder()
+            .append("Error creating training period.")
+            .appendLine(e.toString())
+            .appendLine(stackTrace.toString())
+            .toString(),
+      );
     }
   }
 }

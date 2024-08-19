@@ -15,7 +15,7 @@ class TrainingSessionEntryEntity {
   @ForeignKey(
     entity: TrainingSessionEntity,
     parentColumns: ['id'],
-    childColumns: ['sessionId'],
+    childColumns: ['session_id'],
   )
   final String sessionId;
 
@@ -30,14 +30,14 @@ class TrainingSessionEntryEntity {
   @ColumnInfo(name: 'rating')
   final int rating;
 
-  @ColumnInfo(name: 'comment')
-  final String? comment;
-
   @ColumnInfo(name: 'parosmia_reaction')
   final int? parosmiaReaction;
 
   @ColumnInfo(name: 'parosmia_reaction_severity')
   final int? parosmiaReactionSeverity;
+
+  @ColumnInfo(name: 'comment')
+  final String? comment;
 
   TrainingSessionEntryEntity({
     required this.id,
