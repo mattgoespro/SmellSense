@@ -37,11 +37,11 @@ class RatingBarWidgetState extends State<RatingBarWidget>
 
     return RatingBar.builder(
       direction: Axis.vertical,
-      itemCount: TrainingSessionEntryRatings.getRatings().length,
+      itemCount: TrainingSessionEntryRating.values.length,
       minRating: 1,
       itemBuilder: (context, rating) =>
           _infrastructure.getAssetProvider().getIcon(
-                TrainingSessionEntryRatings.getRating(
+                TrainingSessionEntryRating.fromValue(
                   rating,
                 ).name,
               ),
@@ -49,7 +49,7 @@ class RatingBarWidgetState extends State<RatingBarWidget>
           TrainingSessionEntryWidget.of(context).updateEntry(
         TrainingSessionEntry(
           scent: TrainingScent(name: widget.scent.name),
-          rating: TrainingSessionEntryRatings.getRating(rating),
+          rating: TrainingSessionEntryRating.fromValue(rating.toInt()),
           comment: '', // TODO: Add comment
           parosmiaReactionSeverity:
               TrainingSessionEntryParosmiaReactionSeverity.none,

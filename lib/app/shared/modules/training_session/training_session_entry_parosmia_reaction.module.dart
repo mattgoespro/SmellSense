@@ -16,7 +16,7 @@ enum TrainingSessionEntryParosmiaReactionSeverity {
 
   @override
   String toString() {
-    return "TrainingSessionEntryParosmiaReactionSeverity(value: $severity)";
+    return "TrainingSessionEntryParosmiaReactionSeverity($index)";
   }
 }
 

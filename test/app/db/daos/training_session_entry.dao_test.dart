@@ -4,9 +4,9 @@ import 'package:smellsense/app/db/daos/training_session.dao.dart';
 import 'package:smellsense/app/db/daos/training_session_entry.dao.dart';
 import 'package:smellsense/app/db/smellsense.db.dart';
 
-import '../data/training_period.data.dart';
-import '../data/training_session.data.dart';
-import '../data/training_session_entry.data.dart';
+import '../data/entities/training_period.entity.data.dart';
+import '../data/entities/training_session.entity.data.dart';
+import '../data/entities/training_session_entry.entity.data.dart';
 
 void main() {
   group('TrainingSessionEntryDao', () {
@@ -25,27 +25,29 @@ void main() {
 
     tearDown(() async {
       await trainingSessionEntryDao
-          .deleteTrainingSessionEntry(testTrainingSessionEntry);
-      await trainingSessionDao.deleteTrainingSession(testTrainingSession);
-      await trainingPeriodDao.deleteTrainingPeriod(testTrainingPeriod);
+          .deleteTrainingSessionEntry(testTrainingSessionEntryEntity);
+      await trainingSessionDao.deleteTrainingSession(testTrainingSessionEntity);
+      await trainingPeriodDao.deleteTrainingPeriod(testTrainingPeriodEntity);
+      await database.close();
     });
 
-    test('should insert and retrieve the training session entry', () async {
-      await trainingPeriodDao.insertTrainingPeriod(testTrainingPeriod);
-      await trainingSessionDao.insertTrainingSession(testTrainingSession);
+    test('should insert then find the training session entry', () async {
+      await trainingPeriodDao.insertTrainingPeriod(testTrainingPeriodEntity);
+      await trainingSessionDao.insertTrainingSession(testTrainingSessionEntity);
       await trainingSessionEntryDao
-          .insertTrainingSessionEntry(testTrainingSessionEntry);
+          .insertTrainingSessionEntry(testTrainingSessionEntryEntity);
 
       final retrievedSessionEntries = await trainingSessionEntryDao
-          .findTrainingSessionEntriesBySessionId(testTrainingSession.id);
+          .findTrainingSessionEntries(testTrainingSessionEntity.id);
 
       expect(retrievedSessionEntries, hasLength(1),
-          reason: "The retrieved session entries should have a length of 1.");
+          reason:
+              "The found training session entries should have a length of 1.");
       expect(
         retrievedSessionEntries![0],
-        equals(testTrainingSessionEntry),
+        equals(testTrainingSessionEntryEntity),
         reason:
-            "The retrieved session entry should be equal to the inserted session entry.",
+            "The found training session entry should be equal to the inserted training session entry.",
       );
     });
   });

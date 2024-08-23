@@ -19,22 +19,26 @@ class TrainingSessionService {
     _trainingSessionDao = db.trainingSessionDao;
   }
 
-  Future<void> addTrainingSession(
+  Future<void> addTrainingSessionsForPeriodId(
     String periodId,
-    TrainingSession session,
+    List<TrainingSession> sessions,
   ) async {
     try {
-      await _trainingSessionDao.insertTrainingSession(
-        TrainingSessionEntity(
-          id: uuid(),
-          date: session.date,
-          periodId: periodId,
-        ),
-      );
+      for (var session in sessions) {
+        var sessionId = uuid();
+
+        await _trainingSessionDao.insertTrainingSession(
+          TrainingSessionEntity(
+            id: sessionId,
+            periodId: periodId,
+            date: session.date,
+          ),
+        );
+      }
     } catch (e, stackTrace) {
       throw SmellSenseDatabaseException(
         StringBuilder.builder()
-            .append("Error adding session for period '$periodId'.")
+            .append("Error adding sessions for period '$periodId'.")
             .appendLine(e.toString())
             .appendLine(stackTrace.toString())
             .build(),
@@ -42,7 +46,7 @@ class TrainingSessionService {
     }
   }
 
-  Future<List<TrainingSession>> getTrainingSessions(
+  Future<List<TrainingSession>> getTrainingSessionsForPeriodId(
     String periodId,
   ) async {
     List<TrainingSession> sessions = [];

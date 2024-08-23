@@ -3,6 +3,6 @@
 # shellcheck disable=SC1091
 . ".husky/_/husky.sh"
 
-.husky/scripts/fix.sh
-
 scripts/generate_db.sh
+
+.husky/scripts/fix.sh

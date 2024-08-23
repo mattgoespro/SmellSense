@@ -2,10 +2,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:smellsense/app/db/daos/training_period.dao.dart';
 import 'package:smellsense/app/db/smellsense.db.dart';
 
-import '../data/training_period.data.dart';
+import '../data/entities/training_period.entity.data.dart';
 
 void main() {
-  group('TrainingPeriodDao', () {
+  group('Test: TrainingPeriodDao', () {
     late SmellSenseDatabase database;
     late TrainingPeriodDao trainingPeriodDao;
 
@@ -16,19 +16,21 @@ void main() {
     });
 
     tearDown(() async {
-      await trainingPeriodDao.deleteTrainingPeriod(testTrainingPeriod);
+      await trainingPeriodDao.deleteTrainingPeriod(testTrainingPeriodEntity);
+      await database.close();
     });
 
-    test('should insert and retrieve the training period', () async {
-      await trainingPeriodDao.insertTrainingPeriod(testTrainingPeriod);
+    test('should insert then find a training period', () async {
+      await trainingPeriodDao.insertTrainingPeriod(testTrainingPeriodEntity);
 
-      final retrievedPeriod =
-          await trainingPeriodDao.findTrainingPeriodById(testTrainingPeriod.id);
+      final retrievedPeriod = await trainingPeriodDao
+          .findTrainingPeriodById(testTrainingPeriodEntity.id);
 
       expect(
         retrievedPeriod,
-        equals(testTrainingPeriod),
-        reason: "The retrieved period should be equal to the inserted period.",
+        equals(testTrainingPeriodEntity),
+        reason:
+            "The found training period should be equal to the inserted training period.",
       );
     });
   });

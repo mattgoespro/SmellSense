@@ -1,28 +1,23 @@
+import 'package:smellsense/app/static/supported_training_scent.dart';
 import 'package:smellsense/app/static/supported_training_scent_data.dart';
 
 class SupportedTrainingScentProvider {
-  final SupportedTrainingScentData _supportedTrainingScentLoader =
-      loadSupportedTrainingScents();
+  final SupportedTrainingScentDataLoader _supportedTrainingScentLoader =
+      SupportedTrainingScentDataLoader.loadSupportedTrainingScents();
 
-  SupportedTrainingScent findSupportedTrainingScentById(String id) {
-    if (_supportedTrainingScentLoader.scents == null) {
-      throw Exception('Supported training scent data has not been loaded.');
-    }
-
+  SupportedTrainingScent getSupportedTrainingScentById(String id) {
     return _supportedTrainingScentLoader.scents!.firstWhere(
       (scent) => scent.id == id,
-      orElse: () => throw Exception('Supported training scent not found.'),
+      orElse: () =>
+          throw Exception("Supported training scent with ID '$id' not found."),
     );
   }
 
   SupportedTrainingScent findSupportedTrainingScentByName(String name) {
-    if (_supportedTrainingScentLoader.scents == null) {
-      throw Exception('Supported training scent data has not been loaded.');
-    }
-
     return _supportedTrainingScentLoader.scents!.firstWhere(
       (scent) => scent.name == name,
-      orElse: () => throw Exception('Supported training scent not found.'),
+      orElse: () => throw Exception(
+          "Supported training scent with name '$name' not found."),
     );
   }
 }

@@ -1,25 +1,30 @@
+import 'package:smellsense/app/application/providers/supported_training_scent.provider.dart';
 import 'package:smellsense/app/db/services/database.service.dart';
 import 'package:smellsense/app/db/smellsense.db.dart';
+import 'package:smellsense/app/shared/logger.dart';
 
 class DatabaseServiceProvider {
   static const String dbName = 'smellsense_database.db';
 
-  static late SmellSenseDatabase _database;
+  late final SmellSenseDatabase db;
+
+  DatabaseServiceProvider({required this.db});
 
   ///
   /// Create the database service.
   ///
   /// This function should only be called once before the application initializes.
   ///
-  static Future<DatabaseService> createDatabaseService() async {
+  static Future<DatabaseService> create() async {
     var db = await $FloorSmellSenseDatabase
         .databaseBuilder(DatabaseServiceProvider.dbName)
         .build();
 
-    return DatabaseService(db: db);
-  }
+    Log.trace('Database created.');
 
-  static SmellSenseDatabase get database {
-    return _database;
+    return DatabaseService(
+      db: db,
+      supportedTrainingScentProvider: SupportedTrainingScentProvider(),
+    );
   }
 }

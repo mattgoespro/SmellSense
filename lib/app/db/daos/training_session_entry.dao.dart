@@ -6,8 +6,8 @@ import 'package:smellsense/app/shared/string_builder.dart';
 abstract class TrainingSessionEntryDao {
   @Query(
       'SELECT id, session_id, scent_id, rating, parosmia_reaction, parosmia_reaction_severity, comment FROM training_session_entry WHERE session_id = :sessionId')
-  Future<List<TrainingSessionEntryEntity>?>
-      findTrainingSessionEntriesBySessionId(String sessionId);
+  Future<List<TrainingSessionEntryEntity>?> findTrainingSessionEntries(
+      String sessionId);
 
   @insert
   Future<void> insertTrainingSessionEntry(TrainingSessionEntryEntity entry);
@@ -16,10 +16,10 @@ abstract class TrainingSessionEntryDao {
   Future<void> deleteTrainingSessionEntry(TrainingSessionEntryEntity entry);
 
   @transaction
-  Future<void> deleteTrainingSessionEntriesBySessionId(String sessionId) async {
+  Future<void> deleteTrainingSessionEntries(String sessionId) async {
     try {
       final List<TrainingSessionEntryEntity>? entries =
-          await findTrainingSessionEntriesBySessionId(sessionId);
+          await findTrainingSessionEntries(sessionId);
 
       if (entries == null) {
         throw Exception('No entries found for session $sessionId');
@@ -36,7 +36,7 @@ abstract class TrainingSessionEntryDao {
             )
             .appendLine(e.toString())
             .appendLine(stackTrace.toString())
-            .toString(),
+            .build(),
       );
     }
   }

@@ -1,20 +1,26 @@
 enum TrainingSessionEntryRating {
-  none,
-  weak,
-  normal,
-  heightened,
-  parosmia,
+  none("none", 0),
+  weak("weak", 1),
+  normal("normal", 2),
+  heightened("heightened", 3),
+  parosmia("parosmia", 4);
+
+  final String rating;
+  final int value;
+
+  const TrainingSessionEntryRating(
+    this.rating,
+    this.value,
+  );
+
+  static TrainingSessionEntryRating fromValue(int value) {
+    return TrainingSessionEntryRating.values.firstWhere(
+      (element) => element.value == value,
+    );
+  }
 }
 
 class TrainingSessionEntryRatings {
-  static final Map<int, TrainingSessionEntryRating> _ratings = {
-    1: TrainingSessionEntryRating.none,
-    2: TrainingSessionEntryRating.weak,
-    3: TrainingSessionEntryRating.normal,
-    4: TrainingSessionEntryRating.heightened,
-    5: TrainingSessionEntryRating.parosmia,
-  };
-
   static final Map<TrainingSessionEntryRating, String> _ratingText = {
     TrainingSessionEntryRating.none: "No smell at all",
     TrainingSessionEntryRating.weak: "Slight smell",
@@ -25,13 +31,5 @@ class TrainingSessionEntryRatings {
 
   static String? getRatingText(TrainingSessionEntryRating rating) {
     return _ratingText[rating];
-  }
-
-  static getRatings() {
-    return _ratings;
-  }
-
-  static TrainingSessionEntryRating getRating(num value) {
-    return _ratings[value]!;
   }
 }

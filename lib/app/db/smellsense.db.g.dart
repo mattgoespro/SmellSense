@@ -357,8 +357,8 @@ class _$TrainingSessionEntryDao extends TrainingSessionEntryDao {
       _trainingSessionEntryEntityDeletionAdapter;
 
   @override
-  Future<List<TrainingSessionEntryEntity>?>
-      findTrainingSessionEntriesBySessionId(String sessionId) async {
+  Future<List<TrainingSessionEntryEntity>?> findTrainingSessionEntries(
+      String sessionId) async {
     return _queryAdapter.queryList(
         'SELECT id, session_id, scent_id, rating, parosmia_reaction, parosmia_reaction_severity, comment FROM training_session_entry WHERE session_id = ?1',
         mapper: (Map<String, Object?> row) => TrainingSessionEntryEntity(id: row['id'] as String, sessionId: row['session_id'] as String, scentId: row['scent_id'] as String, rating: row['rating'] as int, comment: row['comment'] as String?, parosmiaReactionSeverity: row['parosmia_reaction_severity'] as int?, parosmiaReaction: row['parosmia_reaction'] as int?),
@@ -379,16 +379,16 @@ class _$TrainingSessionEntryDao extends TrainingSessionEntryDao {
   }
 
   @override
-  Future<void> deleteTrainingSessionEntriesBySessionId(String sessionId) async {
+  Future<void> deleteTrainingSessionEntries(String sessionId) async {
     if (database is sqflite.Transaction) {
-      await super.deleteTrainingSessionEntriesBySessionId(sessionId);
+      await super.deleteTrainingSessionEntries(sessionId);
     } else {
       await (database as sqflite.Database)
           .transaction<void>((transaction) async {
         final transactionDatabase = _$SmellSenseDatabase(changeListener)
           ..database = transaction;
         await transactionDatabase.trainingSessionEntryDao
-            .deleteTrainingSessionEntriesBySessionId(sessionId);
+            .deleteTrainingSessionEntries(sessionId);
       });
     }
   }

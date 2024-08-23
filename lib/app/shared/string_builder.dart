@@ -6,39 +6,24 @@ class StringBuilder {
 
   static StringBuilder builder() => StringBuilder();
 
-  StringBuilder append(dynamic obj, {int indent = 0}) {
-    _buffer.write(formatIndent(indent, obj));
-    currentIndent += indent;
-
+  StringBuilder append(dynamic obj) {
+    _buffer.write(obj.toString());
     return this;
   }
 
-  StringBuilder appendLine(dynamic obj, {int indent = 0}) {
-    if (obj is List) {
-      for (var element in obj) {
-        _buffer.writeln(formatIndent(indent, element));
-      }
+  StringBuilder appendLine(dynamic obj) {
+    if (!_buffer.toString().endsWith("\n")) {
+      _buffer.write("${'\n'}${obj.toString()}${'\n'}");
       return this;
     }
 
-    _buffer.writeln(formatIndent(indent, obj));
+    _buffer.writeln(obj);
+
     return this;
   }
 
-  String formatIndent(int indent, Object? object) {
-    return "${getIndent(indent: indent)}${object.toString()}";
-  }
-
-  String getIndent({int? indent}) {
-    var indentTimes = indent ?? currentIndent;
-
-    if (indentTimes < 1) {
-      return "";
-    }
-
-    return "  " * indentTimes;
-  }
+  String build() => toString();
 
   @override
-  String toString() => _buffer.toString();
+  String toString() => _buffer.toString().trim();
 }

@@ -28,14 +28,14 @@ class ScentSelectionScreenWidgetState
     var infrastructure = Infrastructure.of(context);
 
     try {
-      await infrastructure.databaseService.trainingPeriodService
-          .createTrainingPeriod(
-              DateTime.now(),
-              selectedScents.map(
-                (scent) {
-                  return TrainingScent(name: scent);
-                },
-              ).toList());
+      await infrastructure.databaseService.createTrainingPeriod(
+        DateTime.now(),
+        selectedScents
+            .map(
+              (scent) => TrainingScent(name: scent),
+            )
+            .toList(),
+      );
 
       Log.trace('Training period created');
     } catch (e) {

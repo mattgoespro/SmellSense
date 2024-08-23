@@ -8,6 +8,25 @@ class TrainingSession {
     required this.date,
     required this.entries,
   });
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is TrainingSession &&
+        other.date == date &&
+        other.entries == entries;
+  }
+
+  @override
+  int get hashCode => date.hashCode ^ entries.hashCode;
+
+  @override
+  String toString() {
+    String entriesString = entries.map((e) => e.toString()).join("\n, ");
+
+    return "TrainingSession(date: $date, entries: $entriesString)";
+  }
 }
 
 class TrainingSessionEncouragements {

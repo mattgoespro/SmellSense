@@ -36,8 +36,7 @@ class Infrastructure {
   ///
   static Future<Infrastructure> getInfrastructure() async {
     try {
-      final databaseService =
-          await DatabaseServiceProvider.createDatabaseService();
+      final databaseService = await DatabaseServiceProvider.create();
 
       return Infrastructure(
         databaseService: databaseService,

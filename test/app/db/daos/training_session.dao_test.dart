@@ -3,8 +3,8 @@ import 'package:smellsense/app/db/daos/training_period.dao.dart';
 import 'package:smellsense/app/db/daos/training_session.dao.dart';
 import 'package:smellsense/app/db/smellsense.db.dart';
 
-import '../data/training_period.data.dart';
-import '../data/training_session.data.dart';
+import '../data/entities/training_period.entity.data.dart';
+import '../data/entities/training_session.entity.data.dart';
 
 void main() {
   group('TrainingSessionDao', () {
@@ -18,25 +18,26 @@ void main() {
       trainingPeriodDao = database.trainingPeriodDao;
       trainingSessionDao = database.trainingSessionDao;
 
-      await trainingPeriodDao.insertTrainingPeriod(testTrainingPeriod);
+      await trainingPeriodDao.insertTrainingPeriod(testTrainingPeriodEntity);
     });
 
     tearDown(() async {
-      await trainingSessionDao.deleteTrainingSession(testTrainingSession);
-      await trainingPeriodDao.deleteTrainingPeriod(testTrainingPeriod);
+      await trainingSessionDao.deleteTrainingSession(testTrainingSessionEntity);
+      await trainingPeriodDao.deleteTrainingPeriod(testTrainingPeriodEntity);
+      await database.close();
     });
 
-    test('should insert and retrieve the training session', () async {
-      await trainingSessionDao.insertTrainingSession(testTrainingSession);
+    test('should insert then find the training session', () async {
+      await trainingSessionDao.insertTrainingSession(testTrainingSessionEntity);
 
       final retrievedSession = await trainingSessionDao
-          .findTrainingSessionById(testTrainingSession.id);
+          .findTrainingSessionById(testTrainingSessionEntity.id);
 
       expect(
         retrievedSession,
-        equals(testTrainingSession),
+        equals(testTrainingSessionEntity),
         reason:
-            "The retrieved session should be equal to the inserted session.",
+            "The found training session should be equal to the inserted training session.",
       );
     });
   });
