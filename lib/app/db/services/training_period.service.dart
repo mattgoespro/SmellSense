@@ -8,7 +8,6 @@ import 'package:smellsense/app/shared/datetime_utils.dart';
 import 'package:smellsense/app/shared/modules/training_period.module.dart';
 import 'package:smellsense/app/shared/modules/training_session/training_session.module.dart';
 import 'package:smellsense/app/shared/string_builder.dart';
-import 'package:smellsense/app/shared/utils.dart';
 
 class TrainingPeriodService {
   final SmellSenseDatabase db;
@@ -56,20 +55,16 @@ class TrainingPeriodService {
     }
   }
 
-  Future<String> createTrainingPeriod(
-    DateTime startDate,
+  Future<void> createTrainingPeriod(
+    TrainingPeriod period,
   ) async {
     try {
-      String periodId = uuid();
-
       await trainingPeriodDao.insertTrainingPeriod(
         TrainingPeriodEntity(
-          id: periodId,
-          startDate: DateUtils.fromDateTime(startDate),
+          id: period.id,
+          startDate: DateUtils.fromDateTime(period.startDate),
         ),
       );
-
-      return periodId;
     } catch (e, stackTrace) {
       throw SmellSenseDatabaseException(
         StringBuilder.builder()

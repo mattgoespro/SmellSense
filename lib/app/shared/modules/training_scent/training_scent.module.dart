@@ -1,4 +1,5 @@
 import 'package:smellsense/app/shared/modules/training_scent/training_scent_display.module.dart';
+import 'package:smellsense/app/shared/modules/training_session/training_session_entry.module.dart';
 
 enum TrainingScentName {
   chamomile("chamomile"),
@@ -33,14 +34,17 @@ enum TrainingScentName {
 class TrainingScent {
   static const maxTrainingScents = 4;
 
-  TrainingScentName name;
+  final String id;
+  final TrainingScentName name;
 
   TrainingScent({
+    required this.id,
     required this.name,
   });
 
-  TrainingScent.fromName(String name)
-      : name = TrainingScentName.fromString(name);
+  TrainingScent.of(TrainingSessionEntry entry)
+      : id = entry.id,
+        name = entry.scent.name;
 
   getDisplay() => TrainingScentDisplay.getScent(name);
 

@@ -3,18 +3,20 @@ import 'package:smellsense/app/shared/modules/training_session/training_session_
 import 'package:smellsense/app/shared/modules/training_session/training_session_entry_rating.module.dart';
 
 class TrainingSessionEntry {
+  final String id;
   final TrainingScent scent;
-  final TrainingSessionEntryRating rating;
-  final TrainingSessionEntryParosmiaReactionSeverity? parosmiaReactionSeverity;
-  final TrainingSessionEntryParosmiaReaction? parosmiaReaction;
-  final String? comment;
+  TrainingSessionEntryRating rating;
+  TrainingSessionEntryParosmiaReactionSeverity parosmiaReactionSeverity;
+  TrainingSessionEntryParosmiaReaction parosmiaReaction;
+  String? comment;
 
-  const TrainingSessionEntry({
+  TrainingSessionEntry({
+    required this.id,
     required this.scent,
     required this.rating,
+    required this.parosmiaReaction,
+    required this.parosmiaReactionSeverity,
     this.comment,
-    this.parosmiaReaction,
-    this.parosmiaReactionSeverity,
   });
 
   @override

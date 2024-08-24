@@ -9,7 +9,7 @@ import 'package:smellsense/app/db/smellsense.db.dart';
 import '../data/modules/training_period.data.dart';
 
 void main() {
-  group('TrainingPeriodService', () {
+  group('Test: TrainingPeriodService', () {
     late SmellSenseDatabase database;
     late TrainingPeriodService trainingPeriodService;
     late SupportedTrainingScentProvider supportedTrainingScentProvider;
@@ -47,7 +47,7 @@ void main() {
     test('should create a new training period as the active training period',
         () async {
       await trainingPeriodService.createTrainingPeriod(
-        testTrainingPeriod.startDate,
+        testTrainingPeriod,
       );
 
       final activeTrainingPeriod =
@@ -57,7 +57,7 @@ void main() {
         activeTrainingPeriod.startDate,
         equals(testTrainingPeriod.startDate),
         reason:
-            "The retrieved active should be the training period that was created.",
+            "The retrieved active training period should be the training period that was created.",
       );
     });
   });

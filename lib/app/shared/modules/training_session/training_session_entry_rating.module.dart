@@ -18,6 +18,11 @@ enum TrainingSessionEntryRating {
       (element) => element.value == value,
     );
   }
+
+  @override
+  String toString() {
+    return "TrainingSessionEntryRating($rating)";
+  }
 }
 
 class TrainingSessionEntryRatings {

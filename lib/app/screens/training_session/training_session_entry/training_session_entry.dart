@@ -31,8 +31,8 @@ class TrainingSessionEntryWidgetState extends State<TrainingSessionEntryWidget>
   @override
   bool get wantKeepAlive => true;
 
-  void updateEntry(TrainingSessionEntry entry) {
-    _entries[widget.scent.name] = entry;
+  void updateEntry(void Function(TrainingSessionEntry) updateFn) {
+    updateFn(_entries[widget.scent.name]!);
   }
 
   @override

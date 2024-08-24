@@ -7,7 +7,6 @@ import 'package:smellsense/app/db/smellsense.db.dart';
 import 'package:smellsense/app/shared/modules/training_scent/training_scent.module.dart'
     show TrainingScent, TrainingScentName;
 import 'package:smellsense/app/shared/string_builder.dart';
-import 'package:smellsense/app/shared/utils.dart';
 
 class TrainingScentService {
   final SmellSenseDatabase db;
@@ -35,6 +34,7 @@ class TrainingScentService {
           .getSupportedTrainingScentById(entity.supportedScentId);
 
       return TrainingScent(
+        id: entity.id,
         name: TrainingScentName.fromString(supportedScent.name),
       );
     } catch (e, stackTrace) {
@@ -57,7 +57,7 @@ class TrainingScentService {
 
       if (periodEntity == null) {
         throw SmellSenseDatabaseException(
-          "Failed to retrieve scents: no period found with start date '$periodId'.",
+          "Failed to retrieve scents: period ID '$periodId' not found.",
         );
       }
 
@@ -77,6 +77,7 @@ class TrainingScentService {
                 .getSupportedTrainingScentById(entity.supportedScentId);
 
             return TrainingScent(
+              id: entity.id,
               name: TrainingScentName.fromString(supportedScent.name),
             );
           },
@@ -94,7 +95,7 @@ class TrainingScentService {
     }
   }
 
-  Future<String> addTrainingScent(
+  Future<void> createTrainingScent(
     String periodId,
     TrainingScent scent,
   ) async {
@@ -102,17 +103,13 @@ class TrainingScentService {
       var supportedScent = supportedTrainingScentProvider
           .findSupportedTrainingScentByName(scent.name.name);
 
-      var trainingScentId = uuid();
-
       await _trainingScentDao.insertTrainingScent(
         TrainingScentEntity(
-          id: trainingScentId,
+          id: scent.id,
           periodId: periodId,
           supportedScentId: supportedScent.id,
         ),
       );
-
-      return trainingScentId;
     } catch (e) {
       throw SmellSenseDatabaseException(
         StringBuilder.builder()

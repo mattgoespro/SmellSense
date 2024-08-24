@@ -5,7 +5,6 @@ import 'package:smellsense/app/db/smellsense.db.dart';
 import 'package:smellsense/app/shared/modules/training_session/training_session.module.dart';
 import 'package:smellsense/app/shared/modules/training_session/training_session_entry.module.dart';
 import 'package:smellsense/app/shared/string_builder.dart';
-import 'package:smellsense/app/shared/utils.dart';
 
 class TrainingSessionService {
   final SmellSenseDatabase db;
@@ -19,14 +18,14 @@ class TrainingSessionService {
     _trainingSessionDao = db.trainingSessionDao;
   }
 
-  Future<void> addTrainingSession(
+  Future<void> recordTrainingSession(
     String periodId,
     TrainingSession session,
   ) async {
     try {
       await _trainingSessionDao.insertTrainingSession(
         TrainingSessionEntity(
-          id: uuid(),
+          id: session.id,
           date: session.date,
           periodId: periodId,
         ),
@@ -58,6 +57,7 @@ class TrainingSessionService {
 
         sessions.add(
           TrainingSession(
+            id: entity.id,
             date: entity.date,
             entries: sessionEntries,
           ),

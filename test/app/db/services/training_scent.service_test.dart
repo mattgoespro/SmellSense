@@ -1,6 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:smellsense/app/application/providers/supported_training_scent.provider.dart';
+import 'package:smellsense/app/db/services/training_period.service.dart';
 import 'package:smellsense/app/db/services/training_scent.service.dart';
+import 'package:smellsense/app/db/services/training_session.service.dart';
+import 'package:smellsense/app/db/services/training_session_entry.service.dart';
 import 'package:smellsense/app/db/smellsense.db.dart';
 import 'package:smellsense/app/shared/modules/training_scent/training_scent.module.dart';
 
@@ -8,8 +11,11 @@ import '../data/modules/training_period.data.dart';
 import '../data/modules/training_scent.data.dart';
 
 void main() {
-  group('TrainingScentService', () {
-    late SmellSenseDatabase database;
+  group('Test: TrainingScentService', () {
+    late SmellSenseDatabase db;
+    late TrainingPeriodService trainingPeriodService;
+    late TrainingSessionService trainingSessionService;
+    late TrainingSessionEntryService trainingSessionEntryService;
     late TrainingScentService trainingScentService;
 
     late SupportedTrainingScentProvider supportedTrainingScentProvider;
@@ -17,32 +23,47 @@ void main() {
     TrainingScent testTrainingScent = testTrainingScents[0];
 
     setUp(() async {
-      database =
-          await $FloorSmellSenseDatabase.inMemoryDatabaseBuilder().build();
+      db = await $FloorSmellSenseDatabase.inMemoryDatabaseBuilder().build();
       supportedTrainingScentProvider = SupportedTrainingScentProvider();
       trainingScentService = TrainingScentService(
-        db: database,
+        db: db,
         supportedTrainingScentProvider: supportedTrainingScentProvider,
       );
+      trainingSessionEntryService = TrainingSessionEntryService(
+        db: db,
+        trainingScentService: trainingScentService,
+        supportedTrainingScentProvider: supportedTrainingScentProvider,
+      );
+      trainingSessionService = TrainingSessionService(
+        db: db,
+        trainingSessionEntryService: trainingSessionEntryService,
+      );
+      trainingPeriodService = TrainingPeriodService(
+        db: db,
+        trainingSessionService: trainingSessionService,
+      );
+
+      await trainingPeriodService.createTrainingPeriod(testTrainingPeriod);
     });
 
     tearDown(() async {
-      await database.close();
+      await db.close();
     });
 
     test('should create a new training scent', () async {
-      String trainingScentId = await trainingScentService.addTrainingScent(
+      await trainingScentService.createTrainingScent(
         testTrainingPeriod.id,
         testTrainingScent,
       );
 
       final retrievedScent =
-          await trainingScentService.getTrainingScent(trainingScentId);
+          await trainingScentService.getTrainingScent(testTrainingScent.id);
 
       expect(
         retrievedScent,
         equals(testTrainingScent),
-        reason: "The retrieved scent should be equal to the inserted scent.",
+        reason:
+            "The retrieved training scent should be the training scent that was created.",
       );
     });
   });

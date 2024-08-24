@@ -38,6 +38,11 @@ enum TrainingSessionEntryParosmiaReaction {
       (element) => element.reaction == value,
     );
   }
+
+  @override
+  String toString() {
+    return "TrainingSessionEntryParosmiaReaction($reaction)";
+  }
 }
 
 class TrainingSessionEntryParosmia {

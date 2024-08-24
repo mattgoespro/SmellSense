@@ -5,6 +5,7 @@ import 'package:smellsense/app/screens/scent_selection/scent_selection_checkbox_
 import 'package:smellsense/app/shared/logger.dart';
 import 'package:smellsense/app/shared/modules/training_scent/training_scent.module.dart';
 import 'package:smellsense/app/shared/theme/theme.dart';
+import 'package:smellsense/app/shared/utils.dart';
 
 class ScentSelectionScreenWidget extends StatefulWidget {
   static int maxSelectionCount = 4;
@@ -32,7 +33,10 @@ class ScentSelectionScreenWidgetState
         DateTime.now(),
         selectedScents
             .map(
-              (scent) => TrainingScent(name: scent),
+              (scent) => TrainingScent(
+                id: uuid(),
+                name: scent,
+              ),
             )
             .toList(),
       );

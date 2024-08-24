@@ -9,7 +9,6 @@ import 'package:smellsense/app/screens/splash/splash.screen.dart';
 import 'package:smellsense/app/screens/training_session/training_session.screen.dart';
 import 'package:smellsense/app/screens/training_session_history/training_session_history.screen.dart';
 import 'package:smellsense/app/shared/modules/training_scent/training_scent.module.dart';
-import 'package:smellsense/app/shared/string_builder.dart';
 import 'package:smellsense/app/shared/widgets/fade.animated_widget.dart';
 
 final router = MaterialApp.router(
@@ -17,35 +16,6 @@ final router = MaterialApp.router(
   title: 'SmellSense',
   backButtonDispatcher: RootBackButtonDispatcher(),
 );
-
-List<TrainingScent> parseScentsFromUri(Uri uri) {
-  if (kDebugMode) {
-    print(uri);
-  }
-
-  String? scentsQueryParam = uri.queryParameters['scents'];
-
-  if (scentsQueryParam == null) {
-    throw GoException("Error: No scents resolved from URL path: ${uri.path}.");
-  }
-
-  List<String> scents = scentsQueryParam.split(',');
-
-  if (scents.length < TrainingScent.maxTrainingScents) {
-    throw Exception(
-      StringBuilder.builder()
-          .append("Failed to resolve scents from URL: ${uri.path}")
-          .appendLine(
-            "Expected ${TrainingScent.maxTrainingScents} scents, but got ${scents.length}.",
-          ),
-    );
-  }
-
-  return scents
-      .map<TrainingScent>((scentName) =>
-          TrainingScent(name: TrainingScentName.fromString(scentName)))
-      .toList();
-}
 
 final routerConfig = GoRouter(
   initialLocation: !kDebugMode ? '/splash-screen' : '/scent-selection',
@@ -101,7 +71,7 @@ final routerConfig = GoRouter(
       name: "training-session",
       path: "/training-session",
       pageBuilder: (context, state) {
-        List<TrainingScent> scents = parseScentsFromUri(state.uri);
+        List<TrainingScent> scents = []; // TODO: fetch scents from db
 
         return CustomTransitionPage(
           transitionDuration: const Duration(milliseconds: 500),

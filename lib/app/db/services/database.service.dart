@@ -4,9 +4,11 @@ import 'package:smellsense/app/db/services/training_scent.service.dart';
 import 'package:smellsense/app/db/services/training_session.service.dart';
 import 'package:smellsense/app/db/services/training_session_entry.service.dart';
 import 'package:smellsense/app/db/smellsense.db.dart';
+import 'package:smellsense/app/shared/modules/training_period.module.dart';
 import 'package:smellsense/app/shared/modules/training_scent/training_scent.module.dart';
 import 'package:smellsense/app/shared/modules/training_session/training_session.module.dart';
 import 'package:smellsense/app/shared/string_builder.dart';
+import 'package:smellsense/app/shared/utils.dart';
 
 class DatabaseService {
   late final SmellSenseDatabase db;
@@ -46,11 +48,15 @@ class DatabaseService {
     List<TrainingScent> scents,
   ) async {
     try {
-      var periodId =
-          await _trainingPeriodService.createTrainingPeriod(startDate);
+      TrainingPeriod period = TrainingPeriod(
+        id: uuid(),
+        startDate: startDate,
+      );
+
+      await _trainingPeriodService.createTrainingPeriod(period);
 
       for (TrainingScent scent in scents) {
-        await _trainingScentService.addTrainingScent(periodId, scent);
+        await _trainingScentService.createTrainingScent(period.id, scent);
       }
     } catch (error, stackTrace) {
       throw SmellSenseDatabaseException(
@@ -69,7 +75,7 @@ class DatabaseService {
     try {
       var period = await _trainingPeriodService.getTrainingPeriod();
 
-      await _trainingSessionService.addTrainingSession(
+      await _trainingSessionService.recordTrainingSession(
         period.id,
         session,
       );

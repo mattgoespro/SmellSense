@@ -8,7 +8,6 @@ import 'package:smellsense/app/shared/modules/training_session/training_session_
 import 'package:smellsense/app/shared/modules/training_session/training_session_entry_parosmia_reaction.module.dart';
 import 'package:smellsense/app/shared/modules/training_session/training_session_entry_rating.module.dart';
 import 'package:smellsense/app/shared/string_builder.dart';
-import 'package:smellsense/app/shared/utils.dart';
 import 'package:smellsense/app/static/supported_training_scent.dart';
 
 class TrainingSessionEntryService {
@@ -33,12 +32,16 @@ class TrainingSessionEntryService {
       List<TrainingSessionEntryEntity>? entryEntities =
           await _trainingSessionEntryDao.findTrainingSessionEntries(sessionId);
 
+      // entryEntities!.forEach((entity) => print("$entity\n"));
+
       return Future.wait(
         entryEntities!.map<Future<TrainingSessionEntry>>(
           (entity) async {
             TrainingScent scent =
-                await trainingScentService.getTrainingScent(entity.scentId);
+                await trainingScentService.getTrainingScent(entity.id);
+
             return TrainingSessionEntry(
+              id: entity.id,
               scent: scent,
               rating: TrainingSessionEntryRating.fromValue(entity.rating),
               comment: entity.comment,
@@ -65,8 +68,8 @@ class TrainingSessionEntryService {
   }
 
   Future<void> addTrainingSessionEntry(
-    TrainingSessionEntry entry,
     String sessionId,
+    TrainingSessionEntry entry,
   ) async {
     try {
       SupportedTrainingScent supportedScent =
@@ -76,13 +79,13 @@ class TrainingSessionEntryService {
 
       await _trainingSessionEntryDao.insertTrainingSessionEntry(
         TrainingSessionEntryEntity(
-          id: uuid(),
+          id: entry.id,
           sessionId: sessionId,
           scentId: supportedScent.id,
           rating: entry.rating.value,
           comment: entry.comment,
-          parosmiaReaction: entry.parosmiaReaction!.reaction,
-          parosmiaReactionSeverity: entry.parosmiaReactionSeverity!.severity,
+          parosmiaReaction: entry.parosmiaReaction.reaction,
+          parosmiaReactionSeverity: entry.parosmiaReactionSeverity.severity,
         ),
       );
     } catch (e, stackTrace) {

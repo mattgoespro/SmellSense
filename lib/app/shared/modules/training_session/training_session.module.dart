@@ -1,10 +1,12 @@
 import 'package:smellsense/app/shared/modules/training_session/training_session_entry.module.dart';
 
 class TrainingSession {
+  final String id;
   final DateTime date;
   final List<TrainingSessionEntry> entries;
 
   const TrainingSession({
+    required this.id,
     required this.date,
     required this.entries,
   });
