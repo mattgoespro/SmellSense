@@ -1,6 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:smellsense/app/application/providers/infrastructure.provider.dart';
 import 'package:smellsense/app/shared/modules/training_scent/training_scent.module.dart';
-import 'package:smellsense/app/shared/modules/training_scent/training_scent_display.module.dart';
+import 'package:smellsense/app/static/supported_training_scent.dart';
 
 class ScentSelectionCheckboxGroupWidget extends StatefulWidget {
   static const maxSelectionCount = 4;
@@ -19,38 +22,22 @@ class ScentSelectionCheckboxGroupWidget extends StatefulWidget {
 
 class ScentSelectionCheckboxGroupWidgetState
     extends State<ScentSelectionCheckboxGroupWidget> {
-  final ScrollController _scrollController = ScrollController();
-  bool _isAtBottom = true;
-
   late final Map<TrainingScentName, bool> selectedScents;
+  late final List<SupportedTrainingScent> supportedTrainingScents;
 
   @override
   void initState() {
     super.initState();
-    _scrollController.addListener(_scrollListener);
+    Infrastructure infrastructure = context.read<Infrastructure>();
 
-    selectedScents = TrainingScentName.values
-        .fold<Map<TrainingScentName, bool>>(
-            {}, (acc, element) => acc..[element] = false);
-  }
+    supportedTrainingScents = infrastructure.supportedTrainingScentProvider
+        .listSupportedTrainingScents();
 
-  void _scrollListener() {
-    if (_scrollController.position.atEdge) {
-      setState(() {
-        _isAtBottom = _scrollController.position.pixels != 0;
-      });
-    } else {
-      setState(() {
-        _isAtBottom = false;
-      });
-    }
-  }
-
-  @override
-  void dispose() {
-    _scrollController.removeListener(_scrollListener);
-    _scrollController.dispose();
-    super.dispose();
+    selectedScents =
+        TrainingScentName.values.fold<Map<TrainingScentName, bool>>(
+      {},
+      (acc, scentName) => acc..[scentName] = false,
+    );
   }
 
   @override
@@ -58,90 +45,82 @@ class ScentSelectionCheckboxGroupWidgetState
     var theme = Theme.of(context);
     var textTheme = theme.textTheme;
 
-    return Stack(
+    return ListView(
+      itemExtent: 48,
+      physics: const BouncingScrollPhysics(),
+      scrollDirection: Axis.vertical,
+      clipBehavior: Clip.antiAlias,
       children: [
-        ListView(
-          itemExtent: 48,
-          controller: _scrollController,
-          scrollDirection: Axis.vertical,
-          clipBehavior: Clip.antiAlias,
-          children: [
-            for (TrainingScentDisplay scent in TrainingScentDisplay.getScents())
-              CheckboxListTile(
-                dense: true,
-                checkboxShape: theme.checkboxTheme.shape,
-                title: Text(
-                  scent.displayName,
-                  style: textTheme.bodyMedium!.copyWith(
-                    color: scent.displayColor,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                onChanged: (value) {
-                  setState(
-                    () {
-                      var isChecked = value ?? false;
-                      var scentSelections = selectedScents.keys
-                          .where((key) => selectedScents[key] == true)
-                          .toList();
+        for (var scent in supportedTrainingScents)
+          CheckboxListTile(
+            dense: true,
+            checkboxShape: theme.checkboxTheme.shape,
+            title: Text(
+              scent.displayName,
+              style: textTheme.bodyMedium!.copyWith(
+                color: scent.displayColor,
+                fontWeight: FontWeight.w500,
+              ),
+            ).tr(),
+            onChanged: (value) {
+              setState(
+                () {
+                  var isChecked = value ?? false;
+                  var scentSelections = selectedScents.keys
+                      .where((key) => selectedScents[key]!)
+                      .toList();
+                  TrainingScentName scentName =
+                      TrainingScentName.fromString(scent.name);
 
-                      if (!isChecked) {
-                        setState(() {
-                          selectedScents[scent.name] = isChecked;
-                          scentSelections.remove(scent.name);
-                          widget.onSelectionChange(scentSelections);
-                        });
+                  if (!isChecked) {
+                    setState(() {
+                      selectedScents[scentName] = isChecked;
+                      scentSelections.remove(scentName);
+                      widget.onSelectionChange(scentSelections);
+                    });
 
-                        return;
-                      }
+                    return;
+                  }
 
-                      ///
-                      /// Prevent the checkbox from being selected, and show a snackbar
-                      /// to the user
-                      ///
-                      if (scentSelections.length ==
-                          ScentSelectionCheckboxGroupWidget.maxSelectionCount) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            duration: const Duration(seconds: 2),
-                            content: Text(
-                              'You have already selected ${ScentSelectionCheckboxGroupWidget.maxSelectionCount} scents.',
-                              textAlign: TextAlign.center,
-                              style: textTheme.labelSmall!.copyWith(
-                                color: theme.colorScheme.onError,
-                              ),
-                            ),
+                  ///
+                  /// Prevent the checkbox from being selected, and show a snackbar
+                  /// to the user
+                  ///
+                  if (scentSelections.length ==
+                      ScentSelectionCheckboxGroupWidget.maxSelectionCount) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        duration: const Duration(seconds: 2),
+                        content: Text(
+                          'screens.scent_selection.scent_selection_checkbox_group.selection_limit_reached_snackbar_message'
+                              .tr(
+                            args: [
+                              ScentSelectionCheckboxGroupWidget
+                                  .maxSelectionCount
+                                  .toString()
+                            ],
                           ),
-                        );
-                        return;
-                      }
+                          textAlign: TextAlign.center,
+                          style: textTheme.labelSmall!.copyWith(
+                            color: theme.colorScheme.onError,
+                          ),
+                        ),
+                      ),
+                    );
+                    return;
+                  }
 
-                      setState(() {
-                        selectedScents[scent.name] = isChecked;
-                        widget.onSelectionChange(
-                            [...scentSelections, scent.name]);
-                      });
-                    },
-                  );
+                  setState(() {
+                    selectedScents[scentName] = isChecked;
+                    widget.onSelectionChange(
+                      [...scentSelections, scentName],
+                    );
+                  });
                 },
-                value: selectedScents[scent.name],
-                controlAffinity: ListTileControlAffinity.leading,
-              ),
-          ],
-        ),
-        if (!_isAtBottom)
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: Container(
-              alignment: Alignment.center,
-              padding: const EdgeInsets.all(8.0),
-              child: const Text(
-                '...',
-                style: TextStyle(fontSize: 24, color: Colors.grey),
-              ),
-            ),
+              );
+            },
+            value: selectedScents[TrainingScentName.fromString(scent.name)],
+            controlAffinity: ListTileControlAffinity.leading,
           ),
       ],
     );

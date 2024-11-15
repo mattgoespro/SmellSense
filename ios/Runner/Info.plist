@@ -47,5 +47,10 @@
 		<false/>
 		<key>NSMicrophoneUsageDescription</key>
 		<string>SmellSense relies on third-party packages. It does not, in any capacity, for any reason, use the microphone directly.</string>
+		<key>CFBundleLocalizations</key>
+		<array>
+			<string>en</string>
+			<string>nb</string>
+		</array>
 	</dict>
 </plist>

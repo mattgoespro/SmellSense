@@ -50,9 +50,8 @@ class TrainingSessionEntryEntity {
   });
 
   @override
-  String toString() {
-    return 'TrainingSessionEntryEntity(id: $id, sessionId: $sessionId, scentId: $scentId, rating: $rating, comment: $comment, parosmiaReaction: $parosmiaReaction, parosmiaReactionSeverity: $parosmiaReactionSeverity)';
-  }
+  String toString() =>
+      'TrainingSessionEntryEntity(id: $id, sessionId: $sessionId, scentId: $scentId, rating: $rating, comment: $comment, parosmiaReaction: $parosmiaReaction, parosmiaReactionSeverity: $parosmiaReactionSeverity)';
 
   @override
   bool operator ==(Object other) {

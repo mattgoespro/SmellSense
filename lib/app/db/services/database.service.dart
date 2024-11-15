@@ -56,7 +56,7 @@ class DatabaseService {
       await _trainingPeriodService.createTrainingPeriod(period);
 
       for (TrainingScent scent in scents) {
-        await _trainingScentService.createTrainingScent(period.id, scent);
+        await _trainingScentService.createTrainingScent(period, scent);
       }
     } catch (error, stackTrace) {
       throw SmellSenseDatabaseException(
@@ -73,10 +73,10 @@ class DatabaseService {
     TrainingSession session,
   ) async {
     try {
-      var period = await _trainingPeriodService.getTrainingPeriod();
+      var period = await _trainingPeriodService.getCurrentTrainingPeriod();
 
       await _trainingSessionService.recordTrainingSession(
-        period.id,
+        period,
         session,
       );
     } catch (error, stackTrace) {

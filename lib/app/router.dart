@@ -1,13 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smellsense/app/screens/help/help.screen.dart';
 import 'package:smellsense/app/screens/home/home.screen.dart';
 import 'package:smellsense/app/screens/scent_selection/scent_selection.screen.dart';
 import 'package:smellsense/app/screens/splash/splash.screen.dart';
 import 'package:smellsense/app/screens/training_session/training_session.screen.dart';
 import 'package:smellsense/app/screens/training_session_history/training_session_history.screen.dart';
+import 'package:smellsense/app/shared/logger.dart';
 import 'package:smellsense/app/shared/modules/training_scent/training_scent.module.dart';
 import 'package:smellsense/app/shared/widgets/fade.animated_widget.dart';
 
@@ -24,6 +24,11 @@ final routerConfig = GoRouter(
       path: '/splash-screen',
       name: 'splash-screen',
       pageBuilder: (context, state) {
+        if (kDebugMode) {
+          Log.trace(
+              'Navigated to route: (name="splash-screen", path="/splash-screen")');
+        }
+
         return const MaterialPage(
           child: SplashScreenWidget(),
         );
@@ -33,6 +38,10 @@ final routerConfig = GoRouter(
       name: 'home',
       path: '/',
       pageBuilder: (context, state) {
+        if (kDebugMode) {
+          Log.trace('Navigated to route: (name="home", path="/")');
+        }
+
         return const MaterialPage(
           child: FadeAnimate(
             fadeInDuration: Duration(milliseconds: 300),
@@ -40,25 +49,25 @@ final routerConfig = GoRouter(
           ),
         );
       },
-      redirect: (context, state) async {
-        final prefs = await SharedPreferences.getInstance();
-        final isFirstLaunch = prefs.getBool('isFirstLaunch') ?? true;
-
-        if (isFirstLaunch && state.fullPath != '/scent-selection') {
-          return '/scent-selection';
-        }
-
-        return null;
-      },
     ),
     GoRoute(
       name: 'scent-selection',
       path: '/scent-selection',
       pageBuilder: (context, state) {
+        if (kDebugMode) {
+          Log.trace(
+              'Navigated to route: (name="scent-selection", path="/scent-selection")');
+        }
+
         return CustomTransitionPage(
           maintainState: true,
           transitionDuration: const Duration(seconds: 1),
-          transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+          transitionsBuilder: (
+            context,
+            animation,
+            secondaryAnimation,
+            child,
+          ) =>
               FadeTransition(
             opacity: animation,
             child: child,
@@ -71,6 +80,11 @@ final routerConfig = GoRouter(
       name: "training-session",
       path: "/training-session",
       pageBuilder: (context, state) {
+        if (kDebugMode) {
+          Log.trace(
+              'Navigated to route: (name="training-session", path="/training-session")');
+        }
+
         List<TrainingScent> scents = []; // TODO: fetch scents from db
 
         return CustomTransitionPage(
@@ -90,12 +104,25 @@ final routerConfig = GoRouter(
     GoRoute(
       name: "help",
       path: "/help",
-      builder: (context, state) => const HelpScreenWidget(),
+      builder: (context, state) {
+        if (kDebugMode) {
+          Log.trace('Navigated to route: (name="help", path="/help")');
+        }
+
+        return const HelpScreenWidget();
+      },
     ),
     GoRoute(
       name: "training-session-history",
       path: "/training-session-history",
-      builder: (context, state) => const TrainingSessionHistoryScreenWidget(),
+      builder: (context, state) {
+        if (kDebugMode) {
+          Log.trace(
+              'Navigated to route: (name="training-session-history", path="/training-session-history")');
+        }
+
+        return const TrainingSessionHistoryScreenWidget();
+      },
     ),
   ],
   onException: (context, state, router) => MaterialPage(

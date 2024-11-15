@@ -12,8 +12,10 @@ TextTheme createTextTheme(
 
   var displayTextStyle = GoogleFonts.getFont(displayFont);
 
-  TextTheme fontTextTheme =
-      GoogleFonts.getTextTheme(displayFont, bodyTextTheme).copyWith(
+  TextTheme fontTextTheme = GoogleFonts.getTextTheme(
+    displayFont,
+    bodyTextTheme,
+  ).copyWith(
     headlineSmall: displayTextStyle.copyWith(
       fontSize: 18,
       fontWeight: FontWeight.w100,
@@ -21,8 +23,8 @@ TextTheme createTextTheme(
     ),
     headlineMedium: displayTextStyle.copyWith(
       fontSize: 24,
-      color: Theme.of(context).colorScheme.onSurfaceVariant,
-      fontWeight: FontWeight.w200,
+      color: Theme.of(context).colorScheme.onSurfaceVariant.withOpacity(0.8),
+      fontWeight: FontWeight.normal,
     ),
     headlineLarge: displayTextStyle.copyWith(
       fontSize: 32,

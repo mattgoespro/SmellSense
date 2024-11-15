@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:smellsense/app/shared/modules/training_session/training_session_entry.module.dart';
 
 class TrainingSession {
@@ -17,7 +18,7 @@ class TrainingSession {
 
     return other is TrainingSession &&
         other.date == date &&
-        other.entries == entries;
+        listEquals(other.entries, entries);
   }
 
   @override
@@ -41,7 +42,6 @@ class TrainingSessionEncouragements {
     "What positive associations can you make with this smell?",
   ];
 
-  static String getNextEncouragement() {
-    return _encouragements[++currentIndex % _encouragements.length];
-  }
+  static String getNextEncouragement() =>
+      _encouragements[++currentIndex % _encouragements.length];
 }

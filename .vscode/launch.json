@@ -5,46 +5,31 @@
       "name": "debug: wi-fi device",
       "type": "dart",
       "request": "launch",
-      "presentation": {
-        "hidden": false,
-        "group": "debug",
-        "order": 1
-      },
       "program": "lib/main.dart",
       "deviceId": "SM A245F",
       "flutterMode": "debug",
+      "console": "debugConsole",
       "internalConsoleOptions": "openOnSessionStart",
-      "preLaunchTask": "adb: sync db from device"
+      "presentation": {
+        "group": "debug",
+        "order": 1
+      }
     },
     {
       "name": "debug: virtual device",
       "type": "dart",
       "request": "attach",
+      "program": "lib/main.dart",
+      "deviceId": "emulator-5554",
       "presentation": {
-        "hidden": false,
         "group": "debug",
         "order": 2
       },
-      "deviceId": "emulator-5554",
-      "preLaunchTask": "adb: launch virtual device"
-    },
-    {
-      "name": "debug release: wi-fi device",
-      "type": "dart",
-      "request": "launch",
-      "presentation": {
-        "hidden": false,
-        "group": "debug",
-        "order": 3
-      },
-      "program": "lib/main.dart",
-      "deviceId": "SM A245F",
-      "flutterMode": "release",
-      "showMemoryUsage": true,
+      "preLaunchTask": "adb: launch virtual device",
       "internalConsoleOptions": "openOnSessionStart"
     },
     {
-      "name": "flutter: run tests",
+      "name": "test: integration",
       "type": "dart",
       "request": "launch",
       "program": "${workspaceFolder}/test",

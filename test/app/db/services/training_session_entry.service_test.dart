@@ -56,13 +56,13 @@ void main() {
 
       for (TrainingScent scent in scents) {
         await trainingScentService.createTrainingScent(
-          trainingPeriod.id,
+          trainingPeriod,
           scent,
         );
       }
 
       await trainingSessionService.recordTrainingSession(
-        trainingPeriod.id,
+        trainingPeriod,
         trainingSession,
       );
     });
@@ -73,7 +73,7 @@ void main() {
 
     test('should create a new training session entry', () async {
       for (TrainingSessionEntry entry in trainingSession.entries) {
-        await trainingSessionEntryService.addTrainingSessionEntry(
+        await trainingSessionEntryService.recordTrainingSessionEntry(
           trainingSession.id,
           entry,
         );

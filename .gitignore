@@ -42,5 +42,4 @@ app.*.symbols
 app.*.map.json
 
 # Project
-TODO.md
 temp

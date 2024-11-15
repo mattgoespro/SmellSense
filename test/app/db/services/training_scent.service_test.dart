@@ -50,9 +50,9 @@ void main() {
       await db.close();
     });
 
-    test('should create a new training scent', () async {
+    test('should create a new training scent for the period', () async {
       await trainingScentService.createTrainingScent(
-        testTrainingPeriod.id,
+        testTrainingPeriod,
         testTrainingScent,
       );
 
@@ -63,7 +63,7 @@ void main() {
         retrievedScent,
         equals(testTrainingScent),
         reason:
-            "The retrieved training scent should be the training scent that was created.",
+            "The retrieved training scent for the period should be the training scent that was created.",
       );
     });
   });

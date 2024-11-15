@@ -81,13 +81,13 @@ class MaterialTheme {
       canvasColor: colorScheme.surface,
       cardColor: colorScheme.surfaceContainer,
       checkboxTheme: WidgetThemeData.getCheckboxThemeData(colorScheme),
-      colorScheme: colorScheme,
-      scaffoldBackgroundColor: colorScheme.surface,
-      snackBarTheme: WidgetThemeData.getSnackBarThemeData(
+      listTileTheme: WidgetThemeData.getListTileThemeData(
         colorScheme,
         textTheme,
       ),
-      listTileTheme: WidgetThemeData.getListTileThemeData(
+      colorScheme: colorScheme,
+      scaffoldBackgroundColor: colorScheme.surface,
+      snackBarTheme: WidgetThemeData.getSnackBarThemeData(
         colorScheme,
         textTheme,
       ),

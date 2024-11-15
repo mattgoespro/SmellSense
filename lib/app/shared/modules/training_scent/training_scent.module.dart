@@ -1,4 +1,3 @@
-import 'package:smellsense/app/shared/modules/training_scent/training_scent_display.module.dart';
 import 'package:smellsense/app/shared/modules/training_session/training_session_entry.module.dart';
 
 enum TrainingScentName {
@@ -15,7 +14,7 @@ enum TrainingScentName {
   orange("orange"),
   rose("rose"),
   rosemary("rosemary"),
-  teaTree("teaTree");
+  teatree("teatree");
 
   final String scentName;
 
@@ -46,8 +45,6 @@ class TrainingScent {
       : id = entry.id,
         name = entry.scent.name;
 
-  getDisplay() => TrainingScentDisplay.getScent(name);
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
@@ -59,7 +56,5 @@ class TrainingScent {
   int get hashCode => name.hashCode;
 
   @override
-  String toString() {
-    return "TrainingScent(name: $name)";
-  }
+  String toString() => "TrainingScent(name: $name)";
 }

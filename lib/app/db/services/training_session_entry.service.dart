@@ -5,7 +5,7 @@ import 'package:smellsense/app/db/services/training_scent.service.dart';
 import 'package:smellsense/app/db/smellsense.db.dart';
 import 'package:smellsense/app/shared/modules/training_scent/training_scent.module.dart';
 import 'package:smellsense/app/shared/modules/training_session/training_session_entry.module.dart';
-import 'package:smellsense/app/shared/modules/training_session/training_session_entry_parosmia_reaction.module.dart';
+import 'package:smellsense/app/shared/modules/training_session/training_session_entry_altered_reaction.module.dart';
 import 'package:smellsense/app/shared/modules/training_session/training_session_entry_rating.module.dart';
 import 'package:smellsense/app/shared/string_builder.dart';
 import 'package:smellsense/app/static/supported_training_scent.dart';
@@ -45,11 +45,11 @@ class TrainingSessionEntryService {
               scent: scent,
               rating: TrainingSessionEntryRating.fromValue(entity.rating),
               comment: entity.comment,
-              parosmiaReaction: TrainingSessionEntryParosmiaReaction.fromValue(
+              parosmiaReaction: TrainingSessionEntryAlteredReaction.fromValue(
                 entity.parosmiaReaction ?? 0,
               ),
               parosmiaReactionSeverity:
-                  TrainingSessionEntryParosmiaReactionSeverity.fromValue(
+                  TrainingSessionEntryAlteredReactionSeverity.fromValue(
                 entity.parosmiaReactionSeverity ?? 0,
               ),
             );
@@ -67,7 +67,7 @@ class TrainingSessionEntryService {
     }
   }
 
-  Future<void> addTrainingSessionEntry(
+  Future<void> recordTrainingSessionEntry(
     String sessionId,
     TrainingSessionEntry entry,
   ) async {

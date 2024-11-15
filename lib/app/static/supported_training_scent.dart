@@ -42,21 +42,15 @@ class SupportedTrainingScent {
     this.displayImage,
   );
 
-  static Image _displayImageFromJson(String imagePath) {
-    return Image.asset(imagePath);
-  }
+  static Image _displayImageFromJson(String imagePath) =>
+      Image.asset(imagePath);
 
-  static String _displayImageToJson(Image image) {
-    return image.image.toString();
-  }
+  static String _displayImageToJson(Image image) => image.image.toString();
 
-  static Color _displayColorFromJson(String color) {
-    return Color(int.parse(color));
-  }
+  static Color _displayColorFromJson(String color) => Color(int.parse(color));
 
-  static String _displayColorToJson(Color color) {
-    return color.value.toRadixString(16);
-  }
+  static String _displayColorToJson(Color color) =>
+      color.value.toRadixString(16);
 
   factory SupportedTrainingScent.fromJson(Map<String, String> json) =>
       _$SupportedTrainingScentFromJson(json);
@@ -72,7 +66,6 @@ class SupportedTrainingScent {
   int get hashCode => id.hashCode;
 
   @override
-  String toString() {
-    return 'SupportedTrainingScent(id: $id, name: $name, displayName: $displayName, displayColor: $displayColor, displayImage: $displayImage}';
-  }
+  String toString() =>
+      'SupportedTrainingScent(id: $id, name: $name, displayName: $displayName, displayColor: $displayColor, displayImage: $displayImage}';
 }

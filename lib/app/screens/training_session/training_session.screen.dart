@@ -5,7 +5,10 @@ import 'package:smellsense/app/shared/modules/training_scent/training_scent.modu
 class TrainingSessionScreenWidget extends StatefulWidget {
   final List<TrainingScent> scents;
 
-  const TrainingSessionScreenWidget({super.key, required this.scents});
+  const TrainingSessionScreenWidget({
+    super.key,
+    required this.scents,
+  });
 
   @override
   TrainingSessionScreenWidgetState createState() =>

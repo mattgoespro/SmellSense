@@ -10,7 +10,7 @@ void main() {
       {
         "id": "83375a4b-327f-48cf-aebe-e16a953305a7",
         "name": "cinnamon",
-        "displayName": "Cinnamon",
+        "displayName": "assets.data.supported_scents.display_name.cinnamon",
         "displayColor": "0xFF5D4037",
         "displayImage": "assets/images/cinnamon.png",
       },

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smellsense/app/application/providers/infrastructure.provider.dart';
@@ -27,14 +28,21 @@ class App extends StatelessWidget {
               scrollBehavior: const MaterialScrollBehavior(),
               routerConfig: routerConfig,
               theme: theme.themeData,
+              localizationsDelegates: context.localizationDelegates,
+              supportedLocales: context.supportedLocales,
+              locale: context.locale,
               builder: (context, child) {
                 return MultiProvider(
                   providers: [
-                    Provider<Infrastructure?>.value(
-                      value: context.watch<Infrastructure?>(),
+                    Provider<Infrastructure>.value(
+                      value: context.watch<Infrastructure>(),
                     ),
                   ],
-                  child: child,
+                  child: Container(
+                    padding: const EdgeInsets.all(16),
+                    color: theme.colorScheme.surface,
+                    child: child,
+                  ),
                 );
               },
             );

@@ -7,7 +7,7 @@ import '../data/entities/training_period.entity.data.dart';
 import '../data/entities/training_session.entity.data.dart';
 
 void main() {
-  group('TrainingSessionDao', () {
+  group('Test: TrainingSessionDao', () {
     late SmellSenseDatabase database;
     late TrainingSessionDao trainingSessionDao;
     late TrainingPeriodDao trainingPeriodDao;

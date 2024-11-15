@@ -12,7 +12,6 @@ class SupportedTrainingScentDataLoader {
         scents: json.map(SupportedTrainingScent.fromJson).toList(),
       );
 
-  static SupportedTrainingScentDataLoader loadSupportedTrainingScents() {
-    return SupportedTrainingScentDataLoader.fromJson(supportedScentsData);
-  }
+  static SupportedTrainingScentDataLoader loadSupportedTrainingScents() =>
+      SupportedTrainingScentDataLoader.fromJson(supportedScentsData);
 }

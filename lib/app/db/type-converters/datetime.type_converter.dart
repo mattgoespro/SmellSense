@@ -1,22 +1,13 @@
 import 'package:floor/floor.dart';
+import 'package:smellsense/app/shared/dateutils.dart';
 
 class DateTimeTypeConverter extends TypeConverter<DateTime, int> {
   @override
   DateTime decode(int databaseValue) {
     var dateTime = DateTime.fromMillisecondsSinceEpoch(databaseValue);
-    var date = stripTime(dateTime);
-    return date;
+    return DateTimeUtils.getDateOnly(dateTime);
   }
 
   @override
-  int encode(DateTime value) {
-    var dateTime = value.millisecondsSinceEpoch;
-    var date = DateTime.fromMillisecondsSinceEpoch(dateTime);
-    var dateMillis = stripTime(date).millisecondsSinceEpoch;
-    return dateMillis;
-  }
-
-  DateTime stripTime(DateTime dateTime) {
-    return DateTime(dateTime.year, dateTime.month, dateTime.day);
-  }
+  int encode(DateTime value) => value.millisecondsSinceEpoch;
 }

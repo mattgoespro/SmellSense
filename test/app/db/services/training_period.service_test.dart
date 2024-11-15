@@ -44,20 +44,21 @@ void main() {
       await database.close();
     });
 
-    test('should create a new training period as the active training period',
+    test(
+        'should create a new training period that is the active training period',
         () async {
       await trainingPeriodService.createTrainingPeriod(
         testTrainingPeriod,
       );
 
       final activeTrainingPeriod =
-          await trainingPeriodService.getTrainingPeriod();
+          await trainingPeriodService.getCurrentTrainingPeriod();
 
       expect(
         activeTrainingPeriod.startDate,
         equals(testTrainingPeriod.startDate),
         reason:
-            "The retrieved active training period should be the training period that was created.",
+            "The retrieved training period should be the active training period.",
       );
     });
   });

@@ -1,51 +1,64 @@
 #!/bin/bash
 
-function sync_pull_db {
+function pull_device_db_file {
     local local_db_file_path=$1
 
     device_db_file_path="/data/data/za.co.smellsense/databases/smellsense_database.db"
 
-    if ! adb pull "$device_db_file_path" "$local_db_file_path"; then
-        echo "failed to pull database file from device."
+    if ! adb exec-out "$device_db_file_path" "$local_db_file_path"; then
         return 1
     fi
 
     return 0
 }
 
-function sync_db_from_device() {
+function try_pull_device_db {
+    if ! pull_device_db_file "$local_db_file_path"; then
+        echo "[sync_db_from_device] WARNING: inital sync did not complete."
+        exit 1
+    fi
+
+    return 0
+}
+
+function sync_device_db_to_project() {
+    # open_device_shell
+
     local device_db_file_name="smellsense_database.db"
     local device_db_file_path="/data/data/za.co.smellsense/databases/$device_db_file_name"
 
-    cwd="$(pwd)"
+    cwd="\"$(dirname "$0")\""
+    local_db_file_dir="$cwd/temp"
+
+    if [ ! -d "$local_db_file_dir" ]; then
+        mkdir -p "$local_db_file_dir"
+    fi
 
     local_db_file_path="$cwd/temp/$device_db_file_name"
 
-    echo "performing initial sync of device db '$device_db_file_path' -> '$local_db_file_path' ..."
+    echo "[sync_db_from_device] Performing initial sync of device db '$device_db_file_path' -> '$local_db_file_path' ..."
 
-    if ! sync_pull_db "$local_db_file_path"; then
-        echo "failed to sync database file:"
-        echo -e "\tdevice path: $device_db_file_path"
-        echo -e "\tlocal path: $local_db_file_path"
-        return 1
-    fi
+    try_pull_device_db
 
-    echo "starting synchronization..."
+    echo "[sync_db_from_device] Starting synchronization..."
 
     while true; do
-        if ! sync_pull_db "$local_db_file_path"; then
-            echo "failed to sync database file:"
-            echo -e "\tdevice path: $device_db_file_path"
-            echo -e "\tlocal path: $local_db_file_path"
-            return 1
+        if ! try_pull_device_db; then
+            echo "[sync_db_from_device] Retrying sync..."
+            sleep 1
+            continue
         fi
 
         sleep 5
     done
 }
 
-echo "starting synchronization of device database to local database..."
+echo "[sync_db_from_device] Starting synchronization of device database to local database..."
 
-sync_db_from_device
+sync_device_db_to_project
+
+echo "[sync_db_from_device] Synchronization ended."
+
+read -r -p "[connect_device] Press any key to exit..."
 
 exit 0

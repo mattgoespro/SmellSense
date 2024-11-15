@@ -4,7 +4,7 @@ import 'package:smellsense/app/db/daos/training_scent.dao.dart';
 import 'package:smellsense/app/db/entities/training_period.entity.dart';
 import 'package:smellsense/app/db/services/training_session.service.dart';
 import 'package:smellsense/app/db/smellsense.db.dart';
-import 'package:smellsense/app/shared/datetime_utils.dart';
+import 'package:smellsense/app/shared/dateutils.dart';
 import 'package:smellsense/app/shared/modules/training_period.module.dart';
 import 'package:smellsense/app/shared/modules/training_session/training_session.module.dart';
 import 'package:smellsense/app/shared/string_builder.dart';
@@ -28,7 +28,7 @@ class TrainingPeriodService {
     trainingPeriodDao = db.trainingPeriodDao;
   }
 
-  Future<TrainingPeriod> getTrainingPeriod() async {
+  Future<TrainingPeriod> getCurrentTrainingPeriod() async {
     try {
       TrainingPeriodEntity? period =
           await trainingPeriodDao.findActiveTrainingPeriod();
@@ -62,7 +62,7 @@ class TrainingPeriodService {
       await trainingPeriodDao.insertTrainingPeriod(
         TrainingPeriodEntity(
           id: period.id,
-          startDate: DateUtils.fromDateTime(period.startDate),
+          startDate: DateTimeUtils.getDateOnly(period.startDate),
         ),
       );
     } catch (e, stackTrace) {

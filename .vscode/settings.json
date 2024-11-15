@@ -28,17 +28,32 @@
     "editor.formatOnPaste": true,
     "editor.formatOnSave": true
   },
-  "dart.flutterCustomEmulators": [
-    {
-      "args": ["-avd", "Pixel_6_API_34", "-gpu", "host", "-grpc-use-jwt"],
-      "emulatorPath": "emulator",
-      "id": "Pixel_6_API_34",
-      "name": "Pixel 6 API 34"
-    }
+  "dart.analysisExcludedFolders": [
+    ".dart_tool/",
+    ".git",
+    ".husky/",
+    ".idea/",
+    "build/",
+    "android/",
+    "ios/",
+    "tools/",
+    "scripts/"
   ],
+  "dart.analysisServerFolding": false,
+  "dart.cliConsole": "debugConsole",
+  "dart.debugSdkLibraries": false,
+  "dart.flutterOutline": true,
+  "dart.flutterTestLogFile": "test_results.xml",
+  "dart.runPubGetOnPubspecChanges": "prompt",
+  "dart.showTestCodeLens": true,
+  "dart.vmServiceLogFile": "dart-tools.log",
   "editor.codeActionsOnSave": {
-    "source.fixAll.dart": "always",
-    "source.organizeImports": "always"
+    "source.fixAll.dart": "explicit",
+    "source.organizeImports": "always",
+    "source.organizeLinkDefinitions": "always"
+  },
+  "emeraldwalk.runonsave": {
+    "commands": []
   },
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,

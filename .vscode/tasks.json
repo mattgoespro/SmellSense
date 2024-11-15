@@ -2,10 +2,39 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "adb: launch virtual device",
+      "detail": "Launch a virtual device.",
+      "type": "shell",
+      "command": "emulator -avd Samsung_Galaxy_A24_API_35 -id samsung-galaxy-a24 -gpu host -grpc-use-jwt",
+      "isBackground": true,
+      "group": {
+        "kind": "test"
+      },
+      "presentation": {
+        "panel": "dedicated",
+        "group": "debug",
+        "revealProblems": "onProblem"
+      },
+      "problemMatcher": [
+        {
+          "pattern": {
+            "regexp": "^(INFO \\s+| Boot completed in (.*)ms)$",
+            "location": 2,
+            "message": 1
+          },
+          "background": {
+            "activeOnStart": true,
+            "beginsPattern": "^(INFO \\s+| Storing crashdata in: (.*))",
+            "endsPattern": "^(INFO \\s+| Boot completed in (.*)ms)$"
+          }
+        }
+      ]
+    },
+    {
       "label": "adb: connect to wifi device",
       "detail": "Connect to a device over Wi-Fi.",
       "type": "shell",
-      "command": "./scripts/connect_device.sh -d wifi",
+      "command": "./scripts/connect_wifi_device.sh",
       "isBackground": true,
       "group": {
         "kind": "test",
@@ -20,55 +49,25 @@
         {
           "pattern": [
             {
-              "regexp": "^(error: no devices connected\\.|error: failed to connect to device\\.|error: adb failed to bridge connection to device '\\w+' over wi-fi\\.)$",
+              "regexp": "^\\[(.*)\\] Error: (.*)$",
+              "line": 0,
               "file": 1,
-              "line": 1,
-              "message": 1
+              "message": 2
             }
           ],
           "background": {
             "activeOnStart": true,
-            "beginsPattern": "^connecting to device over wi-fi\\.$",
-            "endsPattern": "^(error: failed to connect to device\\.|error: adb failed to bridge connection to device '\\w+' over wi-fi\\.)$"
-          }
-        }
-      ]
-    },
-    {
-      "label": "adb: launch virtual device",
-      "detail": "Launch a virtual device.",
-      "type": "shell",
-      "command": "emulator -avd Pixel_6_API_34 -gpu host -grpc-use-jwt",
-      "isBackground": true,
-      "group": {
-        "kind": "test"
-      },
-      "presentation": {
-        "panel": "dedicated",
-        "group": "debug",
-        "revealProblems": "onProblem"
-      },
-      "problemMatcher": [
-        {
-          "pattern": {
-            "regexp": "^emulator: INFO: boot completed",
-            "file": 1,
-            "location": 2,
-            "message": 3
-          },
-          "background": {
-            "activeOnStart": true,
-            "beginsPattern": "^emulator: INFO: boot completed",
-            "endsPattern": "^$"
+            "beginsPattern": "^\\[(.*)\\] Identified device with IP address: .*$",
+            "endsPattern": "^\\[(.*)\\] Press any key to exit\\.\\.\\.$"
           }
         }
       ]
     },
     {
       "label": "adb: sync db from device",
-      "detail": "Sync the database file from the android device to a database file in the project.",
+      "detail": "Sync the SmellSense database file from the device to the project directory.",
       "type": "shell",
-      "command": "${workspaceFolder}/scripts/sync_db_from_device.sh",
+      "command": "./scripts/sync_db_from_device.sh",
       "isBackground": true,
       "group": {
         "kind": "test"
@@ -81,20 +80,18 @@
       "problemMatcher": [
         {
           "pattern": {
-            "regexp": "^(.*):(\\d+):(\\d+): (.*): (.*)$",
+            "regexp": "^\\[(.*)\\] Error: (.*)$",
+            "location": 0,
             "file": 1,
-            "location": 2,
-            "severity": 4,
-            "message": 5
+            "message": 2
           },
           "background": {
             "activeOnStart": true,
-            "beginsPattern": "^adb: error:.*$",
-            "endsPattern": "^$"
+            "beginsPattern": "^\\[(.*)\\] Performing initial sync of device db .*$",
+            "endsPattern": "^\\[(.*)\\] Press any key to exit\\.\\.\\.$"
           }
         }
-      ],
-      "dependsOn": ["build_runner: watch"]
+      ]
     },
     {
       "label": "build_runner: watch",
@@ -137,13 +134,24 @@
       "command": "test",
       "args": ["--coverage", "--no-pub"],
       "isBackground": true,
+      "group": {
+        "kind": "test"
+      },
       "presentation": {
         "panel": "dedicated",
         "group": "test",
         "revealProblems": "onProblem"
       },
-      "group": {
-        "kind": "test"
+      "problemMatcher": {
+        "owner": "dart",
+        "fileLocation": ["relative", "${workspaceFolder}"],
+        "pattern": {
+          "regexp": "^(.*):(\\d+):(\\d+): (.*): (.*)$",
+          "file": 1,
+          "location": 2,
+          "severity": 4,
+          "message": 5
+        }
       }
     },
     {
@@ -154,9 +162,6 @@
       "isBackground": true,
       "group": {
         "kind": "test"
-      },
-      "options": {
-        "cwd": "${workspaceFolder}"
       },
       "presentation": {
         "panel": "dedicated",
@@ -178,7 +183,10 @@
             "endsPattern": "^$"
           }
         }
-      ]
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      }
     }
   ]
 }

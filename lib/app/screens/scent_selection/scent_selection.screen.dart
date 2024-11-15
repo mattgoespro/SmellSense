@@ -1,7 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:smellsense/app/application/providers/infrastructure.provider.dart';
 import 'package:smellsense/app/screens/scent_selection/scent_selection_checkbox_group.widget.dart';
+import 'package:smellsense/app/shared/dateutils.dart';
 import 'package:smellsense/app/shared/logger.dart';
 import 'package:smellsense/app/shared/modules/training_scent/training_scent.module.dart';
 import 'package:smellsense/app/shared/theme/theme.dart';
@@ -20,6 +22,7 @@ class ScentSelectionScreenWidget extends StatefulWidget {
 class ScentSelectionScreenWidgetState
     extends State<ScentSelectionScreenWidget> {
   List<TrainingScentName> selectedScents = [];
+  ValueNotifier<bool> isSubmitting = ValueNotifier(false);
 
   bool isSelectionComplete() =>
       selectedScents.length ==
@@ -30,7 +33,7 @@ class ScentSelectionScreenWidgetState
 
     try {
       await infrastructure.databaseService.createTrainingPeriod(
-        DateTime.now(),
+        DateTimeUtils.date(),
         selectedScents
             .map(
               (scent) => TrainingScent(
@@ -47,6 +50,25 @@ class ScentSelectionScreenWidgetState
     }
   }
 
+  void Function()? get onNextButtonPressed => isSelectionComplete()
+      ? () async {
+          isSubmitting.value = true;
+          try {
+            await storeScentSelections();
+            if (context.mounted) {
+              setState(() {
+                isSubmitting.value = false;
+                context.go('/');
+              });
+            }
+          } catch (e) {
+            Log.error('Error storing scent selections: $e');
+          } finally {
+            isSubmitting.value = false;
+          }
+        }
+      : null;
+
   @override
   Widget build(BuildContext context) {
     var theme = MaterialTheme.of(context);
@@ -54,25 +76,25 @@ class ScentSelectionScreenWidgetState
 
     return Scaffold(
       body: Center(
-        widthFactor: MediaQuery.of(context).size.width,
-        child: SizedBox(
-          width: MediaQuery.of(context).size.width * 0.8,
-          height: MediaQuery.of(context).size.height * 0.8,
-          child: Flex(
-            direction: Axis.vertical,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Flexible(
-                flex: 1,
-                child: Text(
-                  'Select four of your desired training scents',
-                  style: textTheme.headlineSmall,
-                  textAlign: TextAlign.center,
-                ),
+        child: Flex(
+          direction: Axis.vertical,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Flexible(
+              flex: 1,
+              child: Text(
+                'screens.scent_selection.select_scents_headline'.tr(),
+                style: textTheme.headlineMedium,
+                textAlign: TextAlign.center,
               ),
-              Flexible(
-                flex: 3,
+            ),
+            Flexible(
+              flex: 4,
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                ),
                 child: ScentSelectionCheckboxGroupWidget(
                   onSelectionChange: (List<TrainingScentName> scents) {
                     setState(
@@ -83,20 +105,17 @@ class ScentSelectionScreenWidgetState
                   },
                 ),
               ),
-              Align(
-                alignment: Alignment.bottomRight,
-                child: OutlinedButton(
-                  onPressed: isSelectionComplete()
-                      ? () {
-                          storeScentSelections();
-                          context.goNamed('home');
-                        }
-                      : null,
-                  child: const Text('NEXT'),
+            ),
+            Align(
+              alignment: Alignment.bottomRight,
+              child: OutlinedButton(
+                onPressed: onNextButtonPressed,
+                child: Text(
+                  'shared.next_button_label'.tr(),
                 ),
-              )
-            ],
-          ),
+              ),
+            )
+          ],
         ),
       ),
     );

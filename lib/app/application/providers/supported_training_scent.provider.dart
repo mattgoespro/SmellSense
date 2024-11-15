@@ -5,6 +5,10 @@ class SupportedTrainingScentProvider {
   final SupportedTrainingScentDataLoader _supportedTrainingScentLoader =
       SupportedTrainingScentDataLoader.loadSupportedTrainingScents();
 
+  List<SupportedTrainingScent> listSupportedTrainingScents() {
+    return _supportedTrainingScentLoader.scents!;
+  }
+
   SupportedTrainingScent getSupportedTrainingScentById(String id) {
     return _supportedTrainingScentLoader.scents!.firstWhere(
       (scent) => scent.id == id,

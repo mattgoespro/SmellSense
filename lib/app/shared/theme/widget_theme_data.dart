@@ -80,11 +80,8 @@ class WidgetThemeData {
               return colorScheme.primaryContainer;
             }
 
-            return colorScheme.surfaceContainer;
+            return colorScheme.surface;
           },
-        ),
-        overlayColor: WidgetStateProperty.resolveWith<Color>(
-          (Set<WidgetState> states) => Colors.grey.shade300,
         ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(4),
@@ -116,7 +113,7 @@ class WidgetThemeData {
     TextTheme textTheme,
   ) {
     return ListTileThemeData(
-      tileColor: colorScheme.surfaceContainer,
+      tileColor: colorScheme.surface,
       iconColor: colorScheme.onSurface,
       textColor: colorScheme.onSurface,
       selectedColor: colorScheme.onPrimary,
