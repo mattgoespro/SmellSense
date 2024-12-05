@@ -1,9 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:smellsense/app/application/providers/infrastructure.provider.dart';
+import 'package:smellsense/app/generated/assets.gen.dart';
 import 'package:smellsense/app/shared/modules/training_scent/training_scent.module.dart';
 
 class HomeScreenWidget extends StatefulWidget {
@@ -35,10 +35,9 @@ class HomeScreenWidgetState extends State<HomeScreenWidget> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SvgPicture.asset(
-            // TODO: Convert SVG image to another image format
-            "assets/svg/smellsense_logo.svg",
-            width: 50,
+          Assets.images.branding.logo.image(
+            width: 100,
+            height: 100,
           ),
           Text(
             'SmellSense',

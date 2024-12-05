@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 class TimerWidget extends StatefulWidget {
-  final Duration timerDuration;
+  final Duration duration;
   final void Function() onStart;
   final Widget replaceDoneTimerWidget;
 
   const TimerWidget({
     super.key,
-    required this.timerDuration,
+    required this.duration,
     required this.onStart,
     required this.replaceDoneTimerWidget,
   });
@@ -26,9 +26,9 @@ class TimerWidgetState extends State<TimerWidget>
 
     controller = AnimationController(
       vsync: this,
-      duration: widget.timerDuration,
+      duration: widget.duration,
       lowerBound: 0,
-      upperBound: widget.timerDuration.inSeconds.toDouble(),
+      upperBound: widget.duration.inSeconds.toDouble(),
     )..addStatusListener((status) {
         switch (status) {
           case AnimationStatus.completed:
@@ -79,7 +79,8 @@ class TimerWidgetState extends State<TimerWidget>
               onPressed: () {
                 controller.reset();
               },
-              child: const Text('Start'),
+              child: const Text(
+                  'screens.training_session.training_session_entry.training_session_entry_timer.'),
             ),
         ],
       ),

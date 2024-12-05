@@ -27,7 +27,7 @@ final _$supportedScentsDataJsonLiteral = [
     'id': 'f9f08e99-8c88-4c64-bd91-25bbcb4e435d',
     'name': 'chamomile',
     'displayName': 'assets.data.supported_scents.display_name.chamomile',
-    'displayColor': '0xFFFFE0B2',
+    'displayColor': '0xFFD48201',
     'displayImage': 'assets/images/chamomile.png'
   },
   {

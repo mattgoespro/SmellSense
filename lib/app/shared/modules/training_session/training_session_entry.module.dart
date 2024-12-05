@@ -1,13 +1,13 @@
 import 'package:smellsense/app/shared/modules/training_scent/training_scent.module.dart';
-import 'package:smellsense/app/shared/modules/training_session/training_session_entry_altered_reaction.module.dart';
+import 'package:smellsense/app/shared/modules/training_session/training_session_entry_parosmia_reaction.module.dart';
 import 'package:smellsense/app/shared/modules/training_session/training_session_entry_rating.module.dart';
 
 class TrainingSessionEntry {
   final String id;
   final TrainingScent scent;
   TrainingSessionEntryRating rating;
-  TrainingSessionEntryAlteredReactionSeverity parosmiaReactionSeverity;
-  TrainingSessionEntryAlteredReaction parosmiaReaction;
+  TrainingSessionEntryParosmiaReaction parosmiaReaction;
+  TrainingSessionEntryParosmiaSeverity parosmiaReactionSeverity;
   String? comment;
 
   TrainingSessionEntry({
@@ -18,6 +18,19 @@ class TrainingSessionEntry {
     required this.parosmiaReactionSeverity,
     this.comment,
   });
+
+  void update({
+    TrainingSessionEntryRating? rating,
+    TrainingSessionEntryParosmiaReaction? parosmiaReaction,
+    TrainingSessionEntryParosmiaSeverity? parosmiaReactionSeverity,
+    String? comment,
+  }) {
+    this.rating = rating ?? this.rating;
+    this.parosmiaReaction = parosmiaReaction ?? this.parosmiaReaction;
+    this.parosmiaReactionSeverity =
+        parosmiaReactionSeverity ?? this.parosmiaReactionSeverity;
+    this.comment = comment ?? this.comment;
+  }
 
   @override
   bool operator ==(Object other) {

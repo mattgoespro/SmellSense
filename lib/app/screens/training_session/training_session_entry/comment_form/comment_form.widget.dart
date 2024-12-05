@@ -1,65 +1,75 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:smellsense/app/shared/modules/training_session/training_session_entry.module.dart';
-import 'package:smellsense/app/shared/modules/training_session/training_session_entry_altered_reaction.module.dart';
+import 'package:smellsense/app/generated/assets.gen.dart';
+import 'package:smellsense/app/shared/modules/training_session/training_session_entry_parosmia_reaction.module.dart';
 import 'package:smellsense/app/shared/utils.dart';
 
-class CommentsFormWidget extends StatefulWidget {
+class CommentFormWidget extends StatefulWidget {
   final FormMode mode;
-  final TrainingSessionEntry entry;
 
-  const CommentsFormWidget({
+  const CommentFormWidget({
     super.key,
     required this.mode,
-    required this.entry,
   });
 
   @override
-  State<CommentsFormWidget> createState() => _CommentsFormWidgetState();
+  State<CommentFormWidget> createState() => _CommentFormWidgetState();
 }
 
-class _CommentsFormWidgetState extends State<CommentsFormWidget> {
+class _CommentFormWidgetState extends State<CommentFormWidget> {
   Widget get parosmiaReactionFormField => FormField(
-        builder: (FormFieldState<dynamic> field) => DropdownButtonFormField(
+        builder: (FormFieldState<dynamic> field) =>
+            DropdownButtonFormField<int>(
           items: [
             for (var reaction
-                in TrainingSessionEntryParosmia.getParosmiaReactions())
+                in TrainingSessionEntryParosmiaReaction.getReactions())
               DropdownMenuItem(
-                value: reaction.value,
+                value: reaction.reaction,
                 alignment: Alignment.center,
-                child: SvgPicture.asset(reaction.value),
+                child: Assets.images.reactions.values
+                    .elementAt(reaction.reaction)
+                    .image(),
               ),
           ],
-          decoration: const InputDecoration(
-            labelText: 'How did you react after smelling this scent?',
-            hintText: 'I reacted...',
+          decoration: InputDecoration(
+            labelText:
+                'screens.training_session.training_session_entry.comment_form.parosmia_reaction_field_label'
+                    .tr(),
+            hintText:
+                'screens.training_session.training_session_entry.comment_form.parosmia_reaction_field_hint'
+                    .tr(),
           ),
-          onChanged: (String? value) {
+          onChanged: (int? value) {
             field.didChange(value);
           },
         ),
       );
 
   Widget get parosmiaReactionSeverityFormField => FormField(
-        builder: (FormFieldState<dynamic> field) => DropdownButtonFormField(
+        builder: (FormFieldState<dynamic> field) =>
+            DropdownButtonFormField<int>(
           items: [
             for (var severity
-                in TrainingSessionEntryParosmia.getParosmiaSeverities())
+                in TrainingSessionEntryParosmiaSeverity.getSeverities())
               DropdownMenuItem(
-                value: severity.value,
+                value: severity.severity,
                 alignment: Alignment.center,
                 child: Text(
-                  TrainingSessionEntryParosmia.getParosmiaSeverityDisplayValue(
-                      severity.key),
+                  "screens.training_session.training_session_entry.comment_form.parosmia_reaction.${severity.name}"
+                      .tr(),
+                  style: const TextStyle(fontSize: 16),
                 ),
               ),
           ],
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
             labelText:
-                'How severe was your reaction to the smell of this scent?',
-            hintText: 'The severity...',
+                'screens.training_session.training_session_entry.comment_form.parosmia_reaction_severity_field_label'
+                    .tr(),
+            hintText:
+                'screens.training_session.training_session_entry.comment_form.parosmia_reaction_severity_field_hint'
+                    .tr(),
           ),
-          onChanged: (String? value) {
+          onChanged: (int? value) {
             field.didChange(value);
           },
         ),
@@ -67,9 +77,13 @@ class _CommentsFormWidgetState extends State<CommentsFormWidget> {
 
   Widget get additionalCommentsFormField => FormField(
         builder: (FormFieldState<dynamic> field) => TextFormField(
-          decoration: const InputDecoration(
-            labelText: 'Any additional comments?',
-            hintText: 'Additionally...',
+          decoration: InputDecoration(
+            labelText:
+                'screens.training_session.training_session_entry.comment_form.additional_comments_field_label'
+                    .tr(),
+            hintText:
+                'screens.training_session.training_session_entry.comment_form.additional_comments_field_hint'
+                    .tr(),
           ),
           maxLines: 3,
           onChanged: (String value) {

@@ -1,76 +1,72 @@
 {
-  "en_US": {
-    "shared": {
-      "scent_display_names": {
-        "chamomile": "Chamomile",
-        "cinnamon": "Cinnamon",
-        "citronella": "Citronella",
-        "clove": "Clove",
-        "eucalyptus": "Eucalyptus",
-        "garlic": "Garlic",
-        "grapefruit": "Grapefruit",
-        "lavender": "Lavender",
-        "lemon": "Lemon",
-        "mint": "Mint",
-        "orange": "Orange",
-        "rose": "Rose",
-        "rosemary": "Rosemary",
-        "tea-tree": "Tea Tree"
-      }
+  "shared": {
+    "scent_display_names": {
+      "chamomile": "Chamomile",
+      "cinnamon": "Cinnamon",
+      "citronella": "Citronella",
+      "clove": "Clove",
+      "eucalyptus": "Eucalyptus",
+      "garlic": "Garlic",
+      "grapefruit": "Grapefruit",
+      "lavender": "Lavender",
+      "lemon": "Lemon",
+      "mint": "Mint",
+      "orange": "Orange",
+      "rose": "Rose",
+      "rosemary": "Rosemary",
+      "tea-tree": "Tea Tree"
+    }
+  },
+  "screens": {
+    "scent_selection": {
+      "select-scents-title": "Select four of your desired training scents"
     },
-    "screens": {
-      "scent_selection": {
-        "select-scents-title": "Select four of your desired training scents"
-      },
-      "home": {
-        "start-training-btn": "Start Training",
-        "view-training-progress-btn": "View Training Progress",
-        "about-btn": "About",
-        "help-btn": "Help"
-      },
-      "training_session": {
-        "training_session_comments": {
-          "comment_form": {
-            "parosmia-reaction-field-label": "How did you react after smelling this scent?",
-            "parsomia-reaction-field-hint": "I reacted...",
-            "parosmia-reaction-severity-field-label": "How severe was your reaction to the smell of this scent?",
-            "parsomia-reaction-severity-field-hint": "The severity...",
-            "additional-comments-field-label": "Any additional comments?",
-            "additional-comments-field-hint": "Additionally..."
+    "home": {
+      "start-training-btn": "Start Training",
+      "view-training-progress-btn": "View Training Progress",
+      "about-btn": "About",
+      "help-btn": "Help"
+    },
+    "training_session": {
+      "training_session_entry": {
+        "rating_title": "How intense is the smell of this substance?",
+        "rating_bar": {
+          "rating_bar": {
+            "option": [
+              "1 - No smell at all",
+              "2 - I smell something different (Parosmia)",
+              "3 - Slight smell",
+              "4 - Moderate smell",
+              "5 - Strong smell"
+            ]
           }
         },
-        "rating_form": {
-          "title": "Rate the intensity of the smell",
-          "question": "How intense is the smell of this substance?",
-          "answerOptions": [
-            "1 - No smell at all",
-            "2 - I smell something different (Parosmia)",
-            "3 - Slight smell",
-            "4 - Moderate smell",
-            "5 - Strong smell"
-          ]
+        "comment_form": {
+          "parosmia_reaction_field_label": "How did you react after smelling this scent?",
+          "parsomia_reaction_field_hint": "I reacted...",
+          "parosmia_severity_field_label": "How severe was your reaction to the smell of this scent?",
+          "parsomia_severity_field_hint": "The severity...",
+          "additional_comments_field_label": "Any additional comments?",
+          "additional_comments_field_hint": "Additionally...",
+          "parosmia_severity": {
+            "mild": "Mild",
+            "moderation": "Moderate",
+            "severe": "Severe"
+          },
+          "parosmia_reaction": {
+            "angry": "Angry",
+            "disgusted": "Disgusted",
+            "happy": "Happy",
+            "neutral": "Neutral",
+            "pleased": "Pleased",
+            "unhappy": "Unhappy"
+          }
         },
-        "answerOptions": [
-          "1 - No smell at all",
-          "2 - I smell something different (Parosmia)",
-          "3 - Slight smell",
-          "4 - Moderate smell",
-          "5 - Strong smell"
-        ],
-        "encouragements": [
-          "Try to remember exactly how this substance should smell",
-          "Imagine yourself holding the real thing in your hands...the look, colours, texture and smell.",
-          "Can you recall your last vivid memory of this smell?",
-          "What positive associations can you make with this smell?"
-        ],
-        "parosmiaSeverity": ["Mild", "Moderate", "Severe"],
-        "reactions": {
-          "anger": "assets/svg/emojis/anger.svg",
-          "disgusted": "assets/svg/emojis/disgusted.svg",
-          "happy": "assets/svg/emojis/big_smile.svg",
-          "neutral": "assets/svg/emojis/neutral.svg",
-          "pleased": "assets/svg/emojis/smile.svg",
-          "unhappy": "assets/svg/emojis/unhappy.svg"
+        "timer_encouragements": {
+          "0": "Try to remember exactly how this substance should smell",
+          "1": "Imagine yourself holding the real thing in your hands...the look, colours, texture and smell.",
+          "2": "Can you recall your last vivid memory of this smell?",
+          "3": "What positive associations can you make with this smell?"
         }
       }
     }

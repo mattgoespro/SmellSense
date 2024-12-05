@@ -43,3 +43,6 @@ app.*.map.json
 
 # Project
 temp
+
+# Build runner
+libs/build_gen/

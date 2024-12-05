@@ -18,12 +18,6 @@ class TrainingSessionScreenWidget extends StatefulWidget {
 class TrainingSessionScreenWidgetState
     extends State<TrainingSessionScreenWidget> {
   @override
-  void initState() {
-    super.initState();
-    // TODO: Retrieve scent list from database and pass it to the TrainingSessionScreenWidget
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(

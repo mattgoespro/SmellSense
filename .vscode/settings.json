@@ -46,6 +46,7 @@
   "dart.flutterTestLogFile": "test_results.xml",
   "dart.runPubGetOnPubspecChanges": "prompt",
   "dart.showTestCodeLens": true,
+  "dart.lineLength": 80,
   "dart.vmServiceLogFile": "dart-tools.log",
   "editor.codeActionsOnSave": {
     "source.fixAll.dart": "explicit",
