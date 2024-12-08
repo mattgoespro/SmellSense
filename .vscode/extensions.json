@@ -23,6 +23,7 @@
     "ibm.output-colorizer",
     "alefragnani.bookmarks",
     "emeraldwalk.runonsave",
-    "simonsiefke.svg-preview"
+    "simonsiefke.svg-preview",
+    "vscjava.vscode-gradle"
   ]
 }

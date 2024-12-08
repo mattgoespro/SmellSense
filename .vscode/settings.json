@@ -39,25 +39,26 @@
     "tools/",
     "scripts/"
   ],
+  "java.import.gradle.java.home": "C:\\Users\\Matt\\AppData\\Local\\Programs\\Android Studio 2\\jbr",
   "dart.analysisServerFolding": false,
   "dart.cliConsole": "debugConsole",
   "dart.debugSdkLibraries": false,
   "dart.flutterOutline": true,
   "dart.flutterTestLogFile": "test_results.xml",
+  "dart.lineLength": 80,
   "dart.runPubGetOnPubspecChanges": "prompt",
   "dart.showTestCodeLens": true,
-  "dart.lineLength": 80,
   "dart.vmServiceLogFile": "dart-tools.log",
   "editor.codeActionsOnSave": {
     "source.fixAll.dart": "explicit",
     "source.organizeImports": "always",
     "source.organizeLinkDefinitions": "always"
   },
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
   "emeraldwalk.runonsave": {
     "commands": []
   },
-  "editor.formatOnPaste": true,
-  "editor.formatOnSave": true,
   "files.exclude": {
     "**/.classpath": true,
     "**/.factorypath": true,
@@ -70,6 +71,10 @@
     ".packages": true,
     "pubspec.lock": true
   },
+  "gradle.autoDetect": "on",
+  "gradle.focusTaskInExplorer": true,
+  "gradle.nestedProjects": true,
+  "java.compile.nullAnalysis.mode": "automatic",
   "json.schemas": [
     {
       "description": "Codemagic CI/CD file configuration",
@@ -77,5 +82,6 @@
       "url": "https://codemagic.io/codemagic-schema.json"
     }
   ],
-  "terminal.integrated.defaultProfile.windows": "Git Bash"
+  "terminal.integrated.defaultProfile.windows": "Git Bash",
+  "java.configuration.updateBuildConfiguration": "interactive"
 }

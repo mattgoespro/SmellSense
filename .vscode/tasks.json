@@ -5,7 +5,7 @@
       "label": "adb: launch virtual device",
       "detail": "Launch a virtual device.",
       "type": "shell",
-      "command": "emulator -avd Samsung_Galaxy_A24_API_35 -id samsung-galaxy-a24 -gpu host -grpc-use-jwt",
+      "command": "emulator -avd Samsung_Galaxy_A24 -id samsung-galaxy-a24 -gpu host -grpc-use-jwt",
       "isBackground": true,
       "group": {
         "kind": "test"
@@ -18,14 +18,14 @@
       "problemMatcher": [
         {
           "pattern": {
-            "regexp": "^(INFO \\s+| Boot completed in (.*)ms)$",
+            "regexp": "Boot completed in",
             "location": 2,
             "message": 1
           },
           "background": {
             "activeOnStart": true,
             "beginsPattern": "^(INFO \\s+| Storing crashdata in: (.*))",
-            "endsPattern": "^(INFO \\s+| Boot completed in (.*)ms)$"
+            "endsPattern": "Boot completed in"
           }
         }
       ]
