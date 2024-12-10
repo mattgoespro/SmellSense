@@ -111,7 +111,7 @@ class ScentSelectionScreenWidgetState
               child: OutlinedButton(
                 onPressed: onNextButtonPressed,
                 child: Text(
-                  'shared.next_button_label'.tr(),
+                  'shared.next_button_text'.tr(),
                 ),
               ),
             )

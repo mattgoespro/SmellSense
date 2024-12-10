@@ -32,11 +32,11 @@ if (keystorePropertiesFile.exists()) {
 android {
     namespace= "za.co.smellsense"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
+    ndkVersion = "28.0.12674087"
 
-        compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+    compileOptions {
+        sourceCompatibility = 20
+        targetCompatibility = 20
     }
 
     defaultConfig {
@@ -71,6 +71,7 @@ android {
            signingConfig = signingConfigs.release
         }
    }
+    buildToolsVersion '34.0.0'
 }
 
 flutter {

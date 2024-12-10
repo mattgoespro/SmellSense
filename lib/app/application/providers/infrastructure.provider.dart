@@ -20,6 +20,8 @@ class Infrastructure {
       databaseService = infrastructure.databaseService;
       supportedTrainingScentProvider =
           infrastructure.supportedTrainingScentProvider;
+    } else {
+      throw Exception("Unable to access infrastructure.");
     }
   }
 
@@ -37,6 +39,7 @@ class Infrastructure {
         supportedTrainingScentProvider: SupportedTrainingScentProvider(),
       );
     } catch (exception) {
+      print(exception);
       throw Exception(
           "Fatal error: failed to create infrastructure: ${exception.toString()}.");
     }

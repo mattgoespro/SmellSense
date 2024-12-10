@@ -56,7 +56,7 @@ class ScentSelectionCheckboxGroupWidgetState
             dense: true,
             checkboxShape: theme.checkboxTheme.shape,
             title: Text(
-              scent.displayName,
+              "shared.scent_name.${scent.displayName}".tr(),
               style: textTheme.bodyMedium!.copyWith(
                 color: scent.displayColor,
                 fontWeight: FontWeight.w500,

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smellsense/app/application/providers/infrastructure.provider.dart';
 import 'package:smellsense/app/router.dart';
+import 'package:smellsense/app/shared/logger.dart';
 import 'package:smellsense/app/shared/theme/theme.dart';
 
 class App extends StatelessWidget {
@@ -16,6 +17,10 @@ class App extends StatelessWidget {
       providers: [
         FutureProvider<Infrastructure?>(
           create: (context) => Infrastructure.getInfrastructure(),
+          catchError: (context, error) {
+            Log.error(error);
+            return null;
+          },
           initialData: null,
           builder: (context, child) {
             if (context.watch<Infrastructure?>() == null) {
