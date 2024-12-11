@@ -24,6 +24,8 @@
     "alefragnani.bookmarks",
     "emeraldwalk.runonsave",
     "simonsiefke.svg-preview",
-    "vscjava.vscode-gradle"
+    "vscjava.vscode-gradle",
+    "alexisvt.flutter-snippets",
+    "jeroen-meijer.pubspec-assist"
   ]
 }

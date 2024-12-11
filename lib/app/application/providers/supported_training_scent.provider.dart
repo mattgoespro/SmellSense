@@ -1,5 +1,5 @@
-import 'package:smellsense/app/static/supported_training_scent.dart';
-import 'package:smellsense/app/static/supported_training_scent_data.dart';
+import 'package:smellsense/app/assets/supported_training_scent.dart';
+import 'package:smellsense/app/assets/data/supported_scents.dart';
 
 class SupportedTrainingScentProvider {
   final SupportedTrainingScentDataLoader _supportedTrainingScentLoader =

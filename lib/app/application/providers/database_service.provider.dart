@@ -8,7 +8,9 @@ class DatabaseServiceProvider {
 
   late final SmellSenseDatabase db;
 
-  DatabaseServiceProvider({required this.db});
+  DatabaseServiceProvider({
+    required this.db,
+  });
 
   ///
   /// Create the database service.

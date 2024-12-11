@@ -24,19 +24,6 @@
         "group": "debug",
         "order": 2
       },
-      // "preLaunchTask": "adb: launch virtual device",
-      "internalConsoleOptions": "openOnSessionStart"
-    },
-    {
-      "name": "debug: virtual device (flutter)",
-      "type": "dart",
-      "request": "attach",
-      "program": "lib/main.dart",
-      "deviceId": "emulator-5554",
-      "presentation": {
-        "group": "debug",
-        "order": 2
-      },
       "internalConsoleOptions": "openOnSessionStart"
     },
     {

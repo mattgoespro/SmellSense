@@ -14,7 +14,7 @@ void main() {
     late TrainingPeriodService trainingPeriodService;
     late SupportedTrainingScentProvider supportedTrainingScentProvider;
     late TrainingScentService trainingScentService;
-    late TrainingSessionService trainingSessionService;
+    late TrainingPeriodService trainingSessionService;
     late TrainingSessionEntryService trainingSessionEntryService;
 
     setUp(() async {
@@ -30,7 +30,7 @@ void main() {
         supportedTrainingScentProvider: supportedTrainingScentProvider,
         trainingScentService: trainingScentService,
       );
-      trainingSessionService = TrainingSessionService(
+      trainingSessionService = TrainingPeriodService(
         db: database,
         trainingSessionEntryService: trainingSessionEntryService,
       );

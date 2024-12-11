@@ -14,7 +14,7 @@ void main() {
   group('Test: TrainingScentService', () {
     late SmellSenseDatabase db;
     late TrainingPeriodService trainingPeriodService;
-    late TrainingSessionService trainingSessionService;
+    late TrainingPeriodService trainingSessionService;
     late TrainingSessionEntryService trainingSessionEntryService;
     late TrainingScentService trainingScentService;
 
@@ -34,7 +34,7 @@ void main() {
         trainingScentService: trainingScentService,
         supportedTrainingScentProvider: supportedTrainingScentProvider,
       );
-      trainingSessionService = TrainingSessionService(
+      trainingSessionService = TrainingPeriodService(
         db: db,
         trainingSessionEntryService: trainingSessionEntryService,
       );

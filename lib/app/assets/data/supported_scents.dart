@@ -1,4 +1,4 @@
-import 'package:smellsense/app/static/supported_training_scent.dart';
+import 'package:smellsense/app/assets/supported_training_scent.dart';
 
 class SupportedTrainingScentDataLoader {
   List<SupportedTrainingScent>? scents;

@@ -11,7 +11,6 @@ SupportedTrainingScent _$SupportedTrainingScentFromJson(
     SupportedTrainingScent(
       json['id'] as String,
       json['name'] as String,
-      json['displayName'] as String,
       SupportedTrainingScent._displayColorFromJson(
           json['displayColor'] as String),
       SupportedTrainingScent._displayImageFromJson(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show DeviceOrientation, SystemChrome;
+import 'package:easy_localization/easy_localization.dart';
 
 class TrainingSessionHistoryScreenWidget extends StatefulWidget {
   const TrainingSessionHistoryScreenWidget({super.key});
@@ -53,7 +54,7 @@ class TrainingSessionHistoryScreenWidgetState
             child: Padding(
               padding: const EdgeInsets.all(20),
               child: Text(
-                'Training Progress',
+                'screens.training_session_history.title'.tr(),
                 style: TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.w100,

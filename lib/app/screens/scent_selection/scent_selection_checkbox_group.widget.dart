@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smellsense/app/application/providers/infrastructure.provider.dart';
 import 'package:smellsense/app/shared/modules/training_scent/training_scent.module.dart';
-import 'package:smellsense/app/static/supported_training_scent.dart';
+import 'package:smellsense/app/assets/supported_training_scent.dart';
 
 class ScentSelectionCheckboxGroupWidget extends StatefulWidget {
   static const maxSelectionCount = 4;
@@ -56,7 +56,7 @@ class ScentSelectionCheckboxGroupWidgetState
             dense: true,
             checkboxShape: theme.checkboxTheme.shape,
             title: Text(
-              "shared.scent_name.${scent.displayName}".tr(),
+              "shared.scent_name.${scent.name}".tr(),
               style: textTheme.bodyMedium!.copyWith(
                 color: scent.displayColor,
                 fontWeight: FontWeight.w500,

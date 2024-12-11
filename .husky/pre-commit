@@ -1,8 +1,0 @@
-#!/usr/bin/env sh
-
-# shellcheck disable=SC1091
-. ".husky/_/husky.sh"
-
-scripts/generate_db.sh
-
-.husky/scripts/fix.sh

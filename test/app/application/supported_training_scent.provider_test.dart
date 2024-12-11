@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:smellsense/app/application/providers/supported_training_scent.provider.dart';
-import 'package:smellsense/app/static/supported_training_scent.dart';
+import 'package:smellsense/app/assets/supported_training_scent.dart';
 
 void main() {
   group('Test: SupportedTrainingScentProvider', () {

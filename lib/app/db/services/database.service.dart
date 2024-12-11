@@ -15,7 +15,7 @@ class DatabaseService {
 
   late final TrainingPeriodService _trainingPeriodService;
   late final TrainingScentService _trainingScentService;
-  late final TrainingSessionService _trainingSessionService;
+  late final TrainingPeriodService _trainingSessionService;
   late final TrainingSessionEntryService _trainingSessionEntryService;
   late final SupportedTrainingScentProvider _supportedTrainingScentProvider;
 
@@ -33,7 +33,7 @@ class DatabaseService {
       supportedTrainingScentProvider: _supportedTrainingScentProvider,
       trainingScentService: _trainingScentService,
     );
-    _trainingSessionService = TrainingSessionService(
+    _trainingSessionService = TrainingPeriodService(
       db: db,
       trainingSessionEntryService: _trainingSessionEntryService,
     );

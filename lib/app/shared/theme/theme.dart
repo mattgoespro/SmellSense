@@ -85,6 +85,7 @@ class MaterialTheme {
         colorScheme,
         textTheme,
       ),
+      indicatorColor: colorScheme.primary,
       colorScheme: colorScheme,
       scaffoldBackgroundColor: colorScheme.surface,
       snackBarTheme: WidgetThemeData.getSnackBarThemeData(

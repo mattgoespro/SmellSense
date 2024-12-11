@@ -18,7 +18,7 @@ void main() {
     late TrainingSessionEntryService trainingSessionEntryService;
     late TrainingScentService trainingScentService;
     late TrainingPeriodService trainingPeriodService;
-    late TrainingSessionService trainingSessionService;
+    late TrainingPeriodService trainingSessionService;
     TrainingPeriod trainingPeriod = testTrainingPeriod;
     TrainingSession trainingSession = testTrainingPeriod.sessions![0];
 
@@ -37,7 +37,7 @@ void main() {
         trainingScentService: trainingScentService,
         supportedTrainingScentProvider: supportedTrainingScentProvider,
       );
-      trainingSessionService = TrainingSessionService(
+      trainingSessionService = TrainingPeriodService(
         db: db,
         trainingSessionEntryService: trainingSessionEntryService,
       );

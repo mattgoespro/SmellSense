@@ -16,11 +16,6 @@ class SupportedTrainingScent {
   final String name;
 
   @JsonKey(
-    name: "displayName",
-  )
-  final String displayName;
-
-  @JsonKey(
     name: "displayColor",
     fromJson: _displayColorFromJson,
     toJson: _displayColorToJson,
@@ -37,7 +32,6 @@ class SupportedTrainingScent {
   SupportedTrainingScent(
     this.id,
     this.name,
-    this.displayName,
     this.displayColor,
     this.displayImage,
   );
@@ -67,5 +61,5 @@ class SupportedTrainingScent {
 
   @override
   String toString() =>
-      'SupportedTrainingScent(id: $id, name: $name, displayName: $displayName, displayColor: $displayColor, displayImage: $displayImage}';
+      'SupportedTrainingScent(id: $id, name: $name, displayColor: $displayColor, displayImage: $displayImage}';
 }

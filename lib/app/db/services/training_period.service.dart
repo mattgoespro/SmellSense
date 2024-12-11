@@ -75,4 +75,39 @@ class TrainingPeriodService {
       );
     }
   }
+
+  Future<List<TrainingPeriod>> getAllTrainingPeriods() async {
+    try {
+      List<TrainingPeriodEntity>? periodEntities =
+          await trainingPeriodDao.listTrainingPeriods();
+
+      if (periodEntities == null) {
+        return Future.value(<TrainingPeriod>[]);
+      }
+
+      List<TrainingPeriod> periods = [];
+
+      for (var periodEntity in periodEntities) {
+        List<TrainingSession> sessions =
+            await trainingSessionService.getTrainingSessions(periodEntity.id);
+
+        periods.add(
+          TrainingPeriod(
+            id: periodEntity.id,
+            startDate: periodEntity.startDate,
+            sessions: sessions,
+          ),
+        );
+      }
+
+      return periods;
+    } catch (e) {
+      throw SmellSenseDatabaseException(
+        StringBuilder.builder()
+            .append("Error listing all training periods.")
+            .appendLine(e.toString())
+            .build(),
+      );
+    }
+  }
 }
