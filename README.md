@@ -13,10 +13,6 @@ SmellSense was designed to provide the following functionality:
 
 Smell training is a little-known but scientifically proven method of quickly regaining one's sense of smell by utilizing a complex mechanism of the brain called 'Neuroplasticity', instead of waiting for long periods for your smell to naturally return to normal.
 
-## Set Up Flutter
-
-- Disable flutter for desktop support: `flutter config --no-enable-windows-desktop`
-
 ## Known Issues
 
 - Starting a training session that starts before the day ends and ends after the next day begins will break training history.

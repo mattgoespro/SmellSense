@@ -357,7 +357,7 @@ class _$TrainingSessionEntryDao extends TrainingSessionEntryDao {
       _trainingSessionEntryEntityDeletionAdapter;
 
   @override
-  Future<List<TrainingSessionEntryEntity>?> findTrainingSessionEntries(
+  Future<List<TrainingSessionEntryEntity>> findTrainingSessionEntries(
       String sessionId) async {
     return _queryAdapter.queryList(
         'SELECT id, session_id, scent_id, rating, parosmia_reaction, parosmia_reaction_severity, comment FROM training_session_entry WHERE session_id = ?1',

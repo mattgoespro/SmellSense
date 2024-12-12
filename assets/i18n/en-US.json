@@ -1,10 +1,10 @@
 {
-  "screen": {
+  "screens": {
     "home": {
-      "about-btn": "About",
-      "help-btn": "Help",
-      "start-training-btn": "Start Training",
-      "view-training-progress-btn": "View Training Progress"
+      "about_menu_button": "About",
+      "help_menu_button": "Help",
+      "train_menu_button": "Start Training",
+      "training_history_menu_button": "View Training Progress"
     },
     "scent_selection": {
       "scent_selection_checkbox_group": {

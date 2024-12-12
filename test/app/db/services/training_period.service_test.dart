@@ -14,7 +14,7 @@ void main() {
     late TrainingPeriodService trainingPeriodService;
     late SupportedTrainingScentProvider supportedTrainingScentProvider;
     late TrainingScentService trainingScentService;
-    late TrainingPeriodService trainingSessionService;
+    late TrainingSessionService trainingSessionService;
     late TrainingSessionEntryService trainingSessionEntryService;
 
     setUp(() async {
@@ -30,7 +30,7 @@ void main() {
         supportedTrainingScentProvider: supportedTrainingScentProvider,
         trainingScentService: trainingScentService,
       );
-      trainingSessionService = TrainingPeriodService(
+      trainingSessionService = TrainingSessionService(
         db: database,
         trainingSessionEntryService: trainingSessionEntryService,
       );
@@ -52,7 +52,7 @@ void main() {
       );
 
       final activeTrainingPeriod =
-          await trainingPeriodService.getCurrentTrainingPeriod();
+          await trainingPeriodService.getActiveTrainingPeriod();
 
       expect(
         activeTrainingPeriod.startDate,

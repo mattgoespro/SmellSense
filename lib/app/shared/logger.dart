@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:logger/logger.dart' as dart_logger;
-import 'package:smellsense/app/shared/string_builder.dart';
+import 'package:smellsense/app/shared/stringbuilder.dart';
 
 class AppLogPrinter extends dart_logger.PrettyPrinter {
   AppLogPrinter({
@@ -56,22 +56,22 @@ class Log {
   );
 
   static trace(dynamic message) {
-    logger.t(StringBuilder.builder().append(message).toString());
+    logger.t(message);
   }
 
   static debug(dynamic message) {
-    logger.d(StringBuilder.builder().append(message).toString());
+    logger.d(message);
   }
 
   static info(dynamic message) {
-    logger.i(StringBuilder.builder().append(message).toString());
+    logger.i(message);
   }
 
   static warn(dynamic message) {
-    logger.w(StringBuilder.builder().append(message).toString());
+    logger.w(message);
   }
 
-  static error(dynamic message) {
-    logger.e(StringBuilder.builder().append(message).toString());
+  static error(dynamic exception) {
+    logger.e(exception);
   }
 }

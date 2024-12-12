@@ -7,7 +7,7 @@ import 'package:smellsense/app/db/smellsense.db.dart';
 import 'package:smellsense/app/shared/dateutils.dart';
 import 'package:smellsense/app/shared/modules/training_period.module.dart';
 import 'package:smellsense/app/shared/modules/training_session/training_session.module.dart';
-import 'package:smellsense/app/shared/string_builder.dart';
+import 'package:smellsense/app/shared/stringbuilder.dart';
 
 class TrainingPeriodService {
   final SmellSenseDatabase db;
@@ -28,7 +28,7 @@ class TrainingPeriodService {
     trainingPeriodDao = db.trainingPeriodDao;
   }
 
-  Future<TrainingPeriod> getCurrentTrainingPeriod() async {
+  Future<TrainingPeriod> getActiveTrainingPeriod() async {
     try {
       TrainingPeriodEntity? period =
           await trainingPeriodDao.findActiveTrainingPeriod();

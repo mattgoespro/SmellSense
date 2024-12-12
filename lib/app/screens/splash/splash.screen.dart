@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:smellsense/app/shared/widgets/scale.animated_widget.dart';
+import 'package:smellsense/app/generated/assets.gen.dart';
+import 'package:smellsense/app/shared/widgets/animators/scale.animator.widget.dart';
 
-import '../../shared/widgets/fade.animated_widget.dart';
+import '../../shared/widgets/animators/fade.animator.widget.dart';
 
 class SplashScreenWidget extends StatefulWidget {
   const SplashScreenWidget({super.key});
@@ -37,9 +37,9 @@ class _SplashScreenWidgetState extends State<SplashScreenWidget>
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SvgPicture.asset(
-                "assets/svg/smellsense_logo.svg",
-                width: 20,
+              Assets.images.branding.logo.image(
+                width: 200,
+                height: 200,
               ),
               RichText(
                 textAlign: TextAlign.center,

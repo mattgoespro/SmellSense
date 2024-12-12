@@ -18,6 +18,18 @@
     {
       "name": "debug: virtual device",
       "type": "dart",
+      "request": "attach",
+      "program": "lib/main.dart",
+      "deviceId": "emulator-5554",
+      "presentation": {
+        "group": "debug",
+        "order": 1
+      },
+      "preLaunchTask": "adb: launch virtual device"
+    },
+    {
+      "name": "debug: launch virtual device",
+      "type": "dart",
       "request": "launch",
       "program": "lib/main.dart",
       "presentation": {

@@ -4,7 +4,7 @@
 library;
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:smellsense/app/shared/string_builder.dart';
+import 'package:smellsense/app/shared/stringbuilder.dart';
 
 void main() {
   group('StringBuilder', () {

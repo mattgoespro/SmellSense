@@ -5,17 +5,17 @@ import 'package:smellsense/app/db/smellsense.db.dart';
 import 'package:smellsense/app/shared/modules/training_period.module.dart';
 import 'package:smellsense/app/shared/modules/training_session/training_session.module.dart';
 import 'package:smellsense/app/shared/modules/training_session/training_session_entry.module.dart';
-import 'package:smellsense/app/shared/string_builder.dart';
+import 'package:smellsense/app/shared/stringbuilder.dart';
 
 class TrainingSessionService {
   final SmellSenseDatabase db;
-  final TrainingSessionEntryService trainingSessionEntryService;
-  late TrainingSessionDao _trainingSessionDao;
+  final TrainingSessionEntryService _trainingSessionEntryService;
+  late final TrainingSessionDao _trainingSessionDao;
 
   TrainingSessionService({
     required this.db,
-    required this.trainingSessionEntryService,
-  }) {
+    required TrainingSessionEntryService trainingSessionEntryService,
+  }) : _trainingSessionEntryService = trainingSessionEntryService {
     _trainingSessionDao = db.trainingSessionDao;
   }
 
@@ -53,7 +53,7 @@ class TrainingSessionService {
 
       for (var sessionEntity in sessionEntities) {
         List<TrainingSessionEntry> sessionEntries =
-            await trainingSessionEntryService
+            await _trainingSessionEntryService
                 .getTrainingSessionEntries(sessionEntity.id);
 
         sessions.add(

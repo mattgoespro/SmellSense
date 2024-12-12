@@ -61,8 +61,9 @@ class ScentSelectionScreenWidgetState
                 context.go('/');
               });
             }
-          } catch (e) {
-            Log.error('Error storing scent selections: $e');
+          } catch (exception, stackTrace) {
+            Log.error(exception);
+            Log.trace(stackTrace);
           } finally {
             isSubmitting.value = false;
           }

@@ -53,9 +53,9 @@ class HomeScreenWidgetState extends State<HomeScreenWidget> {
               borderRadius: BorderRadius.circular(5),
             ),
             child: Text(
-              'screen.home.menu.train_menu_button',
+              'screens.home.train_menu_button'.tr(),
               style: textTheme.labelMedium,
-            ).tr(),
+            ),
           ),
           FloatingActionButton(
             onPressed: () => context.go('/training-progress'),
@@ -63,9 +63,9 @@ class HomeScreenWidgetState extends State<HomeScreenWidget> {
               borderRadius: BorderRadius.circular(5),
             ),
             child: Text(
-              'screen.home.menu.training_history_menu_button',
+              'screens.home.training_history_menu_button'.tr(),
               style: textTheme.labelMedium,
-            ).tr(),
+            ),
           ),
           FloatingActionButton(
             onPressed: () => context.go('/about'),
@@ -73,9 +73,9 @@ class HomeScreenWidgetState extends State<HomeScreenWidget> {
               borderRadius: BorderRadius.circular(5),
             ),
             child: Text(
-              "screen.home.menu.about_menu_button",
+              "screens.home.about_menu_button".tr(),
               style: textTheme.labelMedium,
-            ).tr(),
+            ),
           ),
           FloatingActionButton(
             onPressed: () => context.go('/help'),
@@ -83,9 +83,9 @@ class HomeScreenWidgetState extends State<HomeScreenWidget> {
               borderRadius: BorderRadius.circular(5),
             ),
             child: Text(
-              "screen.home.menu.help_menu_button",
+              "screens.home.help_menu_button".tr(),
               style: textTheme.labelMedium,
-            ).tr(),
+            ),
           ),
         ],
       ),

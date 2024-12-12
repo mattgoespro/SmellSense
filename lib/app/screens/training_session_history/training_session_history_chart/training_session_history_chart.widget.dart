@@ -124,7 +124,9 @@ class TrainingSessionHistoryChartWidgetState
                                 .barRods
                                 .map((rod) {
                               return rod.copyWith(
-                                  toY: avg, color: widget.avgColor);
+                                toY: avg,
+                                color: Colors.yellow,
+                              );
                             }).toList(),
                           );
                         }
@@ -221,12 +223,12 @@ class TrainingSessionHistoryChartWidgetState
       barRods: [
         BarChartRodData(
           toY: y1,
-          color: widget.leftBarColor,
+          color: Colors.black,
           width: width,
         ),
         BarChartRodData(
           toY: y2,
-          color: widget.rightBarColor,
+          color: Colors.white,
           width: width,
         ),
       ],

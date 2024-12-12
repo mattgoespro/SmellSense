@@ -36,31 +36,15 @@
     "scripts/",
     "tools/"
   ],
+  "dart.debugSdkLibraries": true,
   "dart.lineLength": 80,
+  "dart.showTodos": false,
   "editor.codeActionsOnSave": {
     "source.fixAll": "always"
   },
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
   "files.eol": "\n",
-  "files.exclude": {
-    // "**/.classpath": true,
-    // "**/.factorypath": true,
-    // "**/.project": true,
-    // "**/.settings": true,
-    // ".dart_tool": true,
-    // ".flutter-plugins": true,
-    // ".flutter-plugins-dependencies": true,
-    // ".idea": true,
-    // ".packages": true,
-    // "pubspec.lock": true
-  },
-  "gradle.autoDetect": "on",
-  "gradle.focusTaskInExplorer": true,
-  "gradle.nestedProjects": true,
-  "java.compile.nullAnalysis.mode": "automatic",
-  "java.configuration.updateBuildConfiguration": "interactive",
-  "java.import.gradle.java.home": "C:\\Users\\Matt\\AppData\\Local\\Programs\\Android Studio 2\\jbr",
   "json.schemas": [
     {
       "description": "Codemagic CI/CD file configuration",

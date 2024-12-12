@@ -5,7 +5,8 @@
       "label": "adb: launch virtual device",
       "detail": "Launch a virtual device.",
       "type": "shell",
-      "command": "emulator -avd Samsung_Galaxy_A24 -id samsung-galaxy-a24 -gpu host -grpc-use-jwt",
+      "command": "emulator",
+      "args": ["-avd", "Samsung_Galaxy_A24_API_34"],
       "isBackground": true,
       "group": {
         "kind": "test"

@@ -35,10 +35,12 @@ class Infrastructure {
         databaseService: databaseService,
         supportedTrainingScentProvider: SupportedTrainingScentProvider(),
       );
-    } catch (exception) {
-      Log.error(exception);
+    } catch (exception, stackTrace) {
+      Log.error(exception.toString());
+      Log.trace(stackTrace.toString());
       throw Exception(
-          "Fatal error: failed to create infrastructure: ${exception.toString()}.");
+        "An error occurred while trying to create the infrastructure.",
+      );
     }
   }
 

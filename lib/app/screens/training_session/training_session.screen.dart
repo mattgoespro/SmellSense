@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:smellsense/app/application/providers/infrastructure.provider.dart';
 import 'package:smellsense/app/screens/training_session/training_session_stepper.widget.dart';
 import 'package:smellsense/app/shared/modules/training_scent/training_scent.module.dart';
+import 'package:smellsense/app/shared/theme/theme.dart';
 
 class TrainingSessionScreenWidget extends StatefulWidget {
-  final List<TrainingScent> scents;
-
   const TrainingSessionScreenWidget({
     super.key,
-    required this.scents,
   });
 
   @override
@@ -19,13 +18,48 @@ class TrainingSessionScreenWidgetState
     extends State<TrainingSessionScreenWidget> {
   @override
   Widget build(BuildContext context) {
+    TextTheme textTheme = MaterialTheme.of(context).textTheme;
+
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(8),
-        child: TrainingSessionStepperWidget(
-          scents: widget.scents,
-        ),
-      ),
+          padding: const EdgeInsets.all(8),
+          child: FutureBuilder(
+            future: Infrastructure.of(context)
+                .databaseService
+                .getActiveTrainingScents(),
+            builder: (context, AsyncSnapshot<List<TrainingScent>> snapshot) {
+              // TODO: Handle loading state better
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+
+              // TODO: Handle error state
+              if (snapshot.hasError) {
+                return Center(
+                  child: Text(
+                    'Error: ${snapshot.error}',
+                    style: textTheme.headlineSmall,
+                  ),
+                );
+              }
+
+              // TODO: Handle this case better
+              if (snapshot.data == null || snapshot.data!.isEmpty) {
+                return Center(
+                  child: Text(
+                    'No training scents found.',
+                    style: MaterialTheme.of(context).textTheme.headlineSmall,
+                  ),
+                );
+              }
+
+              return TrainingSessionStepperWidget(
+                scents: snapshot.data!,
+              );
+            },
+          )),
     );
   }
 }

@@ -61,7 +61,7 @@ class ScentSelectionCheckboxGroupWidgetState
                 color: scent.displayColor,
                 fontWeight: FontWeight.w500,
               ),
-            ).tr(),
+            ),
             onChanged: (value) {
               setState(
                 () {

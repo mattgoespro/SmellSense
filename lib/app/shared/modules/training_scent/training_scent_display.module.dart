@@ -17,6 +17,6 @@ class TrainingScentDisplay {
 
   @override
   String toString() {
-    return "TrainingScentDisplay(name: $name, displayName: ${tr(displayName)}, displayColor: $displayColor, displayImage: $displayImage)";
+    return "TrainingScentDisplay(name: $name, displayName: ${"shared.scent_name.$displayName".tr()}, displayColor: $displayColor, displayImage: $displayImage)";
   }
 }

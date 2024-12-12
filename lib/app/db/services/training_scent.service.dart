@@ -7,7 +7,7 @@ import 'package:smellsense/app/db/smellsense.db.dart';
 import 'package:smellsense/app/shared/modules/training_period.module.dart';
 import 'package:smellsense/app/shared/modules/training_scent/training_scent.module.dart'
     show TrainingScent, TrainingScentName;
-import 'package:smellsense/app/shared/string_builder.dart';
+import 'package:smellsense/app/shared/stringbuilder.dart';
 
 class TrainingScentService {
   final SmellSenseDatabase db;
@@ -49,7 +49,7 @@ class TrainingScentService {
     }
   }
 
-  Future<List<TrainingScent>?> findTrainingScents(
+  Future<List<TrainingScent>> findTrainingScents(
     TrainingPeriod period,
   ) async {
     try {
