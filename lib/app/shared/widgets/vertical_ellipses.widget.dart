@@ -13,7 +13,7 @@ class VerticalEllipses extends StatelessWidget {
         width: 6,
         height: 6,
         decoration: BoxDecoration(
-          color: theme.colorScheme.primary.withOpacity(0.8),
+          color: theme.colorScheme.primary.withAlpha(80),
           shape: BoxShape.circle,
         ),
       ),

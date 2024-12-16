@@ -2,12 +2,11 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "debug: wi-fi device",
+      "name": "debug: device over usb",
       "type": "dart",
       "request": "launch",
       "program": "lib/main.dart",
       "deviceId": "SM A245F",
-      "flutterMode": "debug",
       "console": "debugConsole",
       "internalConsoleOptions": "openOnSessionStart",
       "presentation": {
@@ -16,10 +15,25 @@
       }
     },
     {
+      "name": "debug: device over wi-fi",
+      "type": "dart",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "deviceId": "SM A245F",
+      "console": "debugConsole",
+      "internalConsoleOptions": "openOnSessionStart",
+      "presentation": {
+        "group": "debug",
+        "order": 1
+      },
+      "preLaunchTask": "adb: connect to wifi device"
+    },
+    {
       "name": "debug: virtual device",
       "type": "dart",
       "request": "attach",
       "program": "lib/main.dart",
+      "internalConsoleOptions": "openOnSessionStart",
       "deviceId": "emulator-5554",
       "presentation": {
         "group": "debug",
@@ -27,17 +41,17 @@
       },
       "preLaunchTask": "adb: launch virtual device"
     },
-    {
-      "name": "debug: launch virtual device",
-      "type": "dart",
-      "request": "launch",
-      "program": "lib/main.dart",
-      "presentation": {
-        "group": "debug",
-        "order": 2
-      },
-      "internalConsoleOptions": "openOnSessionStart"
-    },
+    // {
+    //   "name": "debug: launch virtual device",
+    //   "type": "dart",
+    //   "request": "launch",
+    //   "program": "lib/main.dart",
+    //   "presentation": {
+    //     "group": "debug",
+    //     "order": 2
+    //   },
+    //   "internalConsoleOptions": "openOnSessionStart"
+    // },
     {
       "name": "test: integration",
       "type": "dart",

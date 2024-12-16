@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smellsense/app/application/providers/infrastructure.provider.dart';
 import 'package:smellsense/app/router.dart';
-import 'package:smellsense/app/shared/logger.dart';
 import 'package:smellsense/app/shared/widgets/loader.widget.dart';
 import 'package:smellsense/app/shared/theme/theme.dart';
 
@@ -32,17 +31,10 @@ class App extends StatelessWidget {
           supportedLocales: context.supportedLocales,
           locale: context.locale,
           builder: (context, child) {
-            return MultiProvider(
-              providers: [
-                Provider<Infrastructure>.value(
-                  value: context.watch<Infrastructure>(),
-                ),
-              ],
-              child: Container(
-                padding: const EdgeInsets.all(16),
-                color: theme.colorScheme.surface,
-                child: child,
-              ),
+            return Container(
+              padding: const EdgeInsets.all(16),
+              color: theme.colorScheme.surface,
+              child: child,
             );
           },
         );

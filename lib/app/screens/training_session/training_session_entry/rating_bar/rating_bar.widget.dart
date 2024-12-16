@@ -58,7 +58,7 @@ class RatingBarWidgetState extends State<RatingBarWidget>
       },
       glow: true,
       glowColor: Theme.of(context).primaryColor,
-      unratedColor: Theme.of(context).primaryColor.withOpacity(0.5),
+      unratedColor: Theme.of(context).primaryColor.withAlpha(50),
     );
   }
 }

@@ -17,7 +17,7 @@ final router = MaterialApp.router(
 );
 
 final routerConfig = GoRouter(
-  initialLocation: !kDebugMode ? '/splash-screen' : '/scent-selection',
+  initialLocation: !kDebugMode ? '/splash-screen' : '/select-scents',
   routes: [
     GoRoute(
       path: '/splash-screen',
@@ -42,7 +42,6 @@ final routerConfig = GoRouter(
         }
 
         return CustomTransitionPage(
-          maintainState: true,
           transitionDuration: const Duration(seconds: 1),
           transitionsBuilder: (
             context,

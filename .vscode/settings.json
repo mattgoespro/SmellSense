@@ -52,5 +52,20 @@
       "url": "https://codemagic.io/codemagic-schema.json"
     }
   ],
-  "terminal.integrated.defaultProfile.windows": "Git Bash"
+  "terminal.integrated.automationProfile.windows": {
+    "args": ["-l"],
+    "icon": "terminal-decoration-mark",
+    "overrideName": true,
+    "path": "C:\\Program Files\\Git\\bin\\bash.exe"
+  },
+  "terminal.integrated.defaultProfile.windows": "flutter-bash",
+  "terminal.integrated.profiles.windows": {
+    "flutter-bash": {
+      "args": ["-l"],
+      "icon": "terminal-linux",
+      "overrideName": true,
+      "path": "C:\\Program Files\\Git\\bin\\bash.exe"
+    }
+  },
+  "avdmanager.sdkPath": "c:\\Users\\Matt\\AppData\\Local\\Android\\Sdk"
 }

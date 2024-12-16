@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:smellsense/app/application/providers/infrastructure.provider.dart';
 import 'package:smellsense/app/screens/scent_selection/scent_selection_checkbox_group.widget.dart';
+import 'package:smellsense/app/shared/color.mixin.dart';
 import 'package:smellsense/app/shared/dateutils.dart';
 import 'package:smellsense/app/shared/logger.dart';
 import 'package:smellsense/app/shared/modules/training_scent/training_scent.module.dart';
@@ -31,41 +32,47 @@ class ScentSelectionScreenWidgetState
   Future<void> storeScentSelections() async {
     var infrastructure = Infrastructure.of(context);
 
-    try {
-      await infrastructure.databaseService.createTrainingPeriod(
-        DateTimeUtils.date(),
-        selectedScents
-            .map(
-              (scent) => TrainingScent(
-                id: uuid(),
-                name: scent,
-              ),
-            )
-            .toList(),
-      );
+    await infrastructure.databaseService.createTrainingPeriod(
+      DateTimeUtils.date(),
+      selectedScents
+          .map(
+            (scent) => TrainingScent(
+              id: uuid(),
+              name: scent,
+            ),
+          )
+          .toList(),
+    );
 
-      Log.trace('Training period created');
-    } catch (e) {
-      throw Exception('Error creating training period: $e');
-    }
+    Log.trace('Training period created');
   }
 
   void Function()? get onNextButtonPressed => isSelectionComplete()
       ? () async {
-          isSubmitting.value = true;
           try {
+            setState(() {
+              isSubmitting.value = true;
+            });
+
             await storeScentSelections();
-            if (context.mounted) {
+
+            if (mounted) {
               setState(() {
                 isSubmitting.value = false;
-                context.go('/');
               });
+              Log.debug('Navigating to home screen');
+              context.pushReplacement('/');
+            } else {
+              Log.error(
+                  'Tried to navigate to the home screen when the scent selection screen is no longer mounted!');
             }
           } catch (exception, stackTrace) {
             Log.error(exception);
             Log.trace(stackTrace);
           } finally {
-            isSubmitting.value = false;
+            setState(() {
+              isSubmitting.value = false;
+            });
           }
         }
       : null;
@@ -77,45 +84,56 @@ class ScentSelectionScreenWidgetState
 
     return Scaffold(
       body: Center(
-        child: Flex(
-          direction: Axis.vertical,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: Stack(
           children: [
-            Flexible(
-              flex: 1,
-              child: Text(
-                'screens.scent_selection.select_scents_headline'.tr(),
-                style: textTheme.headlineMedium,
-                textAlign: TextAlign.center,
-              ),
-            ),
-            Flexible(
-              flex: 4,
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
+            if (isSubmitting.value)
+              Container(
+                color: theme.colorScheme.surface.lighten(50),
+                child: const Center(
+                  child: CircularProgressIndicator(),
                 ),
-                child: ScentSelectionCheckboxGroupWidget(
-                  onSelectionChange: (List<TrainingScentName> scents) {
-                    setState(
-                      () {
-                        selectedScents = scents;
+              ),
+            Flex(
+              direction: Axis.vertical,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Flexible(
+                  flex: 1,
+                  child: Text(
+                    'screens.scent_selection.select_scents_headline'.tr(),
+                    style: textTheme.headlineMedium,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                Flexible(
+                  flex: 4,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: ScentSelectionCheckboxGroupWidget(
+                      onSelectionChange: (List<TrainingScentName> scents) {
+                        setState(
+                          () {
+                            selectedScents = scents;
+                          },
+                        );
                       },
-                    );
-                  },
+                    ),
+                  ),
                 ),
-              ),
+                Align(
+                  alignment: Alignment.bottomRight,
+                  child: OutlinedButton(
+                    onPressed: onNextButtonPressed,
+                    child: Text(
+                      'shared.next_button_text'.tr(),
+                    ),
+                  ),
+                )
+              ],
             ),
-            Align(
-              alignment: Alignment.bottomRight,
-              child: OutlinedButton(
-                onPressed: onNextButtonPressed,
-                child: Text(
-                  'shared.next_button_text'.tr(),
-                ),
-              ),
-            )
           ],
         ),
       ),

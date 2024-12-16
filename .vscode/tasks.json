@@ -6,7 +6,7 @@
       "detail": "Launch a virtual device.",
       "type": "shell",
       "command": "emulator",
-      "args": ["-avd", "Samsung_Galaxy_A24_API_34"],
+      "args": ["-avd", "medium_phone"],
       "isBackground": true,
       "group": {
         "kind": "test"
@@ -19,14 +19,12 @@
       "problemMatcher": [
         {
           "pattern": {
-            "regexp": "Boot completed in",
-            "location": 2,
+            "regexp": "^.*$",
             "message": 1
           },
           "background": {
-            "activeOnStart": true,
-            "beginsPattern": "^(INFO \\s+| Storing crashdata in: (.*))",
-            "endsPattern": "Boot completed in"
+            "beginsPattern": ".*",
+            "endsPattern": "^(INFO    \\| Boot completed in (\\d+) ms)$"
           }
         }
       ]
@@ -36,7 +34,6 @@
       "detail": "Connect to a device over Wi-Fi.",
       "type": "shell",
       "command": "./scripts/connect_wifi_device.sh",
-      "isBackground": true,
       "group": {
         "kind": "test",
         "isDefault": true
@@ -55,12 +52,7 @@
               "file": 1,
               "message": 2
             }
-          ],
-          "background": {
-            "activeOnStart": true,
-            "beginsPattern": "^\\[(.*)\\] Identified device with IP address: .*$",
-            "endsPattern": "^\\[(.*)\\] Press any key to exit\\.\\.\\.$"
-          }
+          ]
         }
       ]
     },

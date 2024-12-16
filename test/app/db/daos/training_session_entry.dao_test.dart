@@ -44,7 +44,7 @@ void main() {
           reason:
               "The found training session entries should have a length of 1.");
       expect(
-        retrievedSessionEntries![0],
+        retrievedSessionEntries[0],
         equals(testTrainingSessionEntryEntity),
         reason:
             "The found training session entry should be equal to the inserted training session entry.",

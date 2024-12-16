@@ -17,8 +17,8 @@ class SupportedTrainingScent {
 
   @JsonKey(
     name: "displayColor",
-    fromJson: _displayColorFromJson,
-    toJson: _displayColorToJson,
+    fromJson: _hexDisplayColorFromJson,
+    toJson: _hexDisplayColorToJson,
   )
   final Color displayColor;
 
@@ -41,10 +41,15 @@ class SupportedTrainingScent {
 
   static String _displayImageToJson(Image image) => image.image.toString();
 
-  static Color _displayColorFromJson(String color) => Color(int.parse(color));
+  static Color _hexDisplayColorFromJson(String color) =>
+      Color(int.parse(color));
 
-  static String _displayColorToJson(Color color) =>
-      color.value.toRadixString(16);
+  static String _hexDisplayColorToJson(Color color) => [
+        color.r.toInt().toRadixString(16),
+        color.g.toInt().toRadixString(16),
+        color.b.toInt().toRadixString(16),
+        color.a.toInt().toRadixString(16)
+      ].join();
 
   factory SupportedTrainingScent.fromJson(Map<String, String> json) =>
       _$SupportedTrainingScentFromJson(json);

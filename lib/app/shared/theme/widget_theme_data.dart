@@ -26,7 +26,7 @@ class WidgetThemeData {
           if (states.contains(WidgetState.disabled)) {
             return BorderSide(
               color: colorScheme.onSurface
-                  .withOpacity(0.4), // Grey color when disabled
+                  .withAlpha(40), // Grey color when disabled
               width: 1,
             );
           }
@@ -72,7 +72,7 @@ class WidgetThemeData {
 
             if (isDisabled) {
               return isChecked
-                  ? colorScheme.primaryContainer.withOpacity(0.8)
+                  ? colorScheme.primaryContainer.withAlpha(80)
                   : colorScheme.surfaceContainer;
             }
 

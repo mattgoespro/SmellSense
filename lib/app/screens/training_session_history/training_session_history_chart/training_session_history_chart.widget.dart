@@ -244,7 +244,7 @@ class TrainingSessionHistoryChartWidgetState
         Container(
           width: width,
           height: 10,
-          color: Colors.white.withOpacity(0.4),
+          color: Colors.white.withAlpha(40),
         ),
         const SizedBox(
           width: space,
@@ -252,7 +252,7 @@ class TrainingSessionHistoryChartWidgetState
         Container(
           width: width,
           height: 28,
-          color: Colors.white.withOpacity(0.8),
+          color: Colors.white.withAlpha(80),
         ),
         const SizedBox(
           width: space,
@@ -260,7 +260,7 @@ class TrainingSessionHistoryChartWidgetState
         Container(
           width: width,
           height: 42,
-          color: Colors.white.withOpacity(1),
+          color: Colors.white.withAlpha(100),
         ),
         const SizedBox(
           width: space,
@@ -268,7 +268,7 @@ class TrainingSessionHistoryChartWidgetState
         Container(
           width: width,
           height: 28,
-          color: Colors.white.withOpacity(0.8),
+          color: Colors.white.withAlpha(80),
         ),
         const SizedBox(
           width: space,
@@ -276,7 +276,7 @@ class TrainingSessionHistoryChartWidgetState
         Container(
           width: width,
           height: 10,
-          color: Colors.white.withOpacity(0.4),
+          color: Colors.white.withAlpha(40),
         ),
       ],
     );

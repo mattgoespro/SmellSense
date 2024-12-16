@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:logger/logger.dart' as dart_logger;
-import 'package:smellsense/app/shared/stringbuilder.dart';
 
 class AppLogPrinter extends dart_logger.PrettyPrinter {
   AppLogPrinter({

@@ -21,12 +21,8 @@
     "davidanson.vscode-markdownlint",
     "malo.copy-json-path",
     "ibm.output-colorizer",
-    "alefragnani.bookmarks",
-    "emeraldwalk.runonsave",
     "simonsiefke.svg-preview",
-    "vscjava.vscode-gradle",
     "alexisvt.flutter-snippets",
-    "jeroen-meijer.pubspec-assist",
     "eamodio.gitlens"
   ]
 }

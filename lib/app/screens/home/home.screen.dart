@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:smellsense/app/application/providers/infrastructure.provider.dart';
 import 'package:smellsense/app/generated/assets.gen.dart';
+import 'package:smellsense/app/shared/logger.dart';
 import 'package:smellsense/app/shared/modules/training_scent/training_scent.module.dart';
 
 class HomeScreenWidget extends StatefulWidget {
@@ -27,6 +28,7 @@ class HomeScreenWidgetState extends State<HomeScreenWidget> {
 
   @override
   Widget build(BuildContext context) {
+    Log.debug('Building HomeScreenWidget');
     var theme = Theme.of(context);
     var textTheme = theme.textTheme;
 

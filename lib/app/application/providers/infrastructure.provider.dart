@@ -30,7 +30,7 @@ class Infrastructure {
   static Future<Infrastructure> getInfrastructure() async {
     try {
       final databaseService = await DatabaseServiceProvider.create();
-      Log.trace(databaseService);
+
       return Infrastructure(
         databaseService: databaseService,
         supportedTrainingScentProvider: SupportedTrainingScentProvider(),
