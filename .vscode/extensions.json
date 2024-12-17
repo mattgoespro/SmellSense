@@ -23,6 +23,7 @@
     "ibm.output-colorizer",
     "simonsiefke.svg-preview",
     "alexisvt.flutter-snippets",
-    "eamodio.gitlens"
+    "eamodio.gitlens",
+    "djbkwon.flutter-dependency-docs"
   ]
 }

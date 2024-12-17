@@ -20,7 +20,9 @@ void main() async {
 
   runApp(
     EasyLocalization(
-      supportedLocales: const [Locale('en', 'US')],
+      supportedLocales: const [
+        Locale('en', 'US'),
+      ],
       path: 'assets/i18n',
       fallbackLocale: const Locale('en', 'US'),
       assetLoader: const JsonAssetLoader(),

@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:smellsense/app/screens/training_session/training_session_entry/training_session_entry.dart';
-import 'package:smellsense/app/shared/modules/training_session/training_session_entry_parosmia_reaction.module.dart';
 import 'package:smellsense/app/shared/modules/training_session/training_session_entry_rating.module.dart';
 import 'package:smellsense/app/shared/theme/theme.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class RatingBarWidget extends StatefulWidget {
-  static const Duration timerDuration = Duration(seconds: 15);
-
   const RatingBarWidget({
     super.key,
   });
@@ -18,9 +16,6 @@ class RatingBarWidget extends StatefulWidget {
 
 class RatingBarWidgetState extends State<RatingBarWidget>
     with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
-  bool busy = false;
-  String? currentEncouragement;
-
   @override
   bool get wantKeepAlive => true;
 
@@ -38,7 +33,8 @@ class RatingBarWidgetState extends State<RatingBarWidget>
         var option = TrainingSessionEntryRating.fromValue(rating.toInt());
 
         return Text(
-          "screens.training_session.training_session_entry.rating_bar.option.${option.rating}",
+          "screens.training_session.training_session_entry.rating_bar.option.${option.rating}"
+              .tr(),
           style: theme.textTheme.bodyMedium,
         );
       },
@@ -49,9 +45,6 @@ class RatingBarWidgetState extends State<RatingBarWidget>
           (entry) {
             entry.update(
               rating: TrainingSessionEntryRating.fromValue(rating.toInt()),
-              parosmiaReaction: TrainingSessionEntryParosmiaReaction.none,
-              parosmiaReactionSeverity:
-                  TrainingSessionEntryParosmiaSeverity.none,
             );
           },
         );

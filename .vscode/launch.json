@@ -29,17 +29,29 @@
       "preLaunchTask": "adb: connect to wifi device"
     },
     {
-      "name": "debug: virtual device",
+      "name": "debug: launch virtual device",
+      "type": "dart",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "internalConsoleOptions": "openOnSessionStart",
+      "presentation": {
+        "group": "debug",
+        "order": 1
+      }
+    },
+    {
+      "name": "debug: attach to existing virtual device",
       "type": "dart",
       "request": "attach",
       "program": "lib/main.dart",
+      "args": ["-gpu", "host"],
       "internalConsoleOptions": "openOnSessionStart",
       "deviceId": "emulator-5554",
       "presentation": {
         "group": "debug",
         "order": 1
-      },
-      "preLaunchTask": "adb: launch virtual device"
+      }
+      // "preLaunchTask": "adb: launch virtual device"
     },
     // {
     //   "name": "debug: launch virtual device",
