@@ -2,25 +2,13 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "debug: device over usb",
-      "type": "dart",
-      "request": "launch",
-      "program": "lib/main.dart",
-      "deviceId": "SM A245F",
-      "console": "debugConsole",
-      "internalConsoleOptions": "openOnSessionStart",
-      "presentation": {
-        "group": "debug",
-        "order": 1
-      }
-    },
-    {
       "name": "debug: device over wi-fi",
       "type": "dart",
       "request": "launch",
       "program": "lib/main.dart",
       "deviceId": "SM A245F",
       "console": "debugConsole",
+      "flutterMode": "debug",
       "internalConsoleOptions": "openOnSessionStart",
       "presentation": {
         "group": "debug",
@@ -29,7 +17,7 @@
       "preLaunchTask": "adb: connect to wifi device"
     },
     {
-      "name": "debug: launch virtual device",
+      "name": "dart: launch virtual device",
       "type": "dart",
       "request": "launch",
       "program": "lib/main.dart",
@@ -39,31 +27,6 @@
         "order": 1
       }
     },
-    {
-      "name": "debug: attach to existing virtual device",
-      "type": "dart",
-      "request": "attach",
-      "program": "lib/main.dart",
-      "args": ["-gpu", "host"],
-      "internalConsoleOptions": "openOnSessionStart",
-      "deviceId": "emulator-5554",
-      "presentation": {
-        "group": "debug",
-        "order": 1
-      }
-      // "preLaunchTask": "adb: launch virtual device"
-    },
-    // {
-    //   "name": "debug: launch virtual device",
-    //   "type": "dart",
-    //   "request": "launch",
-    //   "program": "lib/main.dart",
-    //   "presentation": {
-    //     "group": "debug",
-    //     "order": 2
-    //   },
-    //   "internalConsoleOptions": "openOnSessionStart"
-    // },
     {
       "name": "test: integration",
       "type": "dart",

@@ -5,7 +5,7 @@ import 'package:smellsense/app/db/smellsense.db.dart';
 import 'package:smellsense/app/shared/modules/training_period.module.dart';
 import 'package:smellsense/app/shared/modules/training_session/training_session.module.dart';
 import 'package:smellsense/app/shared/modules/training_session/training_session_entry.module.dart';
-import 'package:smellsense/app/shared/stringbuilder.dart';
+import 'package:smellsense/app/shared/utils/stringbuilder.dart';
 
 class TrainingSessionService {
   final SmellSenseDatabase db;

@@ -1,4 +1,4 @@
-import 'package:smellsense/app/shared/dateutils.dart';
+import 'package:smellsense/app/shared/utils/datetimeutils.dart';
 import 'package:smellsense/app/shared/modules/training_session/training_session.module.dart';
 
 import 'training_session_entry.data.dart';

@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:smellsense/app/application/providers/database_service.provider.dart';
 import 'package:smellsense/app/application/providers/supported_training_scent.provider.dart';
 import 'package:smellsense/app/db/services/database.service.dart';
-import 'package:smellsense/app/shared/logger.dart';
+import 'package:smellsense/app/shared/utils/logger.dart';
 
 class Infrastructure {
   late final DatabaseService databaseService;
@@ -36,8 +36,8 @@ class Infrastructure {
         supportedTrainingScentProvider: SupportedTrainingScentProvider(),
       );
     } catch (exception, stackTrace) {
-      Log.error(exception.toString());
-      Log.trace(stackTrace.toString());
+      Output.error(exception.toString());
+      Output.trace(stackTrace.toString());
       throw Exception(
         "An error occurred while trying to create the infrastructure.",
       );

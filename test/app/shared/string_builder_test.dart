@@ -1,10 +1,7 @@
-///
-/// Test the StringBuilder class
-///
 library;
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:smellsense/app/shared/stringbuilder.dart';
+import 'package:smellsense/app/shared/utils/stringbuilder.dart';
 
 void main() {
   group('StringBuilder', () {

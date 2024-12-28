@@ -14,7 +14,7 @@ import 'package:smellsense/app/db/entities/training_scent.entity.dart';
 import 'package:smellsense/app/db/entities/training_session.entity.dart';
 import 'package:smellsense/app/db/entities/training_session_entry.entity.dart';
 import 'package:smellsense/app/db/type-converters/datetime.type_converter.dart';
-import 'package:smellsense/app/shared/stringbuilder.dart';
+import 'package:smellsense/app/shared/utils/stringbuilder.dart';
 import 'package:sqflite/sqflite.dart'
     as sqflite; // generated `floor` SQLite database part uses aliased sqflite import under the hood
 

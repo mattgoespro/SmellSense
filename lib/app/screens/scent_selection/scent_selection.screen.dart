@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:smellsense/app/application/providers/infrastructure.provider.dart';
 import 'package:smellsense/app/screens/scent_selection/scent_selection_checkbox_group.widget.dart';
-import 'package:smellsense/app/shared/color.mixin.dart';
-import 'package:smellsense/app/shared/dateutils.dart';
-import 'package:smellsense/app/shared/logger.dart';
 import 'package:smellsense/app/shared/modules/training_scent/training_scent.module.dart';
 import 'package:smellsense/app/shared/theme/theme.dart';
-import 'package:smellsense/app/shared/utils.dart';
+import 'package:smellsense/app/shared/utils/colorutils.mixin.dart';
+import 'package:smellsense/app/shared/utils/datetimeutils.dart';
+import 'package:smellsense/app/shared/utils/logger.dart';
+import 'package:smellsense/app/shared/utils/utils.dart';
 
 class ScentSelectionScreenWidget extends StatefulWidget {
   static int maxSelectionCount = 4;
@@ -44,7 +44,7 @@ class ScentSelectionScreenWidgetState
           .toList(),
     );
 
-    Log.trace('Training period created');
+    Output.trace('Training period created');
   }
 
   void Function()? get onNextButtonPressed => isSelectionComplete()
@@ -60,15 +60,16 @@ class ScentSelectionScreenWidgetState
               setState(() {
                 isSubmitting.value = false;
               });
-              Log.debug('Navigating to home screen');
-              context.pushReplacement('/');
+              Output.debug('Navigating to home screen');
+              context.pushReplacementNamed('training-session-history');
             } else {
-              Log.error(
-                  'Tried to navigate to the home screen when the scent selection screen is no longer mounted!');
+              Output.error(
+                'Tried to navigate to the home screen when the scent selection screen is no longer mounted!',
+              );
             }
           } catch (exception, stackTrace) {
-            Log.error(exception);
-            Log.trace(stackTrace);
+            Output.error(exception);
+            Output.trace(stackTrace);
           } finally {
             setState(() {
               isSubmitting.value = false;
@@ -88,7 +89,7 @@ class ScentSelectionScreenWidgetState
           children: [
             if (isSubmitting.value)
               Container(
-                color: theme.colorScheme.surface.lighten(50),
+                color: theme.colorScheme.surface.lightenPercent(50),
                 child: const Center(
                   child: CircularProgressIndicator(),
                 ),

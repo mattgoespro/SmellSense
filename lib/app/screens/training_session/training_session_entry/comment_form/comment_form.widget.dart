@@ -2,10 +2,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:smellsense/app/generated/assets.gen.dart';
 import 'package:smellsense/app/shared/modules/training_session/training_session_entry_parosmia_reaction.module.dart';
-import 'package:smellsense/app/shared/utils.dart';
+import 'package:smellsense/app/shared/utils/utils.dart';
 
 class CommentFormWidget extends StatefulWidget {
-  final FormMode mode;
+  final WidgetFormMode mode;
 
   const CommentFormWidget({
     super.key,

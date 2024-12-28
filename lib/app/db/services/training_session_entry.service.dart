@@ -7,7 +7,7 @@ import 'package:smellsense/app/shared/modules/training_scent/training_scent.modu
 import 'package:smellsense/app/shared/modules/training_session/training_session_entry.module.dart';
 import 'package:smellsense/app/shared/modules/training_session/training_session_entry_parosmia_reaction.module.dart';
 import 'package:smellsense/app/shared/modules/training_session/training_session_entry_rating.module.dart';
-import 'package:smellsense/app/shared/stringbuilder.dart';
+import 'package:smellsense/app/shared/utils/stringbuilder.dart';
 import 'package:smellsense/app/assets/supported_training_scent.dart';
 
 class TrainingSessionEntryService {

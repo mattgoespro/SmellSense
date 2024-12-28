@@ -4,10 +4,10 @@ import 'package:smellsense/app/db/daos/training_scent.dao.dart';
 import 'package:smellsense/app/db/entities/training_period.entity.dart';
 import 'package:smellsense/app/db/services/training_session.service.dart';
 import 'package:smellsense/app/db/smellsense.db.dart';
-import 'package:smellsense/app/shared/dateutils.dart';
 import 'package:smellsense/app/shared/modules/training_period.module.dart';
 import 'package:smellsense/app/shared/modules/training_session/training_session.module.dart';
-import 'package:smellsense/app/shared/stringbuilder.dart';
+import 'package:smellsense/app/shared/utils/datetimeutils.dart';
+import 'package:smellsense/app/shared/utils/stringbuilder.dart';
 
 class TrainingPeriodService {
   final SmellSenseDatabase db;

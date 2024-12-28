@@ -7,7 +7,7 @@ import 'package:smellsense/app/screens/training_session/training_session_entry/t
 import 'package:smellsense/app/screens/training_session/training_session_entry/timer/timer_encouragements.module.dart';
 import 'package:smellsense/app/shared/modules/training_scent/training_scent.module.dart';
 import 'package:smellsense/app/shared/modules/training_session/training_session_entry.module.dart';
-import 'package:smellsense/app/shared/utils.dart';
+import 'package:smellsense/app/shared/utils/utils.dart';
 
 class TrainingSessionEntryWidget extends StatefulWidget {
   static const Duration timerDuration = Duration(seconds: 15);
@@ -65,7 +65,7 @@ class TrainingSessionEntryWidgetState extends State<TrainingSessionEntryWidget>
                   ),
                   const RatingBarWidget(),
                   const CommentFormWidget(
-                    mode: FormMode.fill,
+                    mode: WidgetFormMode.fill,
                   ),
                 ],
               ),

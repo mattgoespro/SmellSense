@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smellsense/app/shared/theme/theme.dart';
-import 'package:smellsense/app/shared/color.mixin.dart';
+import 'package:smellsense/app/shared/utils/colorutils.mixin.dart';
 
 class LoaderWidget extends StatefulWidget {
   const LoaderWidget({super.key});
@@ -25,7 +25,7 @@ class _LoaderWidgetState extends State<LoaderWidget>
     )..repeat();
     _animation = ColorTween(
       begin: theme.colorScheme.primary,
-      end: theme.colorScheme.primary.darken(50),
+      end: theme.colorScheme.primary.darkenPercent(50),
     ).animate(
       CurvedAnimation(
         parent: _colorAnimationController,

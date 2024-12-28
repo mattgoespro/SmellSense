@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:smellsense/app/shared/color.mixin.dart';
+import 'package:smellsense/app/shared/utils/colorutils.mixin.dart';
 
 TextTheme createTextTheme(
   BuildContext context,
@@ -20,11 +20,11 @@ TextTheme createTextTheme(
     headlineSmall: displayTextStyle.copyWith(
       fontSize: 18,
       fontWeight: FontWeight.w100,
-      color: Theme.of(context).colorScheme.onSurfaceVariant.lighten(10),
+      color: Theme.of(context).colorScheme.onSurfaceVariant.lightenPercent(10),
     ),
     headlineMedium: displayTextStyle.copyWith(
       fontSize: 24,
-      color: Theme.of(context).colorScheme.onSurfaceVariant.lighten(15),
+      color: Theme.of(context).colorScheme.onSurfaceVariant.lightenPercent(15),
       fontWeight: FontWeight.normal,
     ),
     headlineLarge: displayTextStyle.copyWith(

@@ -1,6 +1,6 @@
 import 'package:floor/floor.dart';
 import 'package:smellsense/app/db/entities/training_session_entry.entity.dart';
-import 'package:smellsense/app/shared/stringbuilder.dart';
+import 'package:smellsense/app/shared/utils/stringbuilder.dart';
 
 @dao
 abstract class TrainingSessionEntryDao {

@@ -1,6 +1,6 @@
 import 'package:intl/intl.dart' show DateFormat;
 
-class DateTimeUtils {
+extension DateTimeUtils on DateTime {
   static final dateFormatter = DateFormat("yMMMEd");
 
   static DateTime date() {

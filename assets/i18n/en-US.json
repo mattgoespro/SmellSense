@@ -1,11 +1,5 @@
 {
   "screens": {
-    "home": {
-      "about_menu_button": "About",
-      "help_menu_button": "Help",
-      "train_menu_button": "Start Training",
-      "training_history_menu_button": "View Training Progress"
-    },
     "scent_selection": {
       "scent_selection_checkbox_group": {
         "selection_limit_reached_snackbar_message": "You can only select up to 4 scents"

@@ -1,7 +1,7 @@
 import 'package:smellsense/app/application/providers/supported_training_scent.provider.dart';
 import 'package:smellsense/app/db/services/database.service.dart';
 import 'package:smellsense/app/db/smellsense.db.dart';
-import 'package:smellsense/app/shared/logger.dart';
+import 'package:smellsense/app/shared/utils/logger.dart';
 
 class DatabaseServiceProvider {
   static const String dbName = 'smellsense_database.db';
@@ -22,7 +22,7 @@ class DatabaseServiceProvider {
         .databaseBuilder(DatabaseServiceProvider.dbName)
         .build();
 
-    Log.trace('Database created.');
+    Output.trace('Database created.');
 
     return DatabaseService(
       db: db,

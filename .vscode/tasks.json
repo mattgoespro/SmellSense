@@ -47,9 +47,10 @@
         {
           "pattern": [
             {
-              "regexp": "^\\[(.*)\\] Error: (.*)$",
-              "line": 0,
+              "regexp": "^\\[(.*?)\\] Error: (.*)$",
               "file": 1,
+              "line": 2,
+              "column": 3,
               "message": 2
             }
           ]

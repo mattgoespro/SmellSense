@@ -1,5 +1,5 @@
 import 'package:smellsense/app/db/entities/training_session.entity.dart';
-import 'package:smellsense/app/shared/dateutils.dart';
+import 'package:smellsense/app/shared/utils/datetimeutils.dart';
 
 import 'training_period.entity.data.dart';
 

@@ -4,10 +4,6 @@
 # Connects an Android device to the host machine over Wi-Fi.
 ##
 
-function usage() {
-    echo "Usage: connect_device.sh [-d <wifi|vm>]"
-}
-
 function configure_adb_over_wifi() {
     local connection_port="$1"
 
@@ -70,7 +66,5 @@ if ! connect_wireless_device; then
 fi
 
 echo -e "\n[connect_device] Success."
-
-read -r -p "[connect_device] Press any key to exit..."
 
 exit 0

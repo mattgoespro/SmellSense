@@ -1,5 +1,5 @@
 import 'package:floor/floor.dart';
-import 'package:smellsense/app/shared/dateutils.dart';
+import 'package:smellsense/app/shared/utils/datetimeutils.dart';
 
 class DateTimeTypeConverter extends TypeConverter<DateTime, int> {
   @override
