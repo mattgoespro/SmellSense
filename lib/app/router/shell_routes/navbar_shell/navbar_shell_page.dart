@@ -33,39 +33,34 @@ class NavBarShellPage extends StatelessWidget {
     final int selectedIndex = getCurrentIndex(context);
 
     return Scaffold(
-      body: Row(
-        children: <Widget>[
-          NavigationRail(
-            destinations: const <NavigationRailDestination>[
-              NavigationRailDestination(
-                icon: Icon(Icons.home),
-                label: Text('Training Session History'),
-              ),
-              NavigationRailDestination(
-                icon: Icon(Icons.group),
-                label: Text('Help'),
-              ),
-              NavigationRailDestination(
-                icon: Icon(Icons.info),
-                label: Text('About'),
-              ),
-            ],
-            selectedIndex: selectedIndex,
-            onDestinationSelected: (int index) {
-              switch (index) {
-                case 0:
-                  TrainingSessionHistoryRouteData().go(context);
-                case 1:
-                  HelpRouteData().go(context);
-                case 2:
-                  AboutRouteData().go(context);
-              }
-            },
+      bottomNavigationBar: NavigationBar(
+        destinations: const <NavigationDestination>[
+          NavigationDestination(
+            icon: Icon(Icons.home),
+            label: 'Training Session History',
           ),
-          const VerticalDivider(thickness: 1, width: 1),
-          Expanded(child: child),
+          NavigationDestination(
+            icon: Icon(Icons.question_mark_rounded),
+            label: 'Help',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.info),
+            label: 'About',
+          ),
         ],
+        selectedIndex: selectedIndex,
+        onDestinationSelected: (int index) {
+          switch (index) {
+            case 0:
+              TrainingSessionHistoryRouteData().go(context);
+            case 1:
+              HelpRouteData().go(context);
+            case 2:
+              AboutRouteData().go(context);
+          }
+        },
       ),
+      body: child,
     );
   }
 }
