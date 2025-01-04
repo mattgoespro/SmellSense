@@ -1,8 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:smellsense/app/application/providers/infrastructure.provider.dart';
+import 'package:smellsense/app/router/router_route_data.dart';
 import 'package:smellsense/app/screens/scent_selection/scent_selection_checkbox_group.widget.dart';
+import 'package:smellsense/app/screens/training_session_history/training_session_history.route.dart';
 import 'package:smellsense/app/shared/modules/training_scent/training_scent.module.dart';
 import 'package:smellsense/app/shared/theme/theme.dart';
 import 'package:smellsense/app/shared/utils/colorutils.mixin.dart';
@@ -60,13 +61,14 @@ class ScentSelectionScreenWidgetState
               setState(() {
                 isSubmitting.value = false;
               });
-              Output.debug('Navigating to home screen');
-              context.pushReplacementNamed('training-session-history');
-            } else {
-              Output.error(
-                'Tried to navigate to the home screen when the scent selection screen is no longer mounted!',
-              );
+
+              TrainingSessionHistoryRouteData().go(context);
+              return;
             }
+
+            Output.error(
+              'Tried to navigate to the home screen when the scent selection screen is no longer mounted!',
+            );
           } catch (exception, stackTrace) {
             Output.error(exception);
             Output.trace(stackTrace);

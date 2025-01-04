@@ -45,6 +45,15 @@
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
   "files.eol": "\n",
+  "files.exclude": {
+    ".git": true,
+    ".dart_tool": true
+  },
+  "search.exclude": {
+    "**/.idea": true,
+    "**/.vscode": true,
+    "**/build": true
+  },
   "json.schemas": [
     {
       "description": "Codemagic CI/CD file configuration",
@@ -66,6 +75,5 @@
       "overrideName": true,
       "path": "C:\\Program Files\\Git\\bin\\bash.exe"
     }
-  },
-  "avdmanager.sdkPath": "c:\\Users\\Matt\\AppData\\Local\\Android\\Sdk"
+  }
 }

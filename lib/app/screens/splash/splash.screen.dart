@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:smellsense/app/generated/assets.gen.dart';
+import 'package:smellsense/app/assets/generated/assets.gen.dart';
 import 'package:smellsense/app/shared/widgets/animators/scale.animator.widget.dart';
-
 import '../../shared/widgets/animators/fade.animator.widget.dart';
 
 class SplashScreenWidget extends StatefulWidget {
@@ -38,8 +37,8 @@ class _SplashScreenWidgetState extends State<SplashScreenWidget>
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Assets.images.branding.logo.image(
-                width: 200,
-                height: 200,
+                width: 100,
+                height: 100,
               ),
               RichText(
                 textAlign: TextAlign.center,
@@ -47,11 +46,11 @@ class _SplashScreenWidgetState extends State<SplashScreenWidget>
                   children: [
                     TextSpan(
                       text: "Smell",
-                      style: theme.textTheme.bodyMedium,
+                      style: theme.textTheme.titleSmall,
                     ),
                     TextSpan(
                       text: "Sense",
-                      style: theme.textTheme.titleMedium!.copyWith(
+                      style: theme.textTheme.titleSmall!.copyWith(
                         fontWeight: FontWeight.bold,
                         color: theme.colorScheme.primary,
                       ),

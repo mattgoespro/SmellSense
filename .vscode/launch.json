@@ -2,6 +2,17 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "debug: virtual device",
+      "type": "dart",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "internalConsoleOptions": "openOnSessionStart",
+      "presentation": {
+        "group": "debug",
+        "order": 1
+      }
+    },
+    {
       "name": "debug: device over wi-fi",
       "type": "dart",
       "request": "launch",
@@ -12,20 +23,9 @@
       "internalConsoleOptions": "openOnSessionStart",
       "presentation": {
         "group": "debug",
-        "order": 1
+        "order": 2
       },
       "preLaunchTask": "adb: connect to wifi device"
-    },
-    {
-      "name": "dart: launch virtual device",
-      "type": "dart",
-      "request": "launch",
-      "program": "lib/main.dart",
-      "internalConsoleOptions": "openOnSessionStart",
-      "presentation": {
-        "group": "debug",
-        "order": 1
-      }
     },
     {
       "name": "test: integration",
