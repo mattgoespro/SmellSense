@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:smellsense/app/assets/generated/assets.gen.dart';
+import 'package:smellsense/app/pages/scent_selection/scent_selection.route.dart';
+import 'package:smellsense/app/router/router_route_data.dart';
+import 'package:smellsense/app/shared/widgets/animators/fade.animator.widget.dart';
 import 'package:smellsense/app/shared/widgets/animators/scale.animator.widget.dart';
-import '../../shared/widgets/animators/fade.animator.widget.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -63,7 +64,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
       ),
       FadeAnimate(
         onComplete: () {
-          context.go("/scent-selection");
+          ScentSelectionRouteData().go(context);
         },
         fadeInDuration: const Duration(milliseconds: 2000),
         idleDuration: const Duration(seconds: 2),
