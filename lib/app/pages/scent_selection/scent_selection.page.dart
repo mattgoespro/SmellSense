@@ -2,8 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:smellsense/app/application/providers/infrastructure.provider.dart';
 import 'package:smellsense/app/router/router_route_data.dart';
-import 'package:smellsense/app/screens/scent_selection/scent_selection_checkbox_group.widget.dart';
-import 'package:smellsense/app/screens/training_session_history/training_session_history.route.dart';
+import 'package:smellsense/app/pages/scent_selection/scent_selection_checkbox_group.widget.dart';
+import 'package:smellsense/app/pages/training_session_history/training_session_history.route.dart';
 import 'package:smellsense/app/shared/modules/training_scent/training_scent.module.dart';
 import 'package:smellsense/app/shared/theme/theme.dart';
 import 'package:smellsense/app/shared/utils/colorutils.mixin.dart';
@@ -11,18 +11,16 @@ import 'package:smellsense/app/shared/utils/datetimeutils.dart';
 import 'package:smellsense/app/shared/utils/logger.dart';
 import 'package:smellsense/app/shared/utils/utils.dart';
 
-class ScentSelectionScreenWidget extends StatefulWidget {
+class ScentSelectionPage extends StatefulWidget {
   static int maxSelectionCount = 4;
 
-  const ScentSelectionScreenWidget({super.key});
+  const ScentSelectionPage({super.key});
 
   @override
-  ScentSelectionScreenWidgetState createState() =>
-      ScentSelectionScreenWidgetState();
+  ScentSelectionPageState createState() => ScentSelectionPageState();
 }
 
-class ScentSelectionScreenWidgetState
-    extends State<ScentSelectionScreenWidget> {
+class ScentSelectionPageState extends State<ScentSelectionPage> {
   List<TrainingScentName> selectedScents = [];
   ValueNotifier<bool> isSubmitting = ValueNotifier(false);
 

@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:smellsense/app/application/providers/infrastructure.provider.dart';
-import 'package:smellsense/app/screens/training_session/training_session_stepper.widget.dart';
+import 'package:smellsense/app/pages/training_session/training_session_stepper.widget.dart';
 import 'package:smellsense/app/shared/modules/training_scent/training_scent.module.dart';
 import 'package:smellsense/app/shared/theme/theme.dart';
 
-class TrainingSessionScreenWidget extends StatefulWidget {
-  const TrainingSessionScreenWidget({
+class TrainingSessionPage extends StatefulWidget {
+  const TrainingSessionPage({
     super.key,
   });
 
   @override
-  TrainingSessionScreenWidgetState createState() =>
-      TrainingSessionScreenWidgetState();
+  TrainingSessionPageState createState() => TrainingSessionPageState();
 }
 
-class TrainingSessionScreenWidgetState
-    extends State<TrainingSessionScreenWidget> {
+class TrainingSessionPageState extends State<TrainingSessionPage> {
   @override
   Widget build(BuildContext context) {
     TextTheme textTheme = MaterialTheme.of(context).textTheme;

@@ -1,10 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:smellsense/app/assets/generated/assets.gen.dart';
-import 'package:smellsense/app/screens/training_session/training_session_entry/comment_form/comment_form.widget.dart';
-import 'package:smellsense/app/screens/training_session/training_session_entry/rating_bar/rating_bar.widget.dart';
-import 'package:smellsense/app/screens/training_session/training_session_entry/timer/timer.widget.dart';
-import 'package:smellsense/app/screens/training_session/training_session_entry/timer/timer_encouragements.module.dart';
+import 'package:smellsense/app/pages/training_session/training_session_entry/comment_form/comment_form.widget.dart';
+import 'package:smellsense/app/pages/training_session/training_session_entry/rating_bar/rating_bar.widget.dart';
+import 'package:smellsense/app/pages/training_session/training_session_entry/timer/timer.widget.dart';
+import 'package:smellsense/app/pages/training_session/training_session_entry/timer/timer_encouragements.module.dart';
 import 'package:smellsense/app/shared/modules/training_scent/training_scent.module.dart';
 import 'package:smellsense/app/shared/modules/training_session/training_session_entry.module.dart';
 import 'package:smellsense/app/shared/utils/utils.dart';

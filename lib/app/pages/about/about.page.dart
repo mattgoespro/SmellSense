@@ -2,14 +2,14 @@ import 'package:flutter/gestures.dart' show TapGestureRecognizer;
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart' show launchUrl;
 
-class AboutScreenWidget extends StatefulWidget {
-  const AboutScreenWidget({super.key});
+class AboutPage extends StatefulWidget {
+  const AboutPage({super.key});
 
   @override
-  AboutScreenWidgetState createState() => AboutScreenWidgetState();
+  AboutPageState createState() => AboutPageState();
 }
 
-class AboutScreenWidgetState extends State<AboutScreenWidget> {
+class AboutPageState extends State<AboutPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

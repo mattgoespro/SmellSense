@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:smellsense/app/router/shell_routes/navbar_shell/navbar_shell_page_route_data.dart';
 import 'package:smellsense/app/router/shell_routes/simple_shell/simple_shell_page_route_data.dart';
-import 'package:smellsense/app/screens/about/about.route.dart';
-import 'package:smellsense/app/screens/help/help.route.dart';
-import 'package:smellsense/app/screens/scent_selection/scent_selection.route.dart';
-import 'package:smellsense/app/screens/splash/splash.route.dart';
-import 'package:smellsense/app/screens/training_session/training_session.route.dart';
-import 'package:smellsense/app/screens/training_session_history/training_session_history.route.dart';
+import 'package:smellsense/app/pages/about/about.route.dart';
+import 'package:smellsense/app/pages/help/help.route.dart';
+import 'package:smellsense/app/pages/scent_selection/scent_selection.route.dart';
+import 'package:smellsense/app/pages/splash/splash.route.dart';
+import 'package:smellsense/app/pages/training_session/training_session.route.dart';
+import 'package:smellsense/app/pages/training_session_history/training_session_history.route.dart';
 
 part 'router_route_data.g.dart';
 

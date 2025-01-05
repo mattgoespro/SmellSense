@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:smellsense/app/router/router_route_data.dart';
-import 'package:smellsense/app/screens/about/about.route.dart';
-import 'package:smellsense/app/screens/help/help.route.dart';
-import 'package:smellsense/app/screens/training_session_history/training_session_history.route.dart';
+import 'package:smellsense/app/pages/about/about.route.dart';
+import 'package:smellsense/app/pages/help/help.route.dart';
+import 'package:smellsense/app/pages/training_session_history/training_session_history.route.dart';
 
 class NavBarShellPage extends StatelessWidget {
   final Widget child;
@@ -37,15 +37,15 @@ class NavBarShellPage extends StatelessWidget {
         destinations: const <NavigationDestination>[
           NavigationDestination(
             icon: Icon(Icons.home),
-            label: 'Training Session History',
+            label: '',
           ),
           NavigationDestination(
             icon: Icon(Icons.question_mark_rounded),
-            label: 'Help',
+            label: '',
           ),
           NavigationDestination(
             icon: Icon(Icons.info),
-            label: 'About',
+            label: '',
           ),
         ],
         selectedIndex: selectedIndex,

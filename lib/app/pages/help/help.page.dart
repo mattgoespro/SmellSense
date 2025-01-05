@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart'
     show HtmlWidget;
 
-class HelpScreenWidget extends StatelessWidget {
-  const HelpScreenWidget({super.key});
+class HelpScreenPage extends StatelessWidget {
+  const HelpScreenPage({super.key});
 
   final String _helpInfo = """
   <div style="font-family: Roboto">

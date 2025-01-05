@@ -4,15 +4,14 @@ import 'package:smellsense/app/assets/generated/assets.gen.dart';
 import 'package:smellsense/app/shared/widgets/animators/scale.animator.widget.dart';
 import '../../shared/widgets/animators/fade.animator.widget.dart';
 
-class SplashScreenWidget extends StatefulWidget {
-  const SplashScreenWidget({super.key});
+class SplashPage extends StatefulWidget {
+  const SplashPage({super.key});
 
   @override
-  State<SplashScreenWidget> createState() => _SplashScreenWidgetState();
+  State<SplashPage> createState() => _SplashPageState();
 }
 
-class _SplashScreenWidgetState extends State<SplashScreenWidget>
-    with TickerProviderStateMixin {
+class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   int _currentStep = 0;
 
   @override
