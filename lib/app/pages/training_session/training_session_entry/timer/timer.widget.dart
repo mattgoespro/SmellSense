@@ -80,7 +80,7 @@ class TimerWidgetState extends State<TimerWidget>
                 controller.reset();
               },
               child: const Text(
-                  'screens.training_session.training_session_entry.training_session_entry_timer.'),
+                  'pages.training_session.training_session_entry.training_session_entry_timer.'),
             ),
         ],
       ),

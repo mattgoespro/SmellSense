@@ -22,21 +22,21 @@
     "editor.formatOnPaste": true,
     "editor.formatOnSave": true
   },
-  "dart.analysisExcludedFolders": [
-    ".config/",
-    ".dart_tool/",
-    ".git/",
-    ".idea/",
-    ".vscode/",
-    "android/",
-    "assets/",
-    "build/",
-    "coverage/",
-    "ios/",
-    "scripts/",
-    "tools/"
-  ],
-  "dart.debugSdkLibraries": true,
+  // "dart.analysisExcludedFolders": [
+  //   ".config/",
+  //   ".dart_tool/",
+  //   ".git/",
+  //   ".idea/",
+  //   ".vscode/",
+  //   "android/",
+  //   "assets/",
+  //   "build/",
+  //   "coverage/",
+  //   "ios/",
+  //   "scripts/",
+  //   "tools/"
+  // ],
+  // "dart.debugSdkLibraries": true,
   "dart.lineLength": 80,
   "dart.showTodos": false,
   "editor.codeActionsOnSave": {

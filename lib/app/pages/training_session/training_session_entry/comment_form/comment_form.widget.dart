@@ -33,10 +33,10 @@ class _CommentFormWidgetState extends State<CommentFormWidget> {
           ],
           decoration: InputDecoration(
             labelText:
-                'screens.training_session.training_session_entry.comment_form.parosmia_reaction_field_label'
+                'pages.training_session.training_session_entry.comment_form.parosmia_reaction_field_label'
                     .tr(),
             hintText:
-                'screens.training_session.training_session_entry.comment_form.parosmia_reaction_field_hint'
+                'pages.training_session.training_session_entry.comment_form.parosmia_reaction_field_hint'
                     .tr(),
           ),
           onChanged: (int? value) {
@@ -63,10 +63,10 @@ class _CommentFormWidgetState extends State<CommentFormWidget> {
           ],
           decoration: InputDecoration(
             labelText:
-                'screens.training_session.training_session_entry.comment_form.parosmia_reaction_severity_field_label'
+                'pages.training_session.training_session_entry.comment_form.parosmia_reaction_severity_field_label'
                     .tr(),
             hintText:
-                'screens.training_session.training_session_entry.comment_form.parosmia_reaction_severity_field_hint'
+                'pages.training_session.training_session_entry.comment_form.parosmia_reaction_severity_field_hint'
                     .tr(),
           ),
           onChanged: (int? value) {
@@ -79,10 +79,10 @@ class _CommentFormWidgetState extends State<CommentFormWidget> {
         builder: (FormFieldState<dynamic> field) => TextFormField(
           decoration: InputDecoration(
             labelText:
-                'screens.training_session.training_session_entry.comment_form.additional_comments_field_label'
+                'pages.training_session.training_session_entry.comment_form.additional_comments_field_label'
                     .tr(),
             hintText:
-                'screens.training_session.training_session_entry.comment_form.additional_comments_field_hint'
+                'pages.training_session.training_session_entry.comment_form.additional_comments_field_hint'
                     .tr(),
           ),
           maxLines: 3,

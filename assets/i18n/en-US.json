@@ -1,5 +1,5 @@
 {
-  "screens": {
+  "pages": {
     "scent_selection": {
       "scent_selection_checkbox_group": {
         "selection_limit_reached_snackbar_message": "You can only select up to 4 scents"
@@ -50,7 +50,10 @@
       }
     },
     "training_session_history": {
-      "title": "Training Session History"
+      "title": "Training Session History",
+      "training_session_history_chart": {
+        "no_data_to_show": "No training history data to show."
+      }
     }
   },
   "shared": {

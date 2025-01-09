@@ -102,7 +102,7 @@ class ScentSelectionPageState extends State<ScentSelectionPage> {
                 Flexible(
                   flex: 1,
                   child: Text(
-                    'screens.scent_selection.select_scents_headline'.tr(),
+                    'pages.scent_selection.select_scents_headline'.tr(),
                     style: textTheme.headlineMedium,
                     textAlign: TextAlign.center,
                   ),

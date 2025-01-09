@@ -92,7 +92,7 @@ class ScentSelectionCheckboxGroupWidgetState
                       SnackBar(
                         duration: const Duration(seconds: 2),
                         content: Text(
-                          'screens.scent_selection.scent_selection_checkbox_group.selection_limit_reached_snackbar_message'
+                          'pages.scent_selection.scent_selection_checkbox_group.selection_limit_reached_snackbar_message'
                               .tr(
                             args: [
                               ScentSelectionCheckboxGroupWidget

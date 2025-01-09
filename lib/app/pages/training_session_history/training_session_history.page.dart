@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show DeviceOrientation, SystemChrome;
 import 'package:easy_localization/easy_localization.dart';
+import 'package:smellsense/app/shared/theme/theme.dart';
 
 class TrainingSessionHistoryPage extends StatefulWidget {
   const TrainingSessionHistoryPage({super.key});
@@ -12,28 +13,6 @@ class TrainingSessionHistoryPage extends StatefulWidget {
 
 class TrainingSessionHistoryPageState
     extends State<TrainingSessionHistoryPage> {
-  @override
-  void initState() {
-    super.initState();
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.landscapeRight,
-    ]);
-  }
-
-  @override
-  dispose() {
-    SystemChrome.setPreferredOrientations(
-      [
-        DeviceOrientation.portraitUp,
-        DeviceOrientation.portraitDown,
-      ],
-    );
-    super.dispose();
-  }
-
   ///
   /// TODO: Create bar chart series from training data
   ///
@@ -44,34 +23,35 @@ class TrainingSessionHistoryPageState
   @override
   Widget build(BuildContext context) {
     // TODO: Create chart from training sessions
-    // var chart;
+
+    MaterialTheme theme = MaterialTheme.of(context);
 
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.all(20),
-              child: Text(
-                'screens.training_session_history.title'.tr(),
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.w100,
-                  fontSize: Theme.of(context).textTheme.headlineSmall!.fontSize,
+      body: Flexible(
+        fit: FlexFit.tight,
+        child: Flex(
+          direction: Axis.vertical,
+          children: [
+            Flexible(
+              flex: 1,
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Text(
+                  'pages.training_session_history.title'.tr(),
+                  style: theme.textTheme.titleLarge,
                 ),
               ),
             ),
-          ),
-          Text(
-            'No training data to show.',
-            style: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.w100,
-              fontSize: Theme.of(context).textTheme.titleLarge!.fontSize,
-            ),
-          )
-        ],
+            Flexible(
+              flex: 4,
+              child: Text(
+                'pages.training_session_history.training_session_history_chart.no_data_to_show'
+                    .tr(),
+                style: theme.textTheme.displaySmall,
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

@@ -60,7 +60,7 @@ class TrainingSessionEntryWidgetState extends State<TrainingSessionEntryWidget>
               replaceDoneTimerWidget: Column(
                 children: [
                   Text(
-                    'screens.training_session.training_session_entry.rating_title'
+                    'pages.training_session.training_session_entry.rating_title'
                         .tr(),
                   ),
                   const RatingBarWidget(),
