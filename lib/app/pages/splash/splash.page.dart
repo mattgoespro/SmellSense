@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:smellsense/app/assets/generated/assets.gen.dart';
 import 'package:smellsense/app/pages/scent_selection/scent_selection.route.dart';
@@ -37,8 +38,8 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Assets.images.branding.logo.image(
-                width: 100,
-                height: 100,
+                width: 60,
+                height: 60,
               ),
               RichText(
                 textAlign: TextAlign.center,
@@ -74,7 +75,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
           child: SizedBox(
             width: MediaQuery.of(context).size.width * 0.8,
             child: Text(
-              "Let's start by selecting your training scents.",
+              "pages.splash.intro_start_scent_selection_title".tr(),
               style: theme.textTheme.headlineSmall,
               textAlign: TextAlign.center,
             ),

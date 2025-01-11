@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smellsense/app/application/providers/infrastructure.provider.dart';
 import 'package:smellsense/app/router/router.dart';
 import 'package:smellsense/app/shared/widgets/loader.widget.dart';
@@ -19,11 +20,20 @@ class App extends StatelessWidget {
       path: 'assets/i18n',
       fallbackLocale: const Locale('en', 'US'),
       assetLoader: const JsonAssetLoader(),
-      child: FutureProvider<Infrastructure>(
-        create: (context) => Infrastructure.getInfrastructure(),
-        initialData: Infrastructure.empty(),
+      child: MultiProvider(
+        providers: [
+          FutureProvider<Infrastructure?>(
+            create: (context) => Infrastructure.getInfrastructure(),
+            initialData: null,
+          ),
+          FutureProvider<SharedPreferences?>(
+            initialData: null,
+            create: (context) => SharedPreferences.getInstance(),
+          ),
+        ],
         builder: (context, child) {
-          if (context.watch<Infrastructure?>() == null) {
+          if (context.watch<SharedPreferences?>() == null ||
+              context.watch<Infrastructure?>() == null) {
             return const Center(
               child: LoaderWidget(),
             );
@@ -36,8 +46,12 @@ class App extends StatelessWidget {
             supportedLocales: context.supportedLocales,
             locale: context.locale,
             builder: (context, child) {
-              // return a page as a widget that is animated
-              // when navigating to the next page
+              if (child == null) {
+                return const Center(
+                  child: LoaderWidget(),
+                );
+              }
+
               return Padding(
                 padding: EdgeInsets.all(5),
                 child: child,

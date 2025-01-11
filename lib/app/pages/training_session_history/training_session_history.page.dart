@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' show DeviceOrientation, SystemChrome;
 import 'package:easy_localization/easy_localization.dart';
 import 'package:smellsense/app/shared/theme/theme.dart';
 
@@ -27,31 +26,27 @@ class TrainingSessionHistoryPageState
     MaterialTheme theme = MaterialTheme.of(context);
 
     return Scaffold(
-      body: Flexible(
-        fit: FlexFit.tight,
-        child: Flex(
-          direction: Axis.vertical,
-          children: [
-            Flexible(
-              flex: 1,
-              child: Padding(
-                padding: const EdgeInsets.all(20),
-                child: Text(
-                  'pages.training_session_history.title'.tr(),
-                  style: theme.textTheme.titleLarge,
-                ),
+      body: Column(
+        children: [
+          Flexible(
+            flex: 1,
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Text(
+                'pages.training_session_history.title'.tr(),
+                style: theme.textTheme.titleLarge,
               ),
             ),
-            Flexible(
-              flex: 4,
-              child: Text(
-                'pages.training_session_history.training_session_history_chart.no_data_to_show'
-                    .tr(),
-                style: theme.textTheme.displaySmall,
-              ),
-            )
-          ],
-        ),
+          ),
+          Flexible(
+            flex: 4,
+            child: Text(
+              'pages.training_session_history.training_session_history_chart.no_data_to_show'
+                  .tr(),
+              style: theme.textTheme.displaySmall,
+            ),
+          )
+        ],
       ),
     );
   }

@@ -1,5 +1,11 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:smellsense/app/application/providers/infrastructure.provider.dart';
+import 'package:smellsense/app/shared/modules/training_period.module.dart';
+import 'package:smellsense/app/shared/modules/training_session/training_session.module.dart';
+import 'package:smellsense/app/shared/modules/training_session/training_session_entry.module.dart';
+import 'package:smellsense/app/shared/modules/training_session/training_session_entry_rating.module.dart';
 
 class TrainingSessionHistoryChartWidget extends StatefulWidget {
   const TrainingSessionHistoryChartWidget({super.key});
@@ -13,35 +19,25 @@ class TrainingSessionHistoryChartWidgetState
     extends State<TrainingSessionHistoryChartWidget> {
   final double width = 7;
 
-  late List<BarChartGroupData> ratingBarGroup;
+  late List<BarChartGroupData> ratingBarGroups;
   late List<BarChartGroupData> visibleRatingBarGroups;
 
   int touchedGroupIndex = -1;
 
   @override
-  void initState() {
+  void initState() async {
     super.initState();
-    final barGroup1 = makeGroupData(0, 5, 12);
-    final barGroup2 = makeGroupData(1, 16, 12);
-    final barGroup3 = makeGroupData(2, 18, 5);
-    final barGroup4 = makeGroupData(3, 20, 16);
-    final barGroup5 = makeGroupData(4, 17, 6);
-    final barGroup6 = makeGroupData(5, 19, 1.5);
-    final barGroup7 = makeGroupData(6, 10, 1.5);
 
-    final items = [
-      barGroup1,
-      barGroup2,
-      barGroup3,
-      barGroup4,
-      barGroup5,
-      barGroup6,
-      barGroup7,
-    ];
+    List<TrainingPeriod> periods = await context
+        .watch<Infrastructure>()
+        .databaseService
+        .getTrainingPeriods();
 
-    ratingBarGroup = items;
+    // TODO: Create bar chart series for all of the sessions done
+    // in each period, in order of the period start date
+    ratingBarGroups = [];
 
-    visibleRatingBarGroups = ratingBarGroup;
+    visibleRatingBarGroups = ratingBarGroups;
   }
 
   @override
@@ -56,7 +52,7 @@ class TrainingSessionHistoryChartWidgetState
             Row(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                makeTransactionsIcon(),
+                // makeTransactionsIcon(),
                 const SizedBox(
                   width: 38,
                 ),
@@ -91,7 +87,7 @@ class TrainingSessionHistoryChartWidgetState
                       if (response == null || response.spot == null) {
                         setState(() {
                           touchedGroupIndex = -1;
-                          visibleRatingBarGroups = List.of(ratingBarGroup);
+                          visibleRatingBarGroups = List.of(ratingBarGroups);
                         });
                         return;
                       }
@@ -101,10 +97,10 @@ class TrainingSessionHistoryChartWidgetState
                       setState(() {
                         if (!event.isInterestedForInteractions) {
                           touchedGroupIndex = -1;
-                          visibleRatingBarGroups = List.of(ratingBarGroup);
+                          visibleRatingBarGroups = List.of(ratingBarGroups);
                           return;
                         }
-                        visibleRatingBarGroups = List.of(ratingBarGroup);
+                        visibleRatingBarGroups = List.of(ratingBarGroups);
                         if (touchedGroupIndex != -1) {
                           var sum = 0.0;
                           for (final rod
@@ -216,69 +212,99 @@ class TrainingSessionHistoryChartWidgetState
     );
   }
 
-  BarChartGroupData makeGroupData(int x, double y1, double y2) {
+  BarChartGroupData makeSessionRatingGroup(
+    TrainingSession session,
+    int datePosition,
+  ) {
     return BarChartGroupData(
-      barsSpace: 4,
-      x: x,
-      barRods: [
-        BarChartRodData(
-          toY: y1,
-          color: Colors.black,
-          width: width,
-        ),
-        BarChartRodData(
-          toY: y2,
-          color: Colors.white,
-          width: width,
-        ),
-      ],
+      x: datePosition,
+      barRods: createSessionRatingBars(session),
     );
   }
 
-  Widget makeTransactionsIcon() {
-    const width = 4.5;
-    const space = 3.5;
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        Container(
-          width: width,
-          height: 10,
-          color: Colors.white.withAlpha(40),
+  List<BarChartRodData> createSessionRatingBars(TrainingSession session) {
+    List<BarChartRodData> bars = [];
+
+    // TODO: Ideally use scent colors for the rating bar segments
+    List<Color> colors = [
+      Colors.red,
+      Colors.orange,
+      Colors.yellow,
+      Colors.green,
+      Colors.blue,
+    ];
+
+    // create a stacked rating bar for each entry where the height of the bar segment
+    // is the rating value of the entry and the color of the bar segment is the rating color
+    // of the entry
+    double barPosition = 0;
+
+    for (int i = 0; i < session.entries.length; i++) {
+      TrainingSessionEntry entry = session.entries[i];
+      double barHeight = entry.rating.value.toDouble();
+
+      bars.add(
+        BarChartRodData(
+          toY: TrainingSessionEntryRating.maxValue.toDouble(),
+          rodStackItems: [
+            BarChartRodStackItem(
+              barPosition,
+              barPosition + barHeight,
+              colors[entry.rating.value],
+            ),
+          ],
         ),
-        const SizedBox(
-          width: space,
-        ),
-        Container(
-          width: width,
-          height: 28,
-          color: Colors.white.withAlpha(80),
-        ),
-        const SizedBox(
-          width: space,
-        ),
-        Container(
-          width: width,
-          height: 42,
-          color: Colors.white.withAlpha(100),
-        ),
-        const SizedBox(
-          width: space,
-        ),
-        Container(
-          width: width,
-          height: 28,
-          color: Colors.white.withAlpha(80),
-        ),
-        const SizedBox(
-          width: space,
-        ),
-        Container(
-          width: width,
-          height: 10,
-          color: Colors.white.withAlpha(40),
-        ),
-      ],
-    );
+      );
+      barPosition += barHeight;
+    }
+
+    return bars;
   }
+
+  // Widget makeTransactionsIcon() {
+  //   const width = 4.5;
+  //   const space = 3.5;
+  //   return Row(
+  //     mainAxisSize: MainAxisSize.min,
+  //     children: <Widget>[
+  //       Container(
+  //         width: width,
+  //         height: 10,
+  //         color: Colors.white.withAlpha(40),
+  //       ),
+  //       const SizedBox(
+  //         width: space,
+  //       ),
+  //       Container(
+  //         width: width,
+  //         height: 28,
+  //         color: Colors.white.withAlpha(80),
+  //       ),
+  //       const SizedBox(
+  //         width: space,
+  //       ),
+  //       Container(
+  //         width: width,
+  //         height: 42,
+  //         color: Colors.white.withAlpha(100),
+  //       ),
+  //       const SizedBox(
+  //         width: space,
+  //       ),
+  //       Container(
+  //         width: width,
+  //         height: 28,
+  //         color: Colors.white.withAlpha(80),
+  //       ),
+  //       const SizedBox(
+  //         width: space,
+  //       ),
+  //       Container(
+  //         width: width,
+  //         height: 10,
+  //         color: Colors.white.withAlpha(40),
+  //       ),
+  //     ],
+  //   );
+  // }
 }

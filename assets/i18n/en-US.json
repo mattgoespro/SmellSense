@@ -6,6 +6,9 @@
       },
       "select_scents_headline": "Select four of your desired training scents"
     },
+    "splash": {
+      "intro_start_scent_selection_title": "Let's start by selecting your training scents."
+    },
     "training_session": {
       "training_session_entry": {
         "comment_form": {

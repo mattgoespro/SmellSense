@@ -104,4 +104,18 @@ class DatabaseService {
       );
     }
   }
+
+  Future<List<TrainingPeriod>> getTrainingPeriods() async {
+    try {
+      return _trainingPeriodService.getAllTrainingPeriods();
+    } catch (error, stackTrace) {
+      throw SmellSenseDatabaseException(
+        StringBuilder.builder()
+            .append("Error retrieving training periods.")
+            .appendLine(error.toString())
+            .appendLine(stackTrace.toString())
+            .build(),
+      );
+    }
+  }
 }

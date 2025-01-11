@@ -5,6 +5,8 @@ enum TrainingSessionEntryRating {
   strong("strong", 3),
   altered("altered", 4);
 
+  static int maxValue = 4;
+
   final String rating;
   final int value;
 

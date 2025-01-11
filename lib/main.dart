@@ -11,7 +11,6 @@ void main() async {
 
   FlutterError.onError = (FlutterErrorDetails details) {
     FlutterError.dumpErrorToConsole(details);
-    FlutterError.reportError(details);
 
     if (kReleaseMode) {
       exit(1);

@@ -1,8 +1,25 @@
 {
   "[dart]": {
-    "editor.defaultFormatter": "Dart-Code.dart-code",
+    "editor.codeActionsOnSave": {
+      "source.fixAll.format": "always"
+    },
+    // "editor.defaultFormatter": "Dart-Code.dart-code",
     "editor.formatOnPaste": true,
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    // Draw a guide line at 80 characters, where Dart's formatting will wrap code.
+    "editor.rulers": [80],
+    // Disables built-in highlighting of words that match your selection. Without
+    // this, all instances of the selected text will be highlighted, interfering
+    // with Dart's ability to highlight only exact references to the selected variable.
+    "editor.selectionHighlight": false,
+    // Allows pressing <TAB> to complete snippets such as `for` even when the
+    // completion list is not visible.
+    "editor.tabCompletion": "onlySnippets",
+    // By default, VS Code will populate code completion with words found in the
+    // matching documents when a language service does not provide its own completions.
+    // This results in code completion suggesting words when editing comments and
+    // strings. This setting will prevent that.
+    "editor.wordBasedSuggestions": "off"
   },
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -22,37 +39,25 @@
     "editor.formatOnPaste": true,
     "editor.formatOnSave": true
   },
-  // "dart.analysisExcludedFolders": [
-  //   ".config/",
-  //   ".dart_tool/",
-  //   ".git/",
-  //   ".idea/",
-  //   ".vscode/",
-  //   "android/",
-  //   "assets/",
-  //   "build/",
-  //   "coverage/",
-  //   "ios/",
-  //   "scripts/",
-  //   "tools/"
-  // ],
-  // "dart.debugSdkLibraries": true,
+  "dart.additionalAnalyzerFileExtensions": [],
+  "dart.checkForSdkUpdates": true,
   "dart.lineLength": 80,
+  "dart.previewFlutterUiGuides": true,
   "dart.showTodos": false,
-  "editor.codeActionsOnSave": {
-    "source.fixAll": "always"
-  },
+  "debug.internalConsoleOptions": "openOnSessionStart",
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
   "files.eol": "\n",
   "files.exclude": {
-    ".git": true,
-    ".dart_tool": true
-  },
-  "search.exclude": {
-    "**/.idea": true,
-    "**/.vscode": true,
-    "**/build": true
+    "**/*.jar": true,
+    "**/.gradle/": true,
+    "**/.idea/": true,
+    "**/.kotlin/": true,
+    "**/gradlew*": true,
+    ".dart_tool/": true,
+    ".git/": true,
+    "coverage/": true,
+    "ios/": true
   },
   "json.schemas": [
     {

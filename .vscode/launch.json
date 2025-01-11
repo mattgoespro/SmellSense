@@ -10,7 +10,21 @@
       "presentation": {
         "group": "debug",
         "order": 1
-      }
+      },
+      "console": "debugConsole",
+      "codeLens": {
+        "for": ["debug-file", "run-file"],
+        "title": "Debug",
+        "path": "${relativeFile}"
+      },
+      "flutterMode": "debug",
+      "vmAdditionalArgs": [
+        "--enable-software-rendering",
+        "--enable-dart-profiling",
+        "--disable-observatory",
+        "--disable-service-auth-codes",
+        "--no-sound-null-safety"
+      ]
     },
     {
       "name": "debug: device over wi-fi",
